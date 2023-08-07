@@ -1,27 +1,26 @@
-import Main from '@pages/main/Main';
+import Home from '@pages/Home';
 import type { RouteObject } from 'react-router';
-import AIHelper from '@pages/main/AIHelper';
-import Progress from '@pages/main/Progress';
 import { lazy } from 'react';
 
+const CoverLetter = lazy(() => import('@pages/CoverLetter'));
+const NewClipping = lazy(() => import('@pages/NewsClipping'));
+const MyPage = lazy(() => import('@pages/MyPage'));
 const routes: RouteObject[] = [
   {
     path: '/',
-    element: <Main />,
-    children: [
-      {
-        path: '/',
-        element: <Progress />,
-      },
-      {
-        path: '/ai',
-        element: <AIHelper />,
-      },
-    ],
+    element: <Home />,
+  },
+  {
+    path: '/cover-letter',
+    element: <CoverLetter />,
+  },
+  {
+    path: '/new-clipping',
+    element: <NewClipping />,
   },
   {
     path: '/my-page',
-    element: lazy(() => import('@pages/MyPage')),
+    element: <MyPage />,
   },
 ];
 

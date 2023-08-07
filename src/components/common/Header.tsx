@@ -1,13 +1,17 @@
 import { Link as ReactRouterLink } from 'react-router-dom';
-import { HStack, Link as ChakraLink } from '@chakra-ui/react';
+import { Flex, HStack, Link as ChakraLink } from '@chakra-ui/react';
 
 const Header = () => {
   return <header>
-    <HStack>
-      <ChakraLink as={ReactRouterLink as any} to={'/'}>Main</ChakraLink>
-      <ChakraLink as={ReactRouterLink as any} to={'/ai'}>AI 자소서 도우미</ChakraLink>
-      <ChakraLink as={ReactRouterLink as any} to={'/my-page'}>My Page</ChakraLink>
-    </HStack>
+    <Flex w={'100%'} alignItems='center' justify={'space-between'} >
+      <div>Logo</div>
+      <HStack spacing='10px'>
+        <ChakraLink as={ReactRouterLink as any} to={'/'}>홈</ChakraLink>
+        <ChakraLink as={ReactRouterLink as any} to={'/cover-letter'}>자기소개서</ChakraLink>
+        <ChakraLink as={ReactRouterLink as any} to={'/new-clipping'}>뉴스 스크랩</ChakraLink>
+        <ChakraLink as={ReactRouterLink as any} to={'/my-page'}>마이페이지</ChakraLink>
+      </HStack>
+    </Flex>
   </header>;
 };
 
