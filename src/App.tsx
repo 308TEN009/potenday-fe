@@ -2,7 +2,7 @@ import './App.css';
 import { useRoutes } from 'react-router';
 import routes from '@/router';
 import { ChakraProvider } from '@chakra-ui/react';
-import Header from '@/component/common/Header';
+import Header from '@components/common/Header';
 import theme from '@/theme';
 
 function App() {

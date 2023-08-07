@@ -1,16 +1,20 @@
-import Header from '@/component/common/Header';
+import Header from '@components/common/Header';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const headerMeta: Meta<typeof Header> = {
   title: 'Common/Header',
   component: Header,
+  argTypes: {
+    backgroundColor: { control: 'color' },
+  },
 };
 
 export default headerMeta;
 type Story = StoryObj<Header>;
 
-export const CommonHeader: Story = {};
-
+export const CommonHeader: Story = {
+  args: {},
+};
 
 // // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 // const meta: Meta<typeof Button> = {

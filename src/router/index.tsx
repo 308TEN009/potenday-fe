@@ -1,14 +1,27 @@
-import MyPage from '@/page/MyPage';
-import Main from '@/page/main/Main';
+import Main from '@pages/main/Main';
+import type { RouteObject } from 'react-router';
+import AIHelper from '@pages/main/AIHelper';
+import Progress from '@pages/main/Progress';
+import { lazy } from 'react';
 
-const routes = [
+const routes: RouteObject[] = [
   {
     path: '/',
     element: <Main />,
+    children: [
+      {
+        path: '/',
+        element: <Progress />,
+      },
+      {
+        path: '/ai',
+        element: <AIHelper />,
+      },
+    ],
   },
   {
     path: '/my-page',
-    element: <MyPage />,
+    element: lazy(() => import('@pages/MyPage')),
   },
 ];
 
