@@ -1,7 +1,12 @@
 import CommonModal from '@components/common/modal/CommonModal';
 import { Button, Flex, FormLabel, Input, Text, VStack } from '@chakra-ui/react';
+import type { CommonModalProps } from '@/model/common';
 
-const AddJobPostingModal = ({ isOpen, onClose, onSubmit }: any) => {
+interface AddJobPostingModalProps extends CommonModalProps {
+  onSubmit: (e: any) => any;
+}
+
+const AddJobPostingModal = ({ isOpen, onClose, onSubmit }: AddJobPostingModalProps) => {
   return <CommonModal isOpen={isOpen}
                       onClose={onClose}
                       size={'3xl'}>
