@@ -1,44 +1,48 @@
 import {
-	Modal,
-	ModalBody,
-	ModalCloseButton,
-	ModalContent,
-	ModalFooter,
-	ModalHeader,
-	ModalOverlay
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
 } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 
 interface CommonModalProps {
-	isOpen: boolean;
-	onClose: () => void;
-	children: ReactNode;
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
+  size?: string;
 }
 
-const CommonModal = ({ isOpen, onClose, children }: CommonModalProps) => {
-	return <Modal isOpen={isOpen} onClose={onClose}>
-		<ModalOverlay/>
-		<ModalContent>
-			{children}
-		</ModalContent>
-	</Modal>
-}
+const CommonModal = ({ isOpen, onClose, children, size }: CommonModalProps) => {
+  return <Modal isOpen={isOpen}
+                onClose={onClose}
+                size={size as any}
+                isCentered>
+    <ModalOverlay />
+    <ModalContent>
+      {children}
+    </ModalContent>
+  </Modal>;
+};
 
 const CommonModalHeader = ({ children }: { children: ReactNode }) =>
-	<ModalHeader>
-		{children}
-		<ModalCloseButton/>
-	</ModalHeader>
+  <ModalHeader>
+    {children}
+    <ModalCloseButton />
+  </ModalHeader>;
 
 const CommonModalBody = ({ children }: { children: ReactNode }) =>
-	<ModalBody>
-		{children}
-	</ModalBody>
+  <ModalBody>
+    {children}
+  </ModalBody>;
 
 const CommonModalFooter = ({ children }: { children: ReactNode }) =>
-	<ModalFooter>
-		{children}
-	</ModalFooter>
+  <ModalFooter>
+    {children}
+  </ModalFooter>;
 
 CommonModal.Header = CommonModalHeader;
 CommonModal.Body = CommonModalBody;
