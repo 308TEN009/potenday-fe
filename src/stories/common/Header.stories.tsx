@@ -1,12 +1,12 @@
-import Header from '@components/common/Header';
+import CommonHeader from '@components/common/CommonHeader';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { BrowserRouter } from 'react-router-dom';
 import theme from '@/theme';
 
-const headerMeta: Meta<typeof Header> = {
+const headerMeta: Meta<typeof CommonHeader> = {
 	title: 'Common/Header',
-	component: Header,
+	component: CommonHeader,
 	decorators: [(story) =>
 		<BrowserRouter>
 			<ChakraProvider theme={theme}>
@@ -18,9 +18,9 @@ const headerMeta: Meta<typeof Header> = {
 ;
 
 export default headerMeta;
-type Story = StoryObj<Header>;
+type Story = StoryObj<CommonHeader>;
 
-export const CommonHeader: Story = {
+export const Common: Story = {
 	args: {},
 };
 

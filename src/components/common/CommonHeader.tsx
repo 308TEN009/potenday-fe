@@ -2,7 +2,7 @@ import { Link as ReactRouterLink } from 'react-router-dom';
 import { Box, Button, Flex, HStack, Link as ChakraLink, Spacer, useDisclosure } from '@chakra-ui/react';
 import LoginModal from '@components/login/LoginModal';
 
-const Header = () => {
+const CommonHeader = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	const onOpenLoginModal = () => {
@@ -32,4 +32,4 @@ const Header = () => {
   </header>;
 };
 
-export default Header;
+export default CommonHeader;
