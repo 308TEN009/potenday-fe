@@ -1,4 +1,12 @@
-import {Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay} from '@chakra-ui/react';
+import {
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalOverlay
+} from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 
 interface CommonModalProps {
@@ -27,7 +35,12 @@ const CommonModalBody = ({ children }: { children: ReactNode }) =>
 		{children}
 	</ModalBody>
 
+const CommonModalFooter = ({ children }: { children: ReactNode }) =>
+	<ModalFooter>
+		{children}
+	</ModalFooter>
+
 CommonModal.Header = CommonModalHeader;
 CommonModal.Body = CommonModalBody;
-
+CommonModal.Footer = CommonModalFooter;
 export default CommonModal;
