@@ -1,4 +1,4 @@
-import { List } from '@chakra-ui/react';
+import { Grid } from '@chakra-ui/react';
 import CoverLatterItem from '@components/home/coverLetter/CoverLatterItem';
 
 const CoverLatterList = () => {
@@ -17,9 +17,9 @@ const CoverLatterList = () => {
     },
   ];
 
-  return <List mt={'10px'}>
+  return <Grid mt={'10px'} templateColumns={'repeat(2, 1fr)'} gap={1}>
     {dummyData.map(it => <CoverLatterItem key={it.coverLatterKey} {...it} />)}
-  </List>;
+  </Grid>;
 };
 
 export default CoverLatterList;
