@@ -1,11 +1,17 @@
 import { Button, Card, CardBody, CardHeader, Flex, HStack, Text, useDisclosure } from '@chakra-ui/react';
-import BookMarkItem from '@components/home/bookmark/BookMarkItem';
-import BookMarkModal from '@components/home/bookmark/BookMarkModal';
-import { useState } from 'react';
+import BookmarkItem from '@components/home/bookmark/BookmarkItem';
+import BookmarkModal from '@components/home/bookmark/BookmarkModal';
+import { useEffect, useState } from 'react';
+import type { BookmarkContent } from '@/model/home';
 
 const Bookmark = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isNew, setIsNew] = useState<boolean>(false);
+  const [bookmarkList, setBookmarkList] = useState<BookmarkContent[]>([]);
+
+  useEffect(() => {
+    // setBookmarkList()
+  }, []);
 
   const addBookmark = () => {
     setIsNew(true);
@@ -35,10 +41,9 @@ const Bookmark = () => {
       <Flex justifyContent={'center'}
             flexWrap={'wrap'}
             gap={5}>
-        <BookMarkItem />
-        <BookMarkItem />
-        <BookMarkItem />
-        <BookMarkItem />
+        {bookmarkList.map((bookmark) =>
+          <BookmarkItem {...bookmark} />,
+        )}
         <Button boxShadow='md'
                 borderRadius={'base'}
                 textAlign={'center'}
@@ -49,7 +54,7 @@ const Bookmark = () => {
         </Button>
       </Flex>
     </CardBody>
-    <BookMarkModal isOpen={isOpen}
+    <BookmarkModal isOpen={isOpen}
                    onClose={onClose}
                    onSubmit={onSubmit}
                    isNew={isNew} />

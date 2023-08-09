@@ -6,5 +6,7 @@ export interface CommonModalProps {
 export interface OptionItem<T> {
   index: number;
   key: string;
-  value: T
+  value: T;
 }
+
+export type SocialLoginType = 'kakao' | 'naver' | 'google';

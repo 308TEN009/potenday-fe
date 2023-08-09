@@ -5,6 +5,8 @@ import { lazy } from 'react';
 const CoverLetter = lazy(() => import('@pages/CoverLetter'));
 const NewClipping = lazy(() => import('@pages/NewsClipping'));
 const MyPage = lazy(() => import('@pages/MyPage'));
+const LoginRedirect = lazy(() => import('@pages/LoginRedirect'));
+
 const routes: RouteObject[] = [
   {
     path: '/',
@@ -21,6 +23,10 @@ const routes: RouteObject[] = [
   {
     path: '/my-page',
     element: <MyPage />,
+  },
+  {
+    path: '/redirect',
+    element: <LoginRedirect />,
   },
 ];
 

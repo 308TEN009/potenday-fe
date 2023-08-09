@@ -2,13 +2,13 @@ import CommonModal from '@components/common/modal/CommonModal';
 import { Button, Center, FormLabel, Input, Text, VStack } from '@chakra-ui/react';
 import type { CommonModalProps } from '@/model/common';
 
-interface BookMarkModalProps extends CommonModalProps {
+interface BookmarkModalProps extends CommonModalProps {
   isNew: boolean;
   bookmarkKey?: string;
   onSubmit: (e: any) => any;
 }
 
-const BookMarkModal = ({ isOpen, onClose, isNew, onSubmit, bookmarkKey }: BookMarkModalProps) => {
+const BookmarkModal = ({ isOpen, onClose, isNew, onSubmit, bookmarkKey }: BookmarkModalProps) => {
   return <CommonModal isOpen={isOpen} onClose={onClose} size={'xl'}>
     <CommonModal.Header>
       <Text fontSize={'md'}
@@ -40,4 +40,4 @@ const BookMarkModal = ({ isOpen, onClose, isNew, onSubmit, bookmarkKey }: BookMa
   </CommonModal>;
 };
 
-export default BookMarkModal;
+export default BookmarkModal;

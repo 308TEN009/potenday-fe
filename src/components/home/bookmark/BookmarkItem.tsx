@@ -1,6 +1,11 @@
 import { Box } from '@chakra-ui/react';
+import type { BookmarkContent } from '@/model/home';
 
-const BookMarkItem = () => {
+interface BookmarkItemProps {
+  bookmark: BookmarkContent;
+}
+
+const BookmarkItem = ({ bookmark }: BookmarkItemProps) => {
   return <Box boxShadow='md'
               borderRadius={'base'}
               textAlign={'center'}
@@ -11,4 +16,4 @@ const BookMarkItem = () => {
   </Box>;
 };
 
-export default BookMarkItem;
+export default BookmarkItem;
