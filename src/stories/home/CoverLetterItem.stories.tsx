@@ -2,7 +2,6 @@ import CoverLatterItem from '@components/home/coverLetter/CoverLatterItem';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ChakraProvider, Grid } from '@chakra-ui/react';
 import theme from '@/theme';
-import GlobalSetting from '@/theme/GlobalSetting';
 
 const CoverLatterTestComponent = (props) => {
   return <Grid>
@@ -14,7 +13,6 @@ const CoverLetterItemMeta: Meta<typeof CoverLatterItem> = {
   component: CoverLatterTestComponent,
   decorators: [(story) =>
     <ChakraProvider theme={theme}>
-      <GlobalSetting/>
       {story()}
     </ChakraProvider>],
 }

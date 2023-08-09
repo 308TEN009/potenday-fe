@@ -3,7 +3,6 @@ import CoverLetter from '@pages/CoverLetter';
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '@/theme';
-import GlobalSetting from '@/theme/GlobalSetting';
 import type { StoryObj } from '@storybook/react';
 
 const coverLetterMeta: Meta<typeof CoverLetter> = {
@@ -12,7 +11,6 @@ const coverLetterMeta: Meta<typeof CoverLetter> = {
   decorators: [(story) =>
     <BrowserRouter>
       <ChakraProvider theme={theme}>
-        <GlobalSetting />
         {story()}
       </ChakraProvider>
     </BrowserRouter>,

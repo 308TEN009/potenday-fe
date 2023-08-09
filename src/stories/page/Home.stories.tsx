@@ -3,7 +3,6 @@ import Home from '@pages/Home';
 import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '@/theme';
-import GlobalSetting from '@/theme/GlobalSetting';
 
 const homePageMeta: Meta<typeof Home> = {
   title: 'Page/Home',
@@ -11,7 +10,6 @@ const homePageMeta: Meta<typeof Home> = {
   decorators: [(story) =>
     <BrowserRouter>
       <ChakraProvider theme={theme}>
-        <GlobalSetting />
         {story()}
       </ChakraProvider>
     </BrowserRouter>,

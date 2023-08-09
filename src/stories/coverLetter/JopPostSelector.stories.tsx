@@ -2,14 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react';
 import JobPostSelector from '@components/coverLetter/form/JobPostSelector';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '@/theme';
-import GlobalSetting from '@/theme/GlobalSetting';
 
 const JobPostSelectorMeta: Meta<typeof JobPostSelector> = {
   component: JobPostSelector,
   title: 'CoverLetter/JobPostSelector',
   decorators: [(story) =>
     <ChakraProvider theme={theme}>
-      <GlobalSetting/>
       {story()}
     </ChakraProvider>],
 }

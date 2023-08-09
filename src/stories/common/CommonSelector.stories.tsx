@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ChakraProvider } from '@chakra-ui/react';
 import theme from '@/theme';
-import GlobalSetting from '@/theme/GlobalSetting';
 import CommonSelect from '@components/common/form/CommonSelect';
 
 const CommonSelectorMeta: Meta<typeof CommonSelect> = {
@@ -9,7 +8,6 @@ const CommonSelectorMeta: Meta<typeof CommonSelect> = {
   title: 'Common/Selector',
   decorators: [(story) =>
     <ChakraProvider theme={theme}>
-      <GlobalSetting/>
       {story()}
     </ChakraProvider>],
 }
