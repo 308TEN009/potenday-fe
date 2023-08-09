@@ -1,20 +1,30 @@
 import type { JobPostOption } from '@/model/coverLetter';
 import CommonSelect from '@components/common/form/CommonSelect';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Button, Text, useDisclosure } from '@chakra-ui/react';
+import AddJobPostingModal from '@components/home/coverLetter/addJobPost/AddJobPostingModal';
 
 interface JobPostSelectorProps {
   options: JobPostOption[];
-  selectedJobPost: JobPostOption;
+  selectedJobPost: JobPostOption | null;
   setSelectedJobPost: (selected: JobPostOption) => void;
 }
 
 const JobPostSelector = ({
                            options,
                            selectedJobPost,
-                           setSelectedJobPost
+                           setSelectedJobPost,
                          }: JobPostSelectorProps) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const getSelectedLabel = () =>
+    selectedJobPost
+      ? `${selectedJobPost.companyName} | ${selectedJobPost.duty}`
+      : '지원공고 선택하기';
+
+  const onSubmit = () => {
+// TODO
+  };
   return <Box w={'400px'}>
-    <CommonSelect title={'지원 공고'} defaultSelectedLabel={'선택'} selectedLabel={selectedJobPost.companyName}>
+    <CommonSelect defaultSelectedLabel={'선택'} selectedLabel={getSelectedLabel()}>
       {
         options.map((option) =>
           <CommonSelect.Option key={option.id}>
@@ -23,11 +33,21 @@ const JobPostSelector = ({
             }}>
               {option.companyName} | {option.duty}
             </Text>
-          </CommonSelect.Option>
+          </CommonSelect.Option>,
         )
       }
+      <Button w={'100%'}
+              fontSize={'sm'}
+              backgroundColor={'white'}
+              boxShadow={'base'}
+              onClick={onOpen}>
+        공고 추가하기
+      </Button>
     </CommonSelect>
-  </Box>
+    <AddJobPostingModal isOpen={isOpen}
+                        onSubmit={onSubmit}
+                        onClose={onClose} />
+  </Box>;
 };
 
 export default JobPostSelector;

@@ -14,4 +14,17 @@ const typography = {
   },
 };
 
-export default extendTheme({ colors, ...typography });
+const global = {
+  '*': {
+    fontFamily: `'Spoqa Han Sans Neo', 'sans-serif'`,
+    padding: 0,
+    margin: 0,
+  },
+  '#root': {
+    width: '100vw',
+    height: '100vh',
+  },
+};
+const styles = { global };
+
+export default extendTheme({ styles, colors, ...typography });

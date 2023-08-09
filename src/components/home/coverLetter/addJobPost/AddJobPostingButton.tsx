@@ -9,7 +9,8 @@ const AddJobPostingButton = ({ onClick }: AddJobPostingButtonProps) => {
                  h={'84px'}
                  size={'md'}
                  mb={'15px'}
-                 fontWeight={'normal'} onClick={onClick}>
+                 fontWeight={'normal'}
+                 onClick={onClick}>
     지원공고 추가하기
   </Button>;
 };
