@@ -22,7 +22,7 @@ const routes: RouteObject[] = [
         element: <CoverLetter />,
       },
       {
-        path: '/new-clipping',
+        path: '/news-clipping',
         element: <NewClipping />,
       },
       {

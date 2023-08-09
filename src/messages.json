@@ -1,0 +1,10 @@
+{
+  "common": {
+    "header": {
+      "home": "홈",
+      "coverLetter": "자기소개서",
+      "newsClipping": "뉴스 스크랩",
+      "myPage": "마이페이지"
+    }
+  }
+}
