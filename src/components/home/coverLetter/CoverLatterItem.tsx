@@ -10,7 +10,7 @@ export interface CoverLatterRowProp {
 const CoverLatterItem = ({
                            companyName,
                            status,
-                           duty
+                           duty,
                          }: CoverLatterRowProp) => {
   return <GridItem>
     <Card h={'200px'}
@@ -19,23 +19,23 @@ const CoverLatterItem = ({
           borderRadius={'base'}
           p={3}
           mb={3}>
-      <CardHeader>
-        <Text fontWeight={'bold'}>
+      <CardHeader p={2}>
+        <Text fontWeight={'bold'}
+              fontSize={'ml'}>
           {companyName}
         </Text>
       </CardHeader>
-      <CardBody>
-        <Text> {duty}</Text>
-      </CardBody>
-      <CardFooter>
-        <Badge w={'100%'}
-               float={'right'}
-               fontSize={'sm'}>
-          {status}
+      <CardBody p={2}>
+        <Text fontSize={'md'}> {duty}</Text>
+        </CardBody>
+        <CardFooter>
+        <Badge ml={'auto'}
+        fontSize={'sm'}>
+      {status}
         </Badge>
-      </CardFooter>
-    </Card>
-  </GridItem>;
-};
+        </CardFooter>
+        </Card>
+        </GridItem>;
+      };
 
-export default CoverLatterItem;
+      export default CoverLatterItem;;

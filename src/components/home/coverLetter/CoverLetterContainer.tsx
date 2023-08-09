@@ -11,9 +11,8 @@ const CoverLetterContainer = () => {
     onClose();
   };
   return <Box>
-    <Text fontSize={'md'} w={'100%'} mb={'27px'}>자소서</Text>
     <Box pl={'30px'}
-         w={'773px'}
+         w={'100%'}
          boxSizing={'border-box'}>
       <AddJobPostingButton onClick={onOpen} />
       <CoverLatterList />

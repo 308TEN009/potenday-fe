@@ -17,7 +17,7 @@ const CoverLatterList = () => {
     },
   ];
 
-  return <Grid mt={'10px'} templateColumns={'repeat(2, 1fr)'} gap={1}>
+  return <Grid mt={'10px'} templateColumns={'repeat(2, 470px)'} gap={1}>
     {dummyData.map(it => <CoverLatterItem key={it.coverLatterKey} {...it} />)}
   </Grid>;
 };

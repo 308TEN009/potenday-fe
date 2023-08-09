@@ -8,6 +8,7 @@ const colors = {
 const typography = {
   fontSizes: {
     lg: '36px',
+    ml: '28px',
     md: '24px',
     sm: '16px',
   },
