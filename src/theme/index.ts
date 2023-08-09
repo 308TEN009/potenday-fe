@@ -27,4 +27,14 @@ const global = {
 };
 const styles = { global };
 
-export default extendTheme({ styles, colors, ...typography });
+const components = {
+  Button: {
+    baseStyle: {
+      fontWeight: 'normal',
+    },
+    defaultProps: {
+      size: 'sm',
+    },
+  },
+};
+export default extendTheme({ styles, colors, components, ...typography });

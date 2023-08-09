@@ -1,6 +1,7 @@
 export interface CommonModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSubmit?: (e: any) => void;
 }
 
 export interface OptionItem<T> {

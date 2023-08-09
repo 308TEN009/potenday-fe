@@ -1,4 +1,4 @@
-import { Box, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, useDisclosure } from '@chakra-ui/react';
 import AddJobPostingButton from '@components/home/coverLetter/addJobPost/AddJobPostingButton';
 import CoverLatterList from '@components/home/coverLetter/CoverLatterList';
 import AddJobPostingModal from '@components/home/coverLetter/addJobPost/AddJobPostingModal';
