@@ -4,7 +4,7 @@ interface ExperienceItemProps {
   onClick: () => void;
 }
 
-const ExperienceItem = ({ onClick }: ExperienceItemProps) => {
+const ExperienceInputButton = ({ onClick }: ExperienceItemProps) => {
   return <ListItem p={'2px 10px'} onClick={onClick}>
     <Button width={'100%'}
             fontSize={'sm'}
@@ -14,4 +14,4 @@ const ExperienceItem = ({ onClick }: ExperienceItemProps) => {
   </ListItem>;
 };
 
-export default ExperienceItem;
+export default ExperienceInputButton;

@@ -1,25 +1,19 @@
-import { Box, useDisclosure } from '@chakra-ui/react';
-import AddJobPostingButton from '@components/home/coverLetter/addJobPost/AddJobPostingButton';
+import { Box } from '@chakra-ui/react';
 import CoverLatterList from '@components/home/coverLetter/CoverLatterList';
-import AddJobPostingModal from '@components/home/coverLetter/addJobPost/AddJobPostingModal';
+import AddJobPostingModalButton from '@components/home/coverLetter/addJobPost/AddJobPostingModalButton';
 
 const CoverLetterContainer = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = () => {
     console.log('submit');
-    onClose();
   };
   return <Box>
     <Box pl={'30px'}
          w={'100%'}
          boxSizing={'border-box'}>
-      <AddJobPostingButton onClick={onOpen} />
+      <AddJobPostingModalButton onSubmit={onSubmit} position={'HOME'} />
       <CoverLatterList />
     </Box>
-    <AddJobPostingModal isOpen={isOpen}
-                        onSubmit={onSubmit}
-                        onClose={onClose} />
+
   </Box>;
 };
 

@@ -9,7 +9,7 @@ const Main = () => {
     <Container as={'main'}
                w={'initial'}
                maxW={'initial'}
-               m={'80px 200px 0px 200px'}>
+               m={'80px 150px 0px 150px'}>
       <Suspense fallback={<div>loading...</div>}>
         <Outlet />
       </Suspense>

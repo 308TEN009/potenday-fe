@@ -1,7 +1,7 @@
 import type { JobPostOption } from '@/model/coverLetter';
 import CommonSelect from '@components/common/form/CommonSelect';
 import { Box, Button, Text, useDisclosure } from '@chakra-ui/react';
-import AddJobPostingModal from '@components/home/coverLetter/addJobPost/AddJobPostingModal';
+import AddJobPostingModalButton from '@components/home/coverLetter/addJobPost/AddJobPostingModalButton';
 
 interface JobPostSelectorProps {
   options: JobPostOption[];
@@ -36,17 +36,13 @@ const JobPostSelector = ({
           </CommonSelect.Option>,
         )
       }
-      <Button w={'100%'}
-              fontSize={'sm'}
-              backgroundColor={'white'}
-              boxShadow={'base'}
-              onClick={onOpen}>
-        공고 추가하기
-      </Button>
+
+      <AddJobPostingModalButton position={'DROPDOWN'}
+                                isOpen={isOpen}
+                                onSubmit={onSubmit}
+                                onClose={onClose} />
     </CommonSelect>
-    <AddJobPostingModal isOpen={isOpen}
-                        onSubmit={onSubmit}
-                        onClose={onClose} />
+
   </Box>;
 };
 

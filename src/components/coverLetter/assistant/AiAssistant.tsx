@@ -4,19 +4,18 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box,
   Button,
   Card,
   CardBody,
   CardFooter,
+  Center,
   List,
   Text,
 } from '@chakra-ui/react';
-import ExperienceItem from '@components/coverLetter/ExperienceItem';
-import ExperienceSelectModal from '@components/coverLetter/ExperienceSelectModal';
+import ExperienceSelectModalButton from '@components/coverLetter/assistant/ExperienceSelectModalButton';
 
-const AiAssist = () => {
-  return <Box h={'100%'}>
+const AiAssistant = () => {
+  return <Center h={'100%'}>
     <Card w={'400px'} m={4}>
       <Accordion defaultIndex={[0]} allowMultiple>
         <AccordionItem>
@@ -34,12 +33,9 @@ const AiAssist = () => {
               최대 3개까지 등록할 수 있습니다.
             </Text>
             <List>
-              <ExperienceSelectModal />
-              <ExperienceSelectModal />
-              <ExperienceSelectModal />
-              {/*<ExperienceItem />*/}
-              {/*<ExperienceItem />*/}
-              {/*<ExperienceItem />*/}
+              <ExperienceSelectModalButton />
+              <ExperienceSelectModalButton />
+              <ExperienceSelectModalButton />
             </List>
           </AccordionPanel>
         </AccordionItem>
@@ -62,7 +58,7 @@ const AiAssist = () => {
         </Button>
       </CardFooter>
     </Card>
-  </Box>;
+  </Center>;
 };
 
-export default AiAssist;
+export default AiAssistant;

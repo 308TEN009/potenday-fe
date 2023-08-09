@@ -2,7 +2,7 @@ import { Box, Button, Flex, HStack, Input, NumberInput, NumberInputField, Text, 
 import JobPostSelector from '@components/coverLetter/form/JobPostSelector';
 import { type ReducerState, useEffect, useMemo, useReducer, useState } from 'react';
 import type { CoverLetterForm, JobPostOption } from '@/model/coverLetter';
-import AiAssist from '@components/coverLetter/AiAssist';
+import AiAssistant from '@components/coverLetter/assistant/AiAssistant';
 
 const EMPTY_COVER_LETTER_FORM = {
   jobDesc: '',
@@ -57,7 +57,7 @@ const CoverLetter = () => {
     ]);
   };
 
-  return <Flex h={'100%'}>
+  return <Flex h={'100%'} gap={'50px'}>
     <Box flex={1}>
       <form>
         <Text fontSize={'ml'} as={'span'}>지원 공고</Text>
@@ -98,7 +98,7 @@ const CoverLetter = () => {
         }
       </form>
     </Box>
-    <AiAssist />
+    <AiAssistant />
   </Flex>
 };
 
