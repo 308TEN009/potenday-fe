@@ -1,15 +1,13 @@
-import type { SocialLoginType } from '@/model/common';
 import apiClient from '@/api/index';
+import type { AccessToken } from '@/model/common';
 import type { AxiosResponse } from 'axios';
 
-const login = (socialLoginType: SocialLoginType) => {
-  return apiClient.get(`/auth/login/${socialLoginType}`).then((res: AxiosResponse) => {
-    console.log(res.data);
-  });
-};
+const retrieveNewAccessToken = (refreshToken: string): Promise<AccessToken> =>
+  apiClient.post('/v1/auth/token', refreshToken)
+           .then((res: AxiosResponse) => res.data);
 
 const AuthApi = {
-  login
-}
+  retrieveNewAccessToken,
+};
 
 export default AuthApi;

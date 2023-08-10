@@ -10,7 +10,6 @@ const Home = () => {
           w={'100%'}
           gap={'25px'}
           justifyContent={'space-between'}>
-
       <CoverLetterContainer />
       <VStack gap={'10px'}>
         <StatusBoard />
