@@ -5,7 +5,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay,
+  ModalOverlay, ModalProps,
 } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 
@@ -16,7 +16,7 @@ interface CommonModalProps {
   size?: string;
 }
 
-const CommonModal = ({ isOpen, onClose, children, size }: CommonModalProps) => {
+const CommonModal = ({ isOpen, onClose, children, size = 'md' }: CommonModalProps) => {
   return <Modal isOpen={isOpen}
                 onClose={onClose}
                 size={size as any}

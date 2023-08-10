@@ -1,5 +1,5 @@
 import { Box, Button, Collapse, HStack, List, ListItem, useDisclosure } from '@chakra-ui/react';
-import { type ReactNode, type RefObject, useRef } from 'react';
+import { type LegacyRef, type ReactNode, useRef } from 'react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 
 interface CommonSelectProps {
@@ -14,7 +14,7 @@ const CommonSelect = ({
                         children,
                       }: CommonSelectProps) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
-  const button = useRef<RefObject<HTMLButtonElement> | null>(null);
+  const button = useRef<LegacyRef<HTMLButtonElement | null>>(null);
 
   const onButtonBlur = () => {
     (button.current as any).blur!();

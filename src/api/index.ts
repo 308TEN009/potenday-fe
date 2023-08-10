@@ -3,8 +3,8 @@ import AuthApi from '@/api/AuthApi';
 
 const apiClient: AxiosInstance = axios.create({ baseURL: import.meta.env.VITE_BASE_URL } as CreateAxiosDefaults);
 
-const getAccessToken = () => localStorage.getItem('accessToken');
-const getRefreshToken = () => localStorage.getItem('refreshToken');
+const getAccessToken = () => localStorage.getItem('accessToken') as string;
+const getRefreshToken = () => localStorage.getItem('refreshToken') as string;
 
 apiClient.interceptors.request.use(
   (config) => {
