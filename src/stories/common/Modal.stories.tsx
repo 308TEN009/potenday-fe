@@ -12,7 +12,7 @@ const commonModalMeta: Meta<typeof CommonModal> = {
 export default commonModalMeta;
 type Story = StoryObj<CommonModal>;
 
-export const Modal: Story = {
+export const Common: Story = {
   args: {
     isOpen: true,
     onClose: () => {},

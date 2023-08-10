@@ -1,0 +1,28 @@
+name: Chromatic Deployment
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Git for Chromatic
+        run: git fetch --prune --unshallow
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18 # Node.js 버전 선택
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy to Chromatic
+        run: npx chromatic --project-token=chpt_134d9493c67ac97 --exit-zero-on-changes

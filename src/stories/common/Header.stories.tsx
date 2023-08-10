@@ -1,19 +1,27 @@
-import Header from '@components/common/Header';
+import CommonHeader from '@components/common/CommonHeader';
 import type { Meta, StoryObj } from '@storybook/react';
+import { ChakraProvider } from '@chakra-ui/react';
+import { BrowserRouter } from 'react-router-dom';
+import theme from '@/theme';
 
-const headerMeta: Meta<typeof Header> = {
-  title: 'Common/Header',
-  component: Header,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
-};
+const headerMeta: Meta<typeof CommonHeader> = {
+	title: 'Common/Header',
+	component: CommonHeader,
+	decorators: [(story) =>
+		<BrowserRouter>
+			<ChakraProvider theme={theme}>
+				{story()}
+				</ChakraProvider>
+		</BrowserRouter>
+],
+}
+;
 
 export default headerMeta;
-type Story = StoryObj<Header>;
+type Story = StoryObj<CommonHeader>;
 
-export const CommonHeader: Story = {
-  args: {},
+export const Common: Story = {
+	args: {},
 };
 
 // // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
