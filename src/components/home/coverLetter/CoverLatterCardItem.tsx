@@ -1,17 +1,13 @@
 import { Badge, Card, CardBody, CardFooter, CardHeader, GridItem, Text } from '@chakra-ui/react';
+import { CoverLatterItemProps } from '@/model/coverLetter';
 
-export interface CoverLatterRowProp {
-  companyName: string;
-  status: string;
-  coverLatterKey: string;
-  duty: string;
-}
 
-const CoverLatterItem = ({
+
+const CoverLatterCardItem = ({
                            companyName,
                            status,
                            duty,
-                         }: CoverLatterRowProp) => {
+                         }: CoverLatterItemProps) => {
   return <GridItem>
     <Card h={'200px'}
           alignItems={'left'}
@@ -38,4 +34,4 @@ const CoverLatterItem = ({
         </GridItem>;
       };
 
-      export default CoverLatterItem;;
+      export default CoverLatterCardItem;;

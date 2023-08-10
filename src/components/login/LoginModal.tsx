@@ -1,6 +1,7 @@
 import CommonModal from '@components/common/modal/CommonModal';
 import { Button, HStack, Text } from '@chakra-ui/react';
 import type { SocialLoginType } from '@/model/common';
+import AuthApi from '@/api/AuthApi';
 
 const LoginModal = ({ isOpen, onClose }: any) => {
   const onLogin = (socialLoginType: SocialLoginType) => {

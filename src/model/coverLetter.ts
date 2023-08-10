@@ -11,3 +11,10 @@ export interface CoverLetterForm {
   maxLength?: number;
   coverLetter: string;
 }
+
+export interface CoverLatterItemProps {
+  companyName: string;
+  status: string;
+  coverLatterKey: string;
+  duty: string;
+};

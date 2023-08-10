@@ -1,13 +1,4 @@
-import {
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Checkbox,
-  HStack,
-  Text,
-} from '@chakra-ui/react';
+import { AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, HStack, Text } from '@chakra-ui/react';
 
 // interface ExperienceItemProps {
 //
@@ -15,15 +6,12 @@ import {
 export const ExperienceItem = () => {
   return <AccordionItem>
     <HStack>
-      <Checkbox w={'100%'}>
-        <Box>
-          경험 1
-        </Box>
-      </Checkbox>
+      <Text w={'100%'}>
+        경험 1
+      </Text>
       <AccordionButton flex={1}>
         <AccordionIcon />
       </AccordionButton>
-
     </HStack>
     <AccordionPanel>
       ❤️경험 1-1

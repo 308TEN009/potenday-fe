@@ -36,5 +36,20 @@ const components = {
       size: 'sm',
     },
   },
+  Heading: {
+    defaultProps: {
+      size: 'md',
+    },
+  },
+  Input: {
+    defaultProps: {
+      size: 'sm',
+    },
+  },
+  Textarea: {
+    defaultProps: {
+      size: 'sm',
+    },
+  },
 };
 export default extendTheme({ styles, colors, components, ...typography });

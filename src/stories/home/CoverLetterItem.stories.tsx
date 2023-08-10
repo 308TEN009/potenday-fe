@@ -1,14 +1,14 @@
-import CoverLatterItem from '@components/home/coverLetter/CoverLatterItem';
+import CoverLatterCardItem from '@components/home/coverLetter/CoverLatterCardItem';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ChakraProvider, Grid } from '@chakra-ui/react';
 import theme from '@/theme';
 
 const CoverLatterTestComponent = (props) => {
   return <Grid>
-    <CoverLatterItem {...props}/>
+    <CoverLatterCardItem {...props}/>
   </Grid>
 }
-const CoverLetterItemMeta: Meta<typeof CoverLatterItem> = {
+const CoverLetterItemMeta: Meta<typeof CoverLatterCardItem> = {
   title: 'Home/CoverLetterItem',
   component: CoverLatterTestComponent,
   decorators: [(story) =>
@@ -19,7 +19,7 @@ const CoverLetterItemMeta: Meta<typeof CoverLatterItem> = {
 
 export default CoverLetterItemMeta;
 
-type Story = StoryObj<CoverLatterItem>;
+type Story = StoryObj<CoverLatterCardItem>;
 export const Common: Story = {
   args: {
     companyName: 'companyName',
