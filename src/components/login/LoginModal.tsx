@@ -39,7 +39,7 @@ const LoginModal = ({ isOpen, onClose }: any) => {
       </HStack>
     </CommonModal.Body>
     <CommonModal.Footer >
-      {` `}
+      {`  `}
     </CommonModal.Footer>
   </CommonModal>;
 };
