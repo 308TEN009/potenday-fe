@@ -5,7 +5,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay, ModalProps,
+  ModalOverlay,
 } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 
@@ -19,7 +19,7 @@ interface CommonModalProps {
 const CommonModal = ({ isOpen, onClose, children, size = 'md' }: CommonModalProps) => {
   return <Modal isOpen={isOpen}
                 onClose={onClose}
-                size={size as any}
+                size={size as any} // @ts-ignore
                 bgColor={'white'}
                 isCentered>
     <ModalOverlay />

@@ -9,8 +9,8 @@ const LoginRedirect = () => {
     const accessToken = searchParams.get('accessToken');
     const refreshToken = searchParams.get('refreshToken');
 
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
+    if (accessToken) localStorage.setItem('accessToken', accessToken);
+    if (refreshToken) localStorage.setItem('refreshToken', refreshToken);
     const redirectWindowChannel = new BroadcastChannel(REDIRECTION_CHANNEL);
     redirectWindowChannel.postMessage('');
     window.close();

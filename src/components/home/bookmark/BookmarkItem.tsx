@@ -1,4 +1,4 @@
-import { Button, Text } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import type { BookmarkContent } from '@/model/home';
 import { memo } from 'react';
 import { CommonOutlineStyle } from '@/styles/commonStyles';
@@ -14,7 +14,6 @@ const BookmarkItem = ({ bookmark }: BookmarkItemProps) => {
   };
 
   return <Button boxShadow='md'
-                 borderRadius={'base'}
                  textAlign={'center'}
                  w={'190px'}
                  h={'40px'}

@@ -38,7 +38,9 @@ const LoginModal = ({ isOpen, onClose }: any) => {
         <Button onClick={onLogin}>카카오</Button>
       </HStack>
     </CommonModal.Body>
-    <CommonModal.Footer />
+    <CommonModal.Footer >
+      {` `}
+    </CommonModal.Footer>
   </CommonModal>;
 };
 

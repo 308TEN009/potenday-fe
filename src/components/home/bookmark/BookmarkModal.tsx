@@ -20,7 +20,6 @@ const BookmarkModal = ({ isOpen, onClose, onSubmit, bookmark }: BookmarkModalPro
     onClose();
   };
 
-
   return <CommonModal isOpen={isOpen} onClose={onClose} size={'xl'}>
     <CommonModal.Header>
       <Text fontSize={'md'}

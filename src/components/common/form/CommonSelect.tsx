@@ -15,7 +15,6 @@ const CommonSelect = ({
                       }: CommonSelectProps) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const button = useRef<LegacyRef<HTMLButtonElement | null>>(null);
-
   const onButtonBlur = () => {
     (button.current as any).blur!();
     onClose();
@@ -30,6 +29,7 @@ const CommonSelect = ({
           justifyContent={'space-between'}
           boxShadow={'base'}
           p={'8px'}>
+           {/* @ts-ignore */}
           <Button ref={button}
                   rightIcon={<ChevronDownIcon />}
                   background={'transparent'}

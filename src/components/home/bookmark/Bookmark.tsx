@@ -8,7 +8,7 @@ import HomeApi from '@/api/HomeApi';
 const Bookmark = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [bookmarkList, setBookmarkList] = useState<BookmarkContent[]>([]);
-  const [bookmark, setBookmark] = useState<BookmarkContent | null>();
+  const [bookmark, setBookmark] = useState<BookmarkContent | null>(null);
 
   useEffect(() => {
     retrieveBookMarkList();
@@ -21,8 +21,8 @@ const Bookmark = () => {
            });
   };
 
-  const openCreateBookmarkModal = (isNew: boolean, selectedBookmark?: BookmarkContent) => {
-    setBookmark(selectedBookmark);
+  const openCreateBookmarkModal = (selectedBookmark?: BookmarkContent) => {
+    setBookmark(selectedBookmark ?? null);
     onOpen();
   };
 
@@ -37,7 +37,7 @@ const Bookmark = () => {
         <Text>
           즐겨찾기
         </Text>
-        <Button size={'sm'} onClick={() => openCreateBookmarkModal(false)}>
+        <Button size={'sm'} onClick={() => openCreateBookmarkModal()}>
           수정
         </Button>
       </HStack>
@@ -54,7 +54,7 @@ const Bookmark = () => {
                 textAlign={'center'}
                 w={'190px'}
                 h={'40px'}
-                onClick={() => openCreateBookmarkModal(true)}>
+                onClick={() => openCreateBookmarkModal()}>
           +
         </Button>
       </Flex>

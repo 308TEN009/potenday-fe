@@ -1,7 +1,7 @@
 import { Box, Button, Flex, HStack, Input, NumberInput, NumberInputField, Text, Textarea } from '@chakra-ui/react';
 import JobPostSelector from '@components/coverLetter/form/JobPostSelector';
-import { type ReducerState, useEffect, useMemo, useReducer, useState } from 'react';
-import type { CoverLetterForm, JobPostOption } from '@/model/coverLetter';
+import { type ReducerStateWithoutAction, useEffect, useMemo, useReducer, useState } from 'react';
+import type { JobPostOption } from '@/model/coverLetter';
 import AiAssistant from '@components/coverLetter/assistant/AiAssistant';
 
 const EMPTY_COVER_LETTER_FORM = {
@@ -9,7 +9,7 @@ const EMPTY_COVER_LETTER_FORM = {
   coverLetter: '',
   jobPost: null,
   question: '',
-} as ReducerState<CoverLetterForm>;
+} as ReducerStateWithoutAction<any>;
 
 const coverLetterFormReducer = (state, action) => {
   switch (action.type) {
@@ -99,7 +99,7 @@ const CoverLetter = () => {
       </form>
     </Box>
     <AiAssistant />
-  </Flex>
+  </Flex>;
 };
 
 export default CoverLetter;

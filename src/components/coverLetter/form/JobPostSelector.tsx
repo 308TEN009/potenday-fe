@@ -1,6 +1,6 @@
 import type { JobPostOption } from '@/model/coverLetter';
 import CommonSelect from '@components/common/form/CommonSelect';
-import { Box, Button, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Text, useDisclosure } from '@chakra-ui/react';
 import AddJobPostingModalButton from '@components/home/coverLetter/addJobPost/AddJobPostingModalButton';
 
 interface JobPostSelectorProps {
@@ -14,7 +14,7 @@ const JobPostSelector = ({
                            selectedJobPost,
                            setSelectedJobPost,
                          }: JobPostSelectorProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const getSelectedLabel = () =>
     selectedJobPost
       ? `${selectedJobPost.companyName} | ${selectedJobPost.duty}`
@@ -37,8 +37,9 @@ const JobPostSelector = ({
         )
       }
 
-      <AddJobPostingModalButton position={'DROPDOWN'}
-                                isOpen={isOpen}
+      {/* @ts-ignore */}
+      <AddJobPostingModalButton isOpen={isOpen}
+                                position={'DROPDOWN'}
                                 callBack={onSubmit}
                                 onClose={onClose} />
     </CommonSelect>
