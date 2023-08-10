@@ -1,14 +1,26 @@
 import CommonModal from '@components/common/modal/CommonModal';
 import { Button, Center, FormLabel, Input, Text, VStack } from '@chakra-ui/react';
 import type { CommonModalProps } from '@/model/common';
+import { useMemo, useState } from 'react';
+import type { BookmarkContent } from '@/model/home';
 
 interface BookmarkModalProps extends CommonModalProps {
-  isNew: boolean;
-  bookmarkKey?: string;
   onSubmit: (e: any) => any;
+  bookmark: BookmarkContent | null;
 }
 
-const BookmarkModal = ({ isOpen, onClose, isNew, onSubmit, bookmarkKey }: BookmarkModalProps) => {
+const BookmarkModal = ({ isOpen, onClose, onSubmit, bookmark }: BookmarkModalProps) => {
+  const [name, setName] = useState('');
+  const [url, setUrl] = useState('');
+  const isNew = useMemo(() => bookmark !== null, [bookmark]);
+
+  const createBookmark = (e) => {
+    e.preventDefault();
+    onSubmit({ name, url });
+    onClose();
+  };
+
+
   return <CommonModal isOpen={isOpen} onClose={onClose} size={'xl'}>
     <CommonModal.Header>
       <Text fontSize={'md'}
@@ -22,19 +34,21 @@ const BookmarkModal = ({ isOpen, onClose, isNew, onSubmit, bookmarkKey }: Bookma
         (최대 5개까지 가능합니다)
       </Text>
     </CommonModal.Header>
-    <form onSubmit={onSubmit}>
+    <form onSubmit={createBookmark}>
       <CommonModal.Body>
         <VStack alignItems={'start'} m={'50px'}>
           <FormLabel>이름</FormLabel>
-          <Input />
+          <Input value={name}
+                 onChange={e => setName(e.target.value)} />
           <FormLabel>URL</FormLabel>
-          <Input />
+          <Input value={url}
+                 onChange={e => setUrl(e.target.value)} />
         </VStack>
       </CommonModal.Body>
       <CommonModal.Footer>
-         <Center w={'100%'} mb={'20px'}>
-           <Button size={'md'} type={'submit'}>추가하기</Button>
-         </Center>
+        <Center w={'100%'} mb={'20px'}>
+          <Button size={'md'} type={'submit'}>추가하기</Button>
+        </Center>
       </CommonModal.Footer>
     </form>
   </CommonModal>;

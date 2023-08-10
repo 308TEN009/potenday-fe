@@ -1,19 +1,21 @@
 import CommonModal from '@components/common/modal/CommonModal';
 import { Button, HStack, Text } from '@chakra-ui/react';
-import type { SocialLoginType } from '@/model/common';
 import { REDIRECTION_CHANNEL } from '@/model/common';
+import { useNavigate } from 'react-router';
 
 const LoginModal = ({ isOpen, onClose }: any) => {
-  const onLogin = (socialLoginType: SocialLoginType) => {
+  const navigate = useNavigate();
+  const onLogin = () => {
     const popupX = document.body.offsetWidth / 2 - 200 / 2;
     const popupY = window.screen.height / 2 - 300 / 2;
     window.open(
-      `${import.meta.env.VITE_BASE_URL}/auth/login/${socialLoginType}`,
+      `${import.meta.env.VITE_BASE_URL}/auth/login/kakao`,
       'Redirect Window',
       `status=no, height=520, width=600, left='${popupX}', top=${popupY}`,
     );
     const redirectWindowChannel = new BroadcastChannel(REDIRECTION_CHANNEL);
     redirectWindowChannel.onmessage = () => onClose();
+    navigate(window.location.pathname, { replace: true });
   };
   return <CommonModal isOpen={isOpen}
                       onClose={onClose}
@@ -33,9 +35,7 @@ const LoginModal = ({ isOpen, onClose }: any) => {
     </CommonModal.Header>
     <CommonModal.Body>
       <HStack justifyContent={'space-around'} h={'200px'}>
-        <Button onClick={() => onLogin('kakao')}>카카오</Button>
-        <Button onClick={() => onLogin('naver')}>네이버</Button>
-        <Button onClick={() => onLogin('google')}>구글</Button>
+        <Button onClick={onLogin}>카카오</Button>
       </HStack>
     </CommonModal.Body>
     <CommonModal.Footer />

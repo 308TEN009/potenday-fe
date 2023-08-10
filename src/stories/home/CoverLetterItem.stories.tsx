@@ -1,4 +1,4 @@
-import CoverLatterCardItem from '@components/home/coverLetter/CoverLatterCardItem';
+import CoverLatterCardItem from '@components/home/coverLetter/CoverLatterListItem';
 import type { Meta, StoryObj } from '@storybook/react';
 import { ChakraProvider, Grid } from '@chakra-ui/react';
 import theme from '@/theme';

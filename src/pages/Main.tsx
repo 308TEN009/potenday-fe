@@ -1,10 +1,12 @@
 import CommonHeader from '@components/common/CommonHeader';
-import { Container } from '@chakra-ui/react';
+import { Box, Container } from '@chakra-ui/react';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router';
 
 const Main = () => {
-  return <>
+  return <Box w={'100%'}
+              h={'100vh'}
+              bgColor={'mainBg'}>
     <CommonHeader />
     <Container as={'main'}
                w={'initial'}
@@ -14,7 +16,7 @@ const Main = () => {
         <Outlet />
       </Suspense>
     </Container>
-  </>
+  </Box>
     ;
 };
 

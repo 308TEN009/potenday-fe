@@ -39,7 +39,7 @@ const JobPostSelector = ({
 
       <AddJobPostingModalButton position={'DROPDOWN'}
                                 isOpen={isOpen}
-                                onSubmit={onSubmit}
+                                callBack={onSubmit}
                                 onClose={onClose} />
     </CommonSelect>
 

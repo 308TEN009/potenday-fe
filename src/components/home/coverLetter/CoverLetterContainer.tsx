@@ -1,17 +1,20 @@
-import { Box } from '@chakra-ui/react';
-import CoverLatterList from '@components/home/coverLetter/CoverLatterList';
-import AddJobPostingModalButton from '@components/home/coverLetter/addJobPost/AddJobPostingModalButton';
+import { Box, List } from '@chakra-ui/react';
+import CoverLatterListItem from '@components/home/coverLetter/CoverLatterListItem';
+import type { JobPost } from '@/model/home';
 
-const CoverLetterContainer = () => {
-  const onSubmit = () => {
-    console.log('submit');
-  };
+interface CoverLetterContainerProps {
+  jobPosts: JobPost[];
+}
+
+const CoverLetterContainer = ({ jobPosts = [] }: CoverLetterContainerProps) => {
   return <Box>
-    <Box pl={'30px'}
-         w={'100%'}
+    <Box w={'100%'}
          boxSizing={'border-box'}>
-      <AddJobPostingModalButton onSubmit={onSubmit} position={'HOME'} />
-      <CoverLatterList />
+      <List>
+        {jobPosts.map(jobPost =>
+          <CoverLatterListItem key={jobPost._id}
+                               {...jobPost} />)}
+      </List>
     </Box>
 
   </Box>;

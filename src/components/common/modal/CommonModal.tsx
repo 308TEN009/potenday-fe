@@ -20,9 +20,10 @@ const CommonModal = ({ isOpen, onClose, children, size }: CommonModalProps) => {
   return <Modal isOpen={isOpen}
                 onClose={onClose}
                 size={size as any}
+                bgColor={'white'}
                 isCentered>
     <ModalOverlay />
-    <ModalContent>
+    <ModalContent borderRadius={0}>
       {children}
     </ModalContent>
   </Modal>;

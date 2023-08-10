@@ -4,7 +4,20 @@
       "home": "홈",
       "coverLetter": "자기소개서",
       "newsClipping": "뉴스 스크랩",
-      "myPage": "마이페이지"
+      "myPage": "마이페이지",
+      "login": "로그인"
+    },
+    "InputCompleted": "입력 완료",
+    "close": "닫기"
+  },
+  "home": {
+    "myCoverLetter": "\uD83D\uDCC4 나의 자소서",
+    "addJobAnnouncement": "지원 공고 추가하기",
+    "addJobAnnouncementPopup": {
+      "title": "지원할 채용공고 입력하기",
+      "subTitle": "기업명, 지원직무만 입력하고 빠르게 자기소개서 작성을 시작해보세요!",
+      "companyName": "기업명",
+      "duty": "지원 직무"
     }
   }
 }

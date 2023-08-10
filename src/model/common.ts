@@ -10,8 +10,6 @@ export interface OptionItem<T> {
   value: T;
 }
 
-export type SocialLoginType = 'kakao' | 'naver' | 'google';
-
 export const REDIRECTION_CHANNEL = 'REDIRECTION_CHANNEL';
 
 export interface AccessToken {

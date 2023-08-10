@@ -22,18 +22,25 @@ apiClient.interceptors.request.use(
 const MAX_RETRY_COUNT = 3;
 let retryCount = 0;
 
-apiClient.interceptors.response.use(async (response) => {
-    if (response.status === 401 && retryCount < MAX_RETRY_COUNT) {
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    console.log(error);
+    if (error.response && error.response.status === 401 && retryCount < MAX_RETRY_COUNT) {
       retryCount++;
-      const { accessToken } = await AuthApi.retrieveNewAccessToken(getRefreshToken());
-      response.config.headers.Authorization = accessToken;
-      return apiClient(response.config);
+      try {
+        const { accessToken } = await AuthApi.retrieveNewAccessToken(getRefreshToken());
+        localStorage.setItem('accessToken', accessToken);
+        error.config.headers.Authorization = `Bearer ${accessToken}`;
+        return apiClient(error.config);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
     }
+
     retryCount = 0;
-    return response;
-  },
-  (error) => {
     return Promise.reject(error);
-  });
+  },
+);
 
 export default apiClient;

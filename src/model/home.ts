@@ -12,3 +12,15 @@ export interface BookmarkContent {
   updatedAt: string;
   deletedAt: string;
 }
+
+export interface JobPostRequest {
+  companyName: string;
+  applicationJob: string;
+}
+
+export interface JobPost {
+  _id: string;
+  companyName: string;
+  applicationJob: string;
+  status: string
+}
