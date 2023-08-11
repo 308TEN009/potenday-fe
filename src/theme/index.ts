@@ -30,21 +30,31 @@ const colors = {
     600: '#FFFFFF',
     700: '#FFFFFF',
     800: '#FFFFFF',
+    black: 'black',
   },
 };
 const typography = {
   fontSizes: {
-    lg: '36px',
-    ml: '28px',
-    md: '24px',
-    sm: '20px',
-    sx: '16px',
-  },
-  size: {
-    lg: '36px',
-    ml: '28px',
-    md: '24px',
-    sm: '20px',
+    lg: {
+      mobile: '24px',
+      desktop: '36px',
+    },
+    ml: {
+      mobile: '20px',
+      desktop: '28px',
+    },
+    md: {
+      mobile: '16px',
+      desktop: '24px',
+    },
+    sm: {
+      mobile: '14px',
+      desktop: '20px',
+    },
+    sx: {
+      mobile: '12px',
+      desktop: '16px',
+    }
   },
 };
 
@@ -65,10 +75,18 @@ const components = {
   Button: {
     baseStyle: {
       fontWeight: 'normal',
+      bg: 'white',
+      border: '2px solid',
+      borderColor: 'outline.500',
     },
     defaultProps: {
       size: 'sm',
+      // colorScheme: 'noColor',
+      color: 'red',
     },
+    defaultStyles: {
+      color: 'red',
+    }
   },
   Heading: {
     defaultProps: {
@@ -81,11 +99,38 @@ const components = {
     },
   },
   Text: {
-    defaultProps: {
+    defaultStyle: {
       wordBreak: 'keep-all',
       whiteSpace: 'wrap',
+    },
+    defaultProps: {
       size: 'sm',
     },
+    sizes: {
+      sm: {
+        fontSize: 'sm',
+      }
+    }
   },
 };
-export default extendTheme({ styles, colors, components, ...typography });
+
+const size = {
+  lg: '36px',
+  ml: '28px',
+  md: '24px',
+  sm: '20px',
+};
+
+const breakpoints = {
+  mobile: "768px",
+  desktop: "1920px",
+}
+
+export default extendTheme({
+  styles,
+  colors,
+  components,
+  size,
+  breakpoints,
+  ...typography
+});

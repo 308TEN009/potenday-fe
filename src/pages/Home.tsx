@@ -7,9 +7,11 @@ import { home } from '@/messages.json';
 import HomeApi from '@/api/HomeApi';
 import { useEffect, useState } from 'react';
 import type { JobPost } from '@/model/home';
+import useFlexDir from '@/hooks/useFlexDir';
 
 const Home = () => {
   const [jobPosts, setJobPost] = useState<JobPost[]>([]);
+  const flexDir = useFlexDir();
 
   useEffect(() => {
     retrieveJobPosts();
@@ -23,7 +25,11 @@ const Home = () => {
   };
   return <>
     <HStack>
-      <Text fontSize={'lg'} mr={'41px'} w={'240px'} wordBreak={'keep-all'}>
+      <Text fontSize={'lg'}
+            mr={'41px'}
+            w={'240px'}
+            flexDir={flexDir}
+            wordBreak={'keep-all'}>
         {home.myCoverLetter}
       </Text>
       <AddJobPostingModalButton callBack={retrieveJobPosts} position={'HOME'} />
@@ -31,6 +37,7 @@ const Home = () => {
     <Flex mt={'54px'}
           w={'100%'}
           gap={'25px'}
+          flexDir={flexDir}
           justifyContent={'space-between'}>
       <CoverLetterContainer jobPosts={jobPosts}/>
       <VStack gap={'10px'}>
