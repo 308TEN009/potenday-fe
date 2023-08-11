@@ -8,7 +8,7 @@ export const ExperienceSelectModalButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return <>
     <ExperienceInputButton onClick={onOpen} />
-    <CommonModal isOpen={isOpen} onClose={onClose} size={'xl'}>
+    <CommonModal isOpen={isOpen} onClose={onClose} w={'800px'}>
       <CommonModal.Header>
         <Text textAlign={'center'}>나의 경험 리스트</Text>
         <Text fontWeight={'thin'}

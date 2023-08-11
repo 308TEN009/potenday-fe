@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Text, useMediaQuery, VStack } from '@chakra-ui/react';
+import { Box, Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import StatusBoard from '@components/home/statusBoard/StatusBoard';
 import Bookmark from '@components/home/bookmark/Bookmark';
 import CoverLetterContainer from '@components/home/coverLetter/CoverLetterContainer';
@@ -13,7 +13,6 @@ import useErrorHandler from '@/hooks/useErrorHandler';
 const Home = () => {
   const [jobPosts, setJobPost] = useState<JobPost[]>([]);
   const flexDir = useFlexDir();
-  const [isMobile] = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     retrieveJobPosts();
@@ -26,7 +25,10 @@ const Home = () => {
 
   return <Flex flexDir={flexDir}>
     <Box>
-      <HStack justifyContent={isMobile ? 'center' : 'initial'} height={'64px'} mb={'20px'}>
+      <HStack justifyContent={['center', 'initial']}
+              w={['auto', '1035px']}
+              height={'64px'}
+              mb={'20px'}>
         <Text fontSize={['md', 'lg']}
               mr={['20px', '41px']}
 

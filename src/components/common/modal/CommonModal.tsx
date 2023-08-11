@@ -21,7 +21,6 @@ interface CommonModalProps {
 const CommonModal = ({ isOpen, onClose, children, w, h }: CommonModalProps) => {
   return <Modal isOpen={isOpen}
                 onClose={onClose}
-                bgColor={'white'}
                 isCentered>
     <ModalOverlay />
     <ModalContent borderRadius={'8px'}

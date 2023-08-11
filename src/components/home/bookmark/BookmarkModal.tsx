@@ -1,7 +1,7 @@
 import CommonModal from '@components/common/modal/CommonModal';
 import { Button, Center, FormLabel, Input, Text, VStack } from '@chakra-ui/react';
 import type { CommonModalProps } from '@/model/common';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import type { BookmarkContent } from '@/model/home';
 
 interface BookmarkModalProps extends CommonModalProps {

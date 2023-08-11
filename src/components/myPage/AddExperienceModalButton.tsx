@@ -7,7 +7,7 @@ const AddExperienceModalButton = () => {
     <Button onClick={onOpen}>
       추가하기
     </Button>
-    <CommonModal isOpen={isOpen} onClose={onClose} size={'xl'}>
+    <CommonModal isOpen={isOpen} onClose={onClose} w={'800px'}>
       <CommonModal.Header>
         <Heading textAlign={'center'} pt={5}>나의 경험 추가하기</Heading>
         <Text fontSize={'sm'}

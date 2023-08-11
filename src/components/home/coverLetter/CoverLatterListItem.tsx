@@ -1,4 +1,4 @@
-import { Badge, Box, Flex, HStack, ListItem, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, ListItem, Text } from '@chakra-ui/react';
 import type { JobPost } from '@/model/home';
 import { home } from '@/messages.json';
 

@@ -63,8 +63,7 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
 
     <CommonModal isOpen={isOpen}
                  onClose={onClose}
-                 w={'980px'}
-                 size={'3xl'}>
+                 w={'980px'}>
       <CommonModal.Header>
         <Text mt={'10px'}
               fontWeight={'normal'}
