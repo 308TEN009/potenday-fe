@@ -1,7 +1,7 @@
 import CommonModal from '@components/common/modal/CommonModal';
 import { Button, Center, FormLabel, Input, Text, VStack } from '@chakra-ui/react';
 import type { CommonModalProps } from '@/model/common';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { BookmarkContent } from '@/model/home';
 
 interface BookmarkModalProps extends CommonModalProps {
@@ -12,6 +12,7 @@ interface BookmarkModalProps extends CommonModalProps {
 const BookmarkModal = ({ isOpen, onClose, onSubmit, bookmark }: BookmarkModalProps) => {
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
+  const isNew = useMemo(() => bookmark === null, [bookmark]);
 
   const createBookmark = (e) => {
     e.preventDefault();
@@ -19,15 +20,11 @@ const BookmarkModal = ({ isOpen, onClose, onSubmit, bookmark }: BookmarkModalPro
     onClose();
   };
 
-  const isNew = () => {
-    return bookmark !== null;
-  };
-
   return <CommonModal isOpen={isOpen} onClose={onClose} w={'800px'}>
     <CommonModal.Header>
       <Text fontSize={'md'}
             mt={'20px'}>
-        즐겨찾기 {isNew() ? '추가' : '수정'}
+        즐겨찾기 {isNew ? '추가' : '수정'}
       </Text>
       <Text mt={'10px'}
             fontWeight={'normal'}

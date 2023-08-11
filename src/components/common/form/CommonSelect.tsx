@@ -4,13 +4,17 @@ import { ChevronDownIcon } from '@chakra-ui/icons';
 
 interface CommonSelectProps {
   selectedLabel?: string;
+  selectedNode?: ReactNode;
   defaultSelectedLabel?: string;
+  dropDownButton?: ReactNode;
   children: ReactNode[];
 }
 
 const CommonSelect = ({
                         selectedLabel,
+                        selectedNode,
                         defaultSelectedLabel = '',
+                        dropDownButton,
                         children,
                       }: CommonSelectProps) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
@@ -26,23 +30,27 @@ const CommonSelect = ({
            role={'select'}>
         <HStack
           onClick={onToggle}
+           w={'100%'}
           justifyContent={'space-between'}
-          boxShadow={'base'}
+          borderBottom={'1px solid'}
+          borderBottomColor={'lightgrey4.500'}
           p={'8px'}>
-           {/* @ts-ignore */}
+          {/* @ts-ignore */}
           <Button ref={button}
-                  rightIcon={<ChevronDownIcon />}
+                  rightIcon={(dropDownButton ?? <ChevronDownIcon />) as any}
                   background={'transparent'}
                   w={'100%'}
                   justifyContent={'space-between'}
                   m={0}
                   fontSize={'sm'}
                   onBlur={onClose}
+                  colorScheme={'white'}
+                  color={'black'}
                   p={'0 10px'}
                   _focus={{}}
                   _hover={{}}
           >
-            {selectedLabel ?? defaultSelectedLabel ?? ''}
+            {selectedNode ?? selectedLabel ?? defaultSelectedLabel ?? ''}
           </Button>
         </HStack>
         <Box position={'relative'} zIndex={999}>

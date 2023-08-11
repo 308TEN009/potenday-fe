@@ -58,6 +58,7 @@ const global = {
     fontFamily: `'Spoqa Han Sans Neo', 'sans-serif'`,
     padding: 0,
     margin: 0,
+    color: '#333333',
   },
   '#root': {
     width: '100vw',
@@ -74,8 +75,11 @@ const components = {
     },
   },
   Heading: {
+    baseStyle: {
+      fontWeight: 'normal',
+    },
     defaultProps: {
-      size: 'md',
+      fontSize: 'ml',
     },
   },
   Textarea: {

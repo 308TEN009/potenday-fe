@@ -1,4 +1,6 @@
-import { Box, Input, Text, Textarea } from '@chakra-ui/react';
+import { Box, Button, Input, Text, Textarea } from '@chakra-ui/react';
+import TipIcon from '@assets/icons/message-question.svg';
+import { useState } from 'react';
 
 interface LabelInput {
   label: string;
@@ -7,15 +9,31 @@ interface LabelInput {
   onChange: (e) => void;
   inputType: 'TEXT' | 'TEXTAREA';
   isLast?: boolean;
+  description?: string;
 }
 
-const FormLabelInput = ({ label, placeholder = '', value, onChange, inputType, isLast }: LabelInput) => {
+const FormLabelInput = ({
+                          label, placeholder = '', value, onChange
+                          , inputType, isLast, description,
+                        }: LabelInput) => {
+  const [showDesc, setShowDesc] = useState(false);
   return <Box mb={isLast ? 0 : '32px'} w={'100%'}>
     <Text fontSize={'sx'}
           mb={'12px'}
+          as={'span'}
           color={'lightgrey3.500'}>
       {label}
     </Text>
+    {
+      description &&
+      <Button colorScheme={'none'}
+              backgroundImage={`url(${TipIcon})`}
+              backgroundPosition={'center center'}
+              backgroundSize={'60% auto'}
+              backgroundRepeat={'no-repeat'}
+              onClick={() => setShowDesc(!showDesc)}
+              w={'20px'} />
+    }
     {inputType === 'TEXT'
       ? <Input fontSize={'sm'}
                placeholder={placeholder ?? ''}
@@ -36,6 +54,9 @@ const FormLabelInput = ({ label, placeholder = '', value, onChange, inputType, i
                   value={value}
                   onChange={e => onChange(e.target.value)} />
     }
+    {showDesc && <Text fontSize={'xs'} color={'sub2.500'}>
+      {description?.split('\n').map(msg => <>{msg}<br /></>)}
+    </Text>}
   </Box>;
 };
 

@@ -1,8 +1,10 @@
 import { Box, Button, Flex, HStack, Input, NumberInput, NumberInputField, Text, Textarea } from '@chakra-ui/react';
 import JobPostSelector from '@components/coverLetter/form/JobPostSelector';
 import { type ReducerStateWithoutAction, useEffect, useMemo, useReducer, useState } from 'react';
-import type { JobPostOption } from '@/model/coverLetter';
 import AiAssistant from '@components/coverLetter/assistant/AiAssistant';
+import HomeApi from '@/api/HomeApi';
+import useErrorHandler from '@/hooks/useErrorHandler';
+import type { JobPost } from '@/model/home';
 
 const EMPTY_COVER_LETTER_FORM = {
   jobDesc: '',
@@ -29,7 +31,7 @@ const coverLetterFormReducer = (state, action) => {
 };
 
 const CoverLetter = () => {
-  const [jopPostOptions, setJobPostOptions] = useState<JobPostOption[]>([]);
+  const [jopPostOptions, setJobPostOptions] = useState<JobPost[]>([]);
   const [state, dispatch] = useReducer(coverLetterFormReducer, EMPTY_COVER_LETTER_FORM);
   const currentLength = useMemo(() => state.coverLetter.length, [state.coverLetter]);
 
@@ -41,29 +43,17 @@ const CoverLetter = () => {
     dispatch({ type, value });
   };
 
-  const retrieveJobPostOptions = () => {
-    //  TODO
-    setJobPostOptions([
-      {
-        id: 1,
-        companyName: '삼성전자',
-        duty: '마케팅',
-      },
-      {
-        id: 2,
-        companyName: 'LG전자',
-        duty: '마케팅',
-      },
-    ]);
-  };
+  const retrieveJobPostOptions = () =>
+    HomeApi.retrieveJobPost()
+           .then(setJobPostOptions)
+           .catch(useErrorHandler);
 
   return <Flex h={'100%'} gap={'50px'}>
     <Box flex={1}>
       <form>
-        <Text fontSize={'ml'} as={'span'}>지원 공고</Text>
         <JobPostSelector options={jopPostOptions}
                          selectedJobPost={state.jobPost}
-                         setSelectedJobPost={(value: JobPostOption) => updateForm('JOB_POST', value)} />
+                         setSelectedJobPost={(value: JobPost) => updateForm('JOB_POST', value)} />
         <Textarea resize={'none'}
                   fontSize={'sm'}
                   mt={3}

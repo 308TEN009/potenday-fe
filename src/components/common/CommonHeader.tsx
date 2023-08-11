@@ -38,15 +38,15 @@ const CommonHeader = () => {
           {common.header.coverLetter}
         </ChakraLink>
         <ChakraLink as={ReactRouterLink as any}
+                    fontWeight={getFontWeight('/my-page')}
+                    to={'/my-page'}>
+          {common.header.myPage}
+        </ChakraLink>
+        <ChakraLink as={ReactRouterLink as any}
                     textAlign={'center'}
                     fontWeight={getFontWeight('/news-clipping')}
                     to={'/news-clipping'}>
           {common.header.newsClipping}
-        </ChakraLink>
-        <ChakraLink as={ReactRouterLink as any}
-                    fontWeight={getFontWeight('/my-page')}
-                    to={'/my-page'}>
-          {common.header.myPage}
         </ChakraLink>
       </HStack>
       <Spacer />

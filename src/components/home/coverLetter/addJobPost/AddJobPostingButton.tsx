@@ -13,7 +13,7 @@ const AddJobPostingButton = ({ onClick }: AddJobPostingButtonProps) => {
                  onClick={onClick}
                  p={'32px 19px'}>
     <Image src={addIcon} boxSize={['20px', '24px']} mr={['16px', '10px']} />
-    {home.addJobAnnouncement}
+    {home.addJobPost}
   </Button>;
 };
 

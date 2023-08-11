@@ -57,7 +57,7 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
                   backgroundColor={'white'}
                   boxShadow={'base'}
                   onClick={onOpenModal}>
-          {home.addJobAnnouncement}
+          {home.addJobPost}
         </Button>
     }
 
@@ -69,31 +69,31 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
               fontWeight={'normal'}
               fontSize={'ml'}
               textAlign={'center'}>
-          {home.addJobAnnouncementPopup.title}
+          {home.addJobPostPopup.title}
         </Text>
         <Text mt={'10px'}
               fontWeight={'thin'}
               fontSize={'sm'}
               color={'lightgrey4.500'}
               textAlign={'center'}>
-          {home.addJobAnnouncementPopup.subTitle}
+          {home.addJobPostPopup.subTitle}
         </Text>
       </CommonModal.Header>
       <form onSubmit={e => onSubmitAndClose(e)}>
         <CommonModal.Body>
           <VStack alignItems={'start'} m={'50px'}>
-            <FormLabelInput label={home.addJobAnnouncementPopup.companyName}
-                            placeholder={home.addJobAnnouncementPopup.companyNamePlaceholder}
+            <FormLabelInput label={home.addJobPostPopup.companyName}
+                            placeholder={home.addJobPostPopup.companyNamePlaceholder}
                             value={companyName}
                             onChange={setCompanyName}
                             inputType={'TEXT'} />
-            <FormLabelInput label={home.addJobAnnouncementPopup.duty}
-                            placeholder={home.addJobAnnouncementPopup.dutyPlaceholder}
+            <FormLabelInput label={home.addJobPostPopup.duty}
+                            placeholder={home.addJobPostPopup.dutyPlaceholder}
                             value={applicationJob}
                             onChange={setApplicationJob}
                             inputType={'TEXT'} />
-            <FormLabelInput label={home.addJobAnnouncementPopup.majorTask}
-                            placeholder={home.addJobAnnouncementPopup.majorTaskPlaceholder}
+            <FormLabelInput label={home.addJobPostPopup.majorTask}
+                            placeholder={home.addJobPostPopup.majorTaskPlaceholder}
                             value={majorTask}
                             onChange={setMajorTask}
                             inputType={'TEXTAREA'}

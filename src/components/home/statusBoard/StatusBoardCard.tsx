@@ -1,4 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
+import { home } from '@/messages.json';
 
 interface StatusBoardCardType {
   isPass?: boolean;
@@ -15,8 +16,8 @@ const StatusBoardCard = ({ isPass = false, value }: StatusBoardCardType) => {
                alignItems={'center'}
                justifyContent={'space-between'}
                flexDir={'column'}>
-    <Text>{isPass ? '서류 합격' : '지원 완료'}</Text>
-    <Text>{value} 건</Text>
+    <Text> {home.statusBoard[isPass ? 'pass' : 'complete']}</Text>
+    <Text>{value} {home.statusBoard.unit}</Text>
   </Flex>;
 };
 

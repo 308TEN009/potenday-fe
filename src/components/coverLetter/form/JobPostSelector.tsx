@@ -1,12 +1,14 @@
-import type { JobPostOption } from '@/model/coverLetter';
 import CommonSelect from '@components/common/form/CommonSelect';
 import { Box, Text, useDisclosure } from '@chakra-ui/react';
 import AddJobPostingModalButton from '@components/home/coverLetter/addJobPost/AddJobPostingModalButton';
+import type { JobPost } from '@/model/home';
+import SelectedJobPost from '@components/home/coverLetter/addJobPost/SelectedJobPost';
+import SelectJobPostDropdownButton from '@components/home/coverLetter/addJobPost/SelectJobPostDropdownButton';
 
 interface JobPostSelectorProps {
-  options: JobPostOption[];
-  selectedJobPost: JobPostOption | null;
-  setSelectedJobPost: (selected: JobPostOption) => void;
+  options: JobPost[];
+  selectedJobPost: JobPost | null;
+  setSelectedJobPost: (selected: JobPost) => void;
 }
 
 const JobPostSelector = ({
@@ -15,23 +17,27 @@ const JobPostSelector = ({
                            setSelectedJobPost,
                          }: JobPostSelectorProps) => {
   const { isOpen, onClose } = useDisclosure();
-  const getSelectedLabel = () =>
+
+  const getSelectedNode = () =>
     selectedJobPost
-      ? `${selectedJobPost.companyName} | ${selectedJobPost.duty}`
+      ? <SelectedJobPost {...selectedJobPost} />
       : '지원공고 선택하기';
 
   const onSubmit = () => {
 // TODO
   };
-  return <Box w={'400px'}>
-    <CommonSelect defaultSelectedLabel={'선택'} selectedLabel={getSelectedLabel()}>
+
+  return <Box>
+    <CommonSelect defaultSelectedLabel={'선택'}
+                  selectedNode={getSelectedNode()}
+                  dropDownButton={<SelectJobPostDropdownButton />}>
       {
         options.map((option) =>
-          <CommonSelect.Option key={option.id}>
+          <CommonSelect.Option key={option._id}>
             <Text onClick={() => {
               setSelectedJobPost(option);
             }}>
-              {option.companyName} | {option.duty}
+              {option.companyName} | {option.applicationJob}
             </Text>
           </CommonSelect.Option>,
         )
