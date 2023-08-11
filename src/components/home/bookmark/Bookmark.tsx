@@ -35,7 +35,7 @@ const Bookmark = () => {
            .then(onClose)
            .then(retrieveBookMarkList);
   };
-  return <Box w={['420px', '605px']} pl={isMobile ? 0 : '50px'}>
+  return <Box w={['420px', '605px']} pl={isMobile ? 0 : '50px'} mb={'20px'}>
     <HStack justifyContent={'space-between'} mb={'32px'}>
       <Text>
         {home.bookmark.title}

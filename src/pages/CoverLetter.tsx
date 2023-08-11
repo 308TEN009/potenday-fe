@@ -48,48 +48,50 @@ const CoverLetter = () => {
            .then(setJobPostOptions)
            .catch(useErrorHandler);
 
-  return <Flex h={'100%'} gap={'50px'}>
-    <Box flex={1}>
-      <form>
-        <JobPostSelector options={jopPostOptions}
-                         selectedJobPost={state.jobPost}
-                         setSelectedJobPost={(value: JobPost) => updateForm('JOB_POST', value)} />
-        <Textarea resize={'none'}
-                  fontSize={'sm'}
-                  mt={3}
-                  placeholder={'채용공고의 주요업무/Job Description을 확인해보세요!'} />
-        <HStack gap={3} m={'10px 0'}>
-          <Text fontSize={'ml'} as={'span'}>문항</Text>
-          <Button size={'sm'} fontWeight={'normal'}>새로 작성하기</Button>
-          <Button size={'sm'} fontWeight={'normal'}>불러오기</Button>
-        </HStack>
-        <Input fontSize={'sm'}
-               placeholder={'자기소개서 문항을 입력해 주세요.'}
-               onChange={e => updateForm('QUESTION', e.target.value)} />
-        <NumberInput>
-          <NumberInputField m={'10px 0'}
-                            w={'200px'}
-                            fontSize={'sm'}
-                            placeholder={'자소서 글자수 (선택)'}
-                            onChange={e => updateForm('MAX_LEN', e.target.value)} />
-        </NumberInput>
-        <Text fontSize={'ml'} as={'span'}>자기소개서</Text>
-        <Textarea resize={'none'}
-                  fontSize={'sm'}
-                  mt={3}
-                  h={'300px'}
-                  onChange={e => updateForm('COVER_LETTER', e.target.value)}>
-        </Textarea>
-        {state.maxLength &&
-          <Text fontSize={'xs'} float={'right'}>
-            현재 글자수: {currentLength} <br />
-            목표 글자수: {state.maxLength}
-          </Text>
-        }
-      </form>
-    </Box>
-    <AiAssistant />
-  </Flex>;
+  return <Box bgColor={'white'}>
+    <Flex h={'100%'} gap={'50px'}>
+      <Box flex={1}>
+        <form>
+          <JobPostSelector options={jopPostOptions}
+                           selectedJobPost={state.jobPost}
+                           setSelectedJobPost={(value: JobPost) => updateForm('JOB_POST', value)} />
+          <Textarea resize={'none'}
+                    fontSize={'sm'}
+                    mt={3}
+                    placeholder={'채용공고의 주요업무/Job Description을 확인해보세요!'} />
+          <HStack gap={3} m={'10px 0'}>
+            <Text fontSize={'ml'} as={'span'}>문항</Text>
+            <Button size={'sm'} fontWeight={'normal'}>새로 작성하기</Button>
+            <Button size={'sm'} fontWeight={'normal'}>불러오기</Button>
+          </HStack>
+          <Input fontSize={'sm'}
+                 placeholder={'자기소개서 문항을 입력해 주세요.'}
+                 onChange={e => updateForm('QUESTION', e.target.value)} />
+          <NumberInput>
+            <NumberInputField m={'10px 0'}
+                              w={'200px'}
+                              fontSize={'sm'}
+                              placeholder={'자소서 글자수 (선택)'}
+                              onChange={e => updateForm('MAX_LEN', e.target.value)} />
+          </NumberInput>
+          <Text fontSize={'ml'} as={'span'}>자기소개서</Text>
+          <Textarea resize={'none'}
+                    fontSize={'sm'}
+                    mt={3}
+                    h={'300px'}
+                    onChange={e => updateForm('COVER_LETTER', e.target.value)}>
+          </Textarea>
+          {state.maxLength &&
+            <Text fontSize={'xs'} float={'right'}>
+              현재 글자수: {currentLength} <br />
+              목표 글자수: {state.maxLength}
+            </Text>
+          }
+        </form>
+      </Box>
+      <AiAssistant />
+    </Flex>
+  </Box>;
 };
 
 export default CoverLetter;

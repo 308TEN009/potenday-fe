@@ -6,9 +6,12 @@ import { Outlet } from 'react-router';
 const Main = () => {
   return <Box w={'100%'}
               h={'100vh'}
+              alignItems={'start'}
               bgColor={'background'}>
     <CommonHeader />
     <Container as={'main'}
+               flex={1}
+               bgColor={'background'}
                w={'initial'}
                maxW={'initial'}
                m={['50px 0px', '80px 150px 0px 150px']}>
@@ -16,8 +19,7 @@ const Main = () => {
         <Outlet />
       </Suspense>
     </Container>
-  </Box>
-    ;
+  </Box>;
 };
 
 export default Main;

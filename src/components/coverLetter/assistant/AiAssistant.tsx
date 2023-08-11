@@ -1,62 +1,69 @@
 import {
   Accordion,
   AccordionButton,
-  AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  Box,
   Button,
   Card,
   CardBody,
-  CardFooter,
+  CardHeader,
   Center,
+  Img,
   List,
   Text,
 } from '@chakra-ui/react';
 import ExperienceSelectModalButton from '@components/coverLetter/assistant/ExperienceSelectModalButton';
+import AiAssistantIcon from '@assets/images/ai-assistant-icon.svg';
+import { coverLetter } from '@/messages.json';
+import DownArrowIcon from '@assets/icons/circle-arrow-down-01-sharp.svg';
 
 const AiAssistant = () => {
-  return <Center h={'100%'}>
+  return <Center h={'100%'} position={'sticky'}>
     <Card w={'400px'} m={4}>
-      <Accordion defaultIndex={[0]} allowMultiple>
-        <AccordionItem>
-          <h2>
-            <AccordionButton justifyContent={'space-between'}>
-              <Text>
-                경험선택
-              </Text>
-              <AccordionIcon />
+      <CardHeader display={'flex'} p={'40px 32px'}>
+        <Img src={AiAssistantIcon} boxSize={'80px'} />
+        <Box ml={'12px'}>
+          <Text>{coverLetter.aiAssistant.title}</Text>
+          <Text fontSize={'sx'}
+                whiteSpace={'break-spaces'}
+                color={'lightgrey4.500'}>
+            {coverLetter.aiAssistant.description}
+          </Text>
+        </Box>
+      </CardHeader>
+      <CardBody p={0}>
+        <Accordion defaultIndex={[0]} allowMultiple>
+          <AccordionItem>
+            <AccordionButton>
+              <Box as={'span'}
+                   flex={'1'}
+                   fontSize={'sm'}
+                   textAlign={'left'}
+                   color={'lightgrey4.500'}>
+                {coverLetter.aiAssistant.selectExp}
+              </Box>
+              <Button boxSize={'30px'}
+                      colorScheme={'none'}
+                      backgroundImage={DownArrowIcon}
+                      backgroundPosition={'center center'}
+                      backgroundSize={'60% auto'}
+                      backgroundRepeat={'no-repeat'} />
             </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <Text mb={1}>
-              마이페이지에 등록한 경험 중 <br />
-              최대 3개까지 등록할 수 있습니다.
-            </Text>
-            <List>
-              <ExperienceSelectModalButton />
-              <ExperienceSelectModalButton />
-              <ExperienceSelectModalButton />
-            </List>
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
-      <CardBody>
-        <Text fontWeight={'600'}>
-          AI 자소서 도우미
-        </Text>
-        <Text>
-          AI 자소서 도우미와 함께 <br />
-          자기소개서를 작성해 보세요!
-        </Text>
+            <AccordionPanel pb={4}>
+              <Text mb={1}>
+                마이페이지에 등록한 경험 중 <br />
+                최대 3개까지 등록할 수 있습니다.
+              </Text>
+              <List>
+                <ExperienceSelectModalButton />
+                <ExperienceSelectModalButton />
+                <ExperienceSelectModalButton />
+              </List>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
       </CardBody>
-      <CardFooter justifyContent={'center'} gap={1}>
-        <Button fontWeight={'normal'}>
-          자소서 작성하기
-        </Button>
-        <Button fontWeight={'normal'}>
-          이걸로 작성하기
-        </Button>
-      </CardFooter>
     </Card>
   </Center>;
 };

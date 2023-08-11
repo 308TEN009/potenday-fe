@@ -10,7 +10,7 @@ const CoverLetterContainer = ({ jobPosts = [] }: CoverLetterContainerProps) => {
   return <Box>
     <Box w={'100%'}
          boxSizing={'border-box'}>
-      <List h={'500px'} overflowY={'auto'}>
+      <List maxH={'500px'} overflowY={'auto'}>
         {jobPosts.map(jobPost =>
           <CoverLatterListItem key={jobPost._id}
                                {...jobPost} />)}

@@ -13,7 +13,7 @@ const CommonHeader = () => {
     return location.pathname.includes(path) ? 'normal' : 'thin';
   };
 
-  return <header>
+  return <header style={{ position: 'sticky', top: 0, zIndex: 999 }}>
     <Flex
       w={'100vw'}
       h={'86px'}
