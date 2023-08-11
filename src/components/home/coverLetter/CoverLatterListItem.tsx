@@ -1,11 +1,9 @@
 import { Badge, Flex, ListItem, Text } from '@chakra-ui/react';
 import type { JobPost } from '@/model/home';
-import { CommonOutlineStyle } from '@/styles/commonStyles';
 
 const CoverLatterListItem = ({ companyName, status, applicationJob }: JobPost) => {
   return <ListItem>
-    <Flex {...CommonOutlineStyle}
-          h={'74px'}
+    <Flex h={'74px'}
           w={'1035px'}
           alignItems={'center'}
           fontSize={'sm'}

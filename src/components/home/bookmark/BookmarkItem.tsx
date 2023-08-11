@@ -1,14 +1,12 @@
 import { Button } from '@chakra-ui/react';
 import type { BookmarkContent } from '@/model/home';
 import { memo } from 'react';
-import { CommonOutlineStyle } from '@/styles/commonStyles';
 
 interface BookmarkItemProps {
   bookmark: BookmarkContent;
 }
 
 const BookmarkItem = ({ bookmark }: BookmarkItemProps) => {
-
   const openBookmark = () => {
     window.open(bookmark.url);
   };
@@ -19,8 +17,7 @@ const BookmarkItem = ({ bookmark }: BookmarkItemProps) => {
                  h={'40px'}
                  p={2}
                  colorScheme={'white'}
-                 onClick={openBookmark}
-                 {...CommonOutlineStyle}>
+                 onClick={openBookmark}>
     {bookmark.name}
   </Button>;
 };
