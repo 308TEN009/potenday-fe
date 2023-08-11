@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Button, Text } from '@chakra-ui/react';
 import type { BookmarkContent } from '@/model/home';
 import { memo } from 'react';
 
@@ -12,14 +12,21 @@ const BookmarkItem = ({ bookmark }: BookmarkItemProps) => {
   };
 
   return <Button textAlign={'center'}
-                 w={['200px', '263px']}
+                 w={'263px'}
                  h={['62px']}
                  bg={'white'}
                  boxShadow={'md'}
                  borderRadius={'12px'}
-                 p={2}
+                 p={'16px 24.5px'}
                  onClick={openBookmark}>
-    {bookmark.name}
+    <Text noOfLines={1}
+          w={'100%'}
+          fontSize={'md'}
+          wordBreak={'break-all'}
+          whiteSpace={'break-spaces'}
+          textOverflow={'ellipsis'}>
+      {bookmark.name}
+    </Text>
   </Button>;
 };
 

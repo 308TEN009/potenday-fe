@@ -8,11 +8,13 @@ interface AddJobPostingButtonProps {
 
 const AddJobPostingButton = ({ onClick }: AddJobPostingButtonProps) => {
   return <Button fontSize={['sm', 'md']}
+                 h={'100%'}
                  colorScheme={'main'}
                  color={'white'}
                  onClick={onClick}
-                 p={'32px 19px'}>
-    <Image src={addIcon} boxSize={['20px', '24px']} mr={['16px', '10px']} />
+                 boxSizing={'border-box'}
+                 p={'19px 32px'}>
+    <Image src={addIcon} boxSize={'24px'} mr={'10px'} />
     {home.addJobPost}
   </Button>;
 };

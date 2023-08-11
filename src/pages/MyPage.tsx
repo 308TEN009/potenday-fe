@@ -3,7 +3,7 @@ import CoverLatterRowItem from '@components/coverLetter/assistant/CoverLatterRow
 import ExperienceContainer from '@components/myPage/ExperienceContainer';
 
 const MyPage = () => {
-  return <>
+  return <Box m={['50px 0px', '106px 120px 0px 120px']}>
     <ExperienceContainer />
     <Box mt={15}>
       <Heading>내가 지원한 공고 모아보기</Heading>
@@ -17,7 +17,7 @@ const MyPage = () => {
         />
       </List>
     </Box>
-  </>;
+  </Box>;
 };
 
 export default MyPage;

@@ -15,10 +15,6 @@ const colors = {
     500: '#8DB0FA',
   },
   gradients: ['#6C74CD', '#8DB0FA'],
-  // highlight1: '#6C74CD',
-  // highlight2: {
-  //   500: '#6C80AC',
-  // },
   lightgrey1: {
     500: '#EEEEEE',
   },
@@ -55,7 +51,7 @@ const typography = {
 
 const global = {
   '*': {
-    fontFamily: `'Spoqa Han Sans Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif`,
+    fontFamily: `'Spoqa Han Sans Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important`,
     padding: 0,
     margin: 0,
     color: '#333333',
@@ -95,10 +91,10 @@ const components = {
     defaultProps: {
       size: 'sm',
     },
-    sizes: {
-      sm: {
-        fontSize: 'sm',
-      },
+  },
+  Th: {
+    baseStyle: {
+      color: 'lightgrey.500',
     },
   },
 };

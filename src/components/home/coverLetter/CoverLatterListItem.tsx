@@ -19,7 +19,7 @@ const CoverLatterListItem = ({ companyName, status, applicationJob }: JobPost) =
     <Flex h={'74px'}
           w={['400px', '1035px']}
           bg={'white'}
-          borderRadius={'12px'}
+          borderRadius={'8px'}
           boxShadow={'md'}
           alignItems={'center'}
           fontSize={'sm'}

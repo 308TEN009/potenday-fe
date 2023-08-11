@@ -29,8 +29,9 @@ apiClient.interceptors.response.use(
     if (error.response && error.response.status === 401 && retryCount < MAX_RETRY_COUNT) {
       retryCount++;
       try {
-        const { accessToken } = await AuthApi.retrieveNewAccessToken(getRefreshToken());
+        const { accessToken, refreshToken } = await AuthApi.retrieveNewAccessToken(getRefreshToken());
         localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
         error.config.headers.Authorization = `Bearer ${accessToken}`;
         return apiClient(error.config);
       } catch (refreshError) {

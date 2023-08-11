@@ -7,7 +7,7 @@ export const CoverLatterRowItem = ({
                                    }: CoverLatterItemProps) => {
   return <ListItem h={'20px'}>
     <Flex>
-      <Box flex={4}>
+      <Box flex={4} boxSizing={'border-box'}>
         <Text>{companyName}</Text>
         <Text>{duty}</Text>
       </Box>

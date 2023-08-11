@@ -37,7 +37,7 @@ const Bookmark = () => {
   };
   return <Box w={['420px', '605px']} pl={isMobile ? 0 : '50px'} mb={'20px'}>
     <HStack justifyContent={'space-between'} mb={'32px'}>
-      <Text>
+      <Text fontSize={'md'}>
         {home.bookmark.title}
       </Text>
       <Button size={'sm'}
@@ -46,10 +46,10 @@ const Bookmark = () => {
         <Image src={EditIcon} boxSize={'30px'} />
       </Button>
     </HStack>
-    <Flex justifyContent={'start'}
+    <Flex justifyContent={['center', 'start']}
           gap={'2'}
-          w={'100%'}
-          h={'100%'}>
+          flexWrap={'wrap'}
+          w={'100%'}>
       {bookmarkList.map((bookmark) =>
         <BookmarkItem key={bookmark._id} bookmark={bookmark} />,
       )}

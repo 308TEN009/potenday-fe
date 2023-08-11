@@ -8,5 +8,6 @@ export interface CommonModalProps {
 export const REDIRECTION_CHANNEL = 'REDIRECTION_CHANNEL';
 
 export interface AccessToken {
-  accessToken: string
+  accessToken: string;
+  refreshToken: string;
 }

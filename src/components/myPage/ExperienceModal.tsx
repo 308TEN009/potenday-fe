@@ -1,6 +1,6 @@
 import type { CommonModalProps } from '@/model/common';
 import CommonModal from '@components/common/modal/CommonModal';
-import { Box, Button, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Heading, Spacer, Text } from '@chakra-ui/react';
 import { common, myPage } from '@/messages.json';
 import type { ExperienceRequest, ExperienceListResponse } from '@/model/mypage';
 import { useEffect, useState } from 'react';
@@ -73,7 +73,7 @@ const ExperienceModal =
       </CommonModal.Header>
       <form onSubmit={onSubmit}>
         <CommonModal.Body>
-          <Box p={'0 20px'}>
+          <Box p={['0 20px', '0 80px']}>
 
             <FormLabelInput label={myPage.subTitle}
                             value={title}
@@ -81,6 +81,7 @@ const ExperienceModal =
                             placeholder={myPage.subTitlePlaceholder}
                             description={myPage.subtitleDesc}
                             inputType={'TEXT'} />
+            <Spacer/>
             <FormLabelInput label={myPage.detail1}
                             value={experience1}
                             onChange={setExperience1}

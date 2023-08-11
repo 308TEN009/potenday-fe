@@ -8,7 +8,7 @@ interface StatusBoardCardType {
 
 const StatusBoardCard = ({ isPass = false, value }: StatusBoardCardType) => {
   return <Flex w={['200px', '263px']}
-               h={['106px']}
+               fontSize={'md'}
                p={5}
                bg={'white'}
                boxShadow={'md'}
@@ -16,7 +16,7 @@ const StatusBoardCard = ({ isPass = false, value }: StatusBoardCardType) => {
                alignItems={'center'}
                justifyContent={'space-between'}
                flexDir={'column'}>
-    <Text> {home.statusBoard[isPass ? 'pass' : 'complete']}</Text>
+    <Text mb={'16px'}> {home.statusBoard[isPass ? 'pass' : 'complete']}</Text>
     <Text>{value} {home.statusBoard.unit}</Text>
   </Flex>;
 };

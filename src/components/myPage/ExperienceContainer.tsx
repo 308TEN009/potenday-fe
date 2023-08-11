@@ -44,12 +44,13 @@ export const ExperienceContainer = () => {
   return <Box>
     <HStack justifyContent={'space-between'}>
       <Box>
-        <Heading fontSize={'md'}
+        <Heading fontSize={['md', 'lg']}
                  fontWeight={'normal'}>
           {myPage.myExperienceList}
         </Heading>
         <Text fontSize={'sm'}
-              color={'lightgrey4.500'}>
+              color={'lightgrey4.500'}
+              whiteSpace={'break-spaces'}>
           {myPage.myExperienceListDesc}
         </Text>
       </Box>

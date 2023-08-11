@@ -21,11 +21,10 @@ export const StatusBoard = () => {
            .then(setStatusBoard)
            .catch(useErrorHandler);
 
-  return <Box w={['420px', '605px']} h={['100px', '235px']} pl={isMobile ? 0 : '50px'}>
+  return <Box w={['420px', '605px']} h={['auto', '235px']} pl={isMobile ? 0 : '50px'}>
     <HStack justifyContent={'space-between'} height={'64px'} mb={'20px'}>
-      <Text>{home.statusBoard.title}</Text>
+      <Text fontSize={'md'}>{home.statusBoard.title}</Text>
       <ChakraLink as={ReactRouterLink as any}
-                  fontWeight={location.pathname === '/' ? 'normal' : 'thin'}
                   to={'/my-page'}>
         <Image src={MoreIcon} />
       </ChakraLink>

@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, Text, HStack, VStack } from '@chakra-ui/react';
 import StatusBoard from '@components/home/statusBoard/StatusBoard';
 import Bookmark from '@components/home/bookmark/Bookmark';
 import CoverLetterContainer from '@components/home/coverLetter/CoverLetterContainer';
@@ -23,7 +23,7 @@ const Home = () => {
            .then(setJobPost)
            .catch(useErrorHandler);
 
-  return <Flex flexDir={flexDir}>
+  return <Flex flexDir={flexDir} m={['50px 0px', '106px 120px 0px 120px']}>
     <Box>
       <HStack justifyContent={['center', 'initial']}
               w={['auto', '1035px']}

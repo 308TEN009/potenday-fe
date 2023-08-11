@@ -17,7 +17,7 @@ const FormLabelInput = ({
                           , inputType, isLast, description,
                         }: LabelInput) => {
   const [showDesc, setShowDesc] = useState(false);
-  return <Box mb={isLast ? 0 : '32px'} w={'100%'}>
+  return <Box mb={isLast ? 0 : '80px'} w={'100%'}>
     <Text fontSize={'sx'}
           mb={'12px'}
           as={'span'}
