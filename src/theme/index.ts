@@ -1,60 +1,55 @@
 import { extendTheme } from '@chakra-ui/react';
 
 const colors = {
-  main: {
-    100: 'red',
-  },
   outline: {
     500: '#DEDEDE',
   },
-  headerBg: '#D9D9D9',
-  mainBg: '#EFEFEF',
 
-  //
-  transparent: {
-    100: 'transparent',
-    200: 'transparent',
-    300: 'transparent',
-    400: 'transparent',
-    500: 'transparent',
-    600: 'transparent',
-    700: 'transparent',
-    800: 'transparent',
+  main: {
+    500: '#6C80AC',
   },
-  noColor: {
-    100: '#FFFFFF',
-    200: '#FFFFFF',
-    300: '#FFFFFF',
-    400: '#FFFFFF',
-    500: '#FFFFFF',
-    600: '#FFFFFF',
-    700: '#FFFFFF',
-    800: '#FFFFFF',
-    black: 'black',
+  sub1: {
+    500: '#6C74CD',
   },
+  sub2: {
+    500: '#8DB0FA',
+  },
+  gradients: ['#6C74CD', '#8DB0FA'],
+  // highlight1: '#6C74CD',
+  // highlight2: {
+  //   500: '#6C80AC',
+  // },
+  lightgrey1: {
+    500: '#EEEEEE',
+  },
+  lightgrey2: {
+    500: '#E4E4E4',
+  },
+  lightgrey3: {
+    500: '#BDBDBD',
+  },
+  lightgrey4: {
+    500: '#999999',
+  },
+  darkgrey1: {
+    500: '#666666',
+  },
+  darkgrey2: {
+    500: '#333333',
+  },
+  inputOutline: {
+    500: 'lightgrey2',
+  },
+  white: '#FFFFFF',
+  background: '#FAFAFF',
 };
 const typography = {
   fontSizes: {
-    lg: {
-      mobile: '24px',
-      desktop: '36px',
-    },
-    ml: {
-      mobile: '20px',
-      desktop: '28px',
-    },
-    md: {
-      mobile: '16px',
-      desktop: '24px',
-    },
-    sm: {
-      mobile: '14px',
-      desktop: '20px',
-    },
-    sx: {
-      mobile: '12px',
-      desktop: '16px',
-    }
+    lg: '36px',
+    ml: '28px',
+    md: '24px',
+    sm: '20px',
+    sx: '16px',
   },
 };
 
@@ -75,18 +70,8 @@ const components = {
   Button: {
     baseStyle: {
       fontWeight: 'normal',
-      bg: 'white',
-      border: '2px solid',
-      borderColor: 'outline.500',
+      borderRadius: '12px',
     },
-    defaultProps: {
-      size: 'sm',
-      // colorScheme: 'noColor',
-      color: 'red',
-    },
-    defaultStyles: {
-      color: 'red',
-    }
   },
   Heading: {
     defaultProps: {
@@ -99,9 +84,9 @@ const components = {
     },
   },
   Text: {
-    defaultStyle: {
+    baseStyle: {
       wordBreak: 'keep-all',
-      whiteSpace: 'wrap',
+      whiteSpace: 'nowrap',
     },
     defaultProps: {
       size: 'sm',
@@ -109,8 +94,8 @@ const components = {
     sizes: {
       sm: {
         fontSize: 'sm',
-      }
-    }
+      },
+    },
   },
 };
 
@@ -122,15 +107,17 @@ const size = {
 };
 
 const breakpoints = {
-  mobile: "768px",
-  desktop: "1920px",
-}
+  sm: '768px',
+  md: '1920px',
+};
+
+export const bottomBoxShadow = `0 0 0 1px #EEEEEE, 0 1px 2px 0 #EEEEEE`;
 
 export default extendTheme({
   styles,
   colors,
   components,
-  size,
   breakpoints,
-  ...typography
+  size,
+  ...typography,
 });

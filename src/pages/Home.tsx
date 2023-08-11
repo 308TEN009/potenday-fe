@@ -1,4 +1,4 @@
-import { Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, HStack, Text, useMediaQuery, VStack } from '@chakra-ui/react';
 import StatusBoard from '@components/home/statusBoard/StatusBoard';
 import Bookmark from '@components/home/bookmark/Bookmark';
 import CoverLetterContainer from '@components/home/coverLetter/CoverLetterContainer';
@@ -8,44 +8,46 @@ import HomeApi from '@/api/HomeApi';
 import { useEffect, useState } from 'react';
 import type { JobPost } from '@/model/home';
 import useFlexDir from '@/hooks/useFlexDir';
+import useErrorHandler from '@/hooks/useErrorHandler';
 
 const Home = () => {
   const [jobPosts, setJobPost] = useState<JobPost[]>([]);
   const flexDir = useFlexDir();
+  const [isMobile] = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     retrieveJobPosts();
   }, []);
 
-  const retrieveJobPosts = () => {
+  const retrieveJobPosts = () =>
     HomeApi.retrieveJobPost()
-           .then(res => {
-             setJobPost(res);
-           });
-  };
-  return <>
-    <HStack>
-      <Text fontSize={'lg'}
-            mr={'41px'}
-            w={'240px'}
-            flexDir={flexDir}
-            wordBreak={'keep-all'}>
-        {home.myCoverLetter}
-      </Text>
-      <AddJobPostingModalButton callBack={retrieveJobPosts} position={'HOME'} />
-    </HStack>
-    <Flex mt={'54px'}
-          w={'100%'}
+           .then(setJobPost)
+           .catch(useErrorHandler);
+
+  return <Flex flexDir={flexDir}>
+    <Box>
+      <HStack justifyContent={isMobile ? 'center' : 'initial'} height={'64px'} mb={'20px'}>
+        <Text fontSize={['md', 'lg']}
+              mr={['20px', '41px']}
+
+              wordBreak={'keep-all'}>
+          {home.myCoverLetter}
+        </Text>
+        <AddJobPostingModalButton callBack={retrieveJobPosts} position={'HOME'} />
+      </HStack>
+      <CoverLetterContainer jobPosts={jobPosts} />
+    </Box>
+    <Flex w={'100%'}
           gap={'25px'}
           flexDir={flexDir}
           justifyContent={'space-between'}>
-      <CoverLetterContainer jobPosts={jobPosts}/>
-      <VStack gap={'10px'}>
+
+      <VStack gap={['100px', '80px']}>
         <StatusBoard />
         <Bookmark />
       </VStack>
     </Flex>
-  </>;
+  </Flex>;
 };
 
 export default Home;

@@ -9,3 +9,11 @@ export const BASIC_SUCCESS: UseToastOptions = {
   isClosable: true,
   duration: 3000,
 };
+
+export const BASIC_FAIL: UseToastOptions = {
+  title: 'Error!',
+  position: 'top',
+  status: 'error',
+  isClosable: true,
+  duration: 8000,
+};

@@ -1,7 +1,7 @@
 import apiClient from '@/api/index';
 import type { AxiosResponse } from 'axios';
 import type { BookmarkContent, BookmarkCreateRequest, JobPostRequest } from '@/model/home';
-import { JobPost } from '@/model/home';
+import { JobPost, StatusBoardCnt } from '@/model/home';
 
 const createBookmark = (request: BookmarkCreateRequest): Promise<any> =>
   apiClient.post('/v1/bookmark-site', request)
@@ -23,12 +23,17 @@ const retrieveJobPost = (): Promise<JobPost[]> =>
   apiClient.get('/v1/employment-opportunity/list/active')
            .then((res: AxiosResponse) => res.data);
 
+const retrieveStatusBoard = (): Promise<StatusBoardCnt> =>
+  apiClient.get('/v1/employment-opportunity/statistic')
+           .then((res: AxiosResponse) => res.data);
+
 const HomeApi = {
   createBookmark,
   retrieveBookmarkList,
   updateBookmark,
   createJobPost,
   retrieveJobPost,
+  retrieveStatusBoard
 };
 
 export default HomeApi;

@@ -1,20 +1,43 @@
-import { Button, Card, CardBody, CardHeader, HStack } from '@chakra-ui/react';
+import { Box, HStack, Image, Link as ChakraLink, Text, useMediaQuery } from '@chakra-ui/react';
 import StatusBoardCard from '@components/home/statusBoard/StatusBoardCard';
+import { home } from '@/messages.json';
+import { Link as ReactRouterLink } from 'react-router-dom';
+import MoreIcon from '@assets/icons/more-horizontal-circle-01.svg';
+import type { StatusBoardCnt } from '@/model/home';
+import { useEffect, useState } from 'react';
+import HomeApi from '@/api/HomeApi';
+import useErrorHandler from '@/hooks/useErrorHandler';
 
 export const StatusBoard = () => {
-  return <Card w={'500px'} h={'280px'}>
-    <CardHeader>
-      <Button size={'sm'} float={'right'}> 더보기 </Button>
-    </CardHeader>
-    <CardBody>
-      <HStack justifyContent={'center'}
-              w={'100%'}
-              h={'100%'}>
-        <StatusBoardCard value={0} />
-        <StatusBoardCard isPass value={0} />
-      </HStack>
-    </CardBody>
-  </Card>;
+  const [{ completeCnt, successCnt }, setStatusBoard] = useState<StatusBoardCnt>({ completeCnt: 0, successCnt: 0 });
+  const [isMobile] = useMediaQuery('(max-width: 768px)');
+
+  useEffect(() => {
+    retrieveStatusBoard();
+  }, []);
+
+  const retrieveStatusBoard = () =>
+    HomeApi.retrieveStatusBoard()
+           .then(setStatusBoard)
+           .catch(useErrorHandler);
+
+  return <Box w={['420px', '605px']} h={['100px', '235px']} pl={isMobile ? 0 : '50px'}>
+    <HStack justifyContent={'space-between'} height={'64px'} mb={'20px'}>
+      <Text>{home.statusBoard.title}</Text>
+      <ChakraLink as={ReactRouterLink as any}
+                  fontWeight={location.pathname === '/' ? 'normal' : 'thin'}
+                  to={'/my-page'}>
+        <Image src={MoreIcon} />
+      </ChakraLink>
+    </HStack>
+    <HStack justifyContent={'start'}
+            alignItems={'start'}
+            w={'100%'}
+            h={'100%'}>
+      <StatusBoardCard value={completeCnt ?? 0} />
+      <StatusBoardCard isPass value={successCnt ?? 0} />
+    </HStack>
+  </Box>;
 };
 
 export default StatusBoard;

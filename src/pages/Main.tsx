@@ -6,12 +6,12 @@ import { Outlet } from 'react-router';
 const Main = () => {
   return <Box w={'100%'}
               h={'100vh'}
-              bgColor={'mainBg'}>
+              bgColor={'background'}>
     <CommonHeader />
     <Container as={'main'}
                w={'initial'}
                maxW={'initial'}
-               m={'80px 150px 0px 150px'}>
+               m={['50px 0px', '80px 150px 0px 150px']}>
       <Suspense fallback={<div>loading...</div>}>
         <Outlet />
       </Suspense>

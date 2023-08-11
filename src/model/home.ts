@@ -24,3 +24,8 @@ export interface JobPost {
   applicationJob: string;
   status: string
 }
+
+export interface StatusBoardCnt {
+  completeCnt: number,
+  successCnt: number
+}

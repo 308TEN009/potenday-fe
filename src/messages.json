@@ -8,16 +8,35 @@
       "login": "로그인"
     },
     "InputCompleted": "입력 완료",
-    "close": "닫기"
+    "close": "닫기",
+    "save": "저장"
+  },
+  "login": {
+    "title": "간편하게 로그인하기",
+    "subTitle": "10초만에 로그인하고 AI자소서를 작성해보세요!"
   },
   "home": {
     "myCoverLetter": "\uD83D\uDCC4 나의 자소서",
-    "addJobAnnouncement": "지원 공고 추가하기",
+    "addJobAnnouncement": "공고 추가하기",
     "addJobAnnouncementPopup": {
       "title": "지원할 채용공고 입력하기",
       "subTitle": "기업명, 지원직무만 입력하고 빠르게 자기소개서 작성을 시작해보세요!",
       "companyName": "기업명",
-      "duty": "지원 직무"
+      "companyNamePlaceholder": "기업명을 적어주세요",
+      "duty": "지원 직무",
+      "dutyPlaceholder": "지원 직무를 적어주세요",
+      "majorTask": "주요 업무",
+      "majorTaskPlaceholder": "주요 업무 내용을 입력해주세요"
+    },
+    "pending": "작성중",
+    "statusBoard": {
+      "title": "\uD83D\uDC40 지원 현황",
+      "complete": "지원 완료",
+      "pass": "서류 합격",
+      "unit": "건"
+    },
+    "bookmark": {
+      "title": "⭐공고 즐겨찾기"
     }
   }
 }

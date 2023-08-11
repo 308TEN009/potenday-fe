@@ -12,7 +12,6 @@ interface BookmarkModalProps extends CommonModalProps {
 const BookmarkModal = ({ isOpen, onClose, onSubmit, bookmark }: BookmarkModalProps) => {
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
-  const isNew = useMemo(() => bookmark !== null, [bookmark]);
 
   const createBookmark = (e) => {
     e.preventDefault();
@@ -20,11 +19,15 @@ const BookmarkModal = ({ isOpen, onClose, onSubmit, bookmark }: BookmarkModalPro
     onClose();
   };
 
-  return <CommonModal isOpen={isOpen} onClose={onClose} size={'xl'}>
+  const isNew = () => {
+    return bookmark !== null;
+  };
+
+  return <CommonModal isOpen={isOpen} onClose={onClose} w={'800px'}>
     <CommonModal.Header>
       <Text fontSize={'md'}
             mt={'20px'}>
-        즐겨찾기 {isNew ? '추가' : '수정'}
+        즐겨찾기 {isNew() ? '추가' : '수정'}
       </Text>
       <Text mt={'10px'}
             fontWeight={'normal'}

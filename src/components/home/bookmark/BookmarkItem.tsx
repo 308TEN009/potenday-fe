@@ -11,12 +11,13 @@ const BookmarkItem = ({ bookmark }: BookmarkItemProps) => {
     window.open(bookmark.url);
   };
 
-  return <Button boxShadow='md'
-                 textAlign={'center'}
-                 w={'190px'}
-                 h={'40px'}
+  return <Button textAlign={'center'}
+                 w={['200px', '263px']}
+                 h={['62px']}
+                 bg={'white'}
+                 boxShadow={'md'}
+                 borderRadius={'12px'}
                  p={2}
-                 colorScheme={'white'}
                  onClick={openBookmark}>
     {bookmark.name}
   </Button>;

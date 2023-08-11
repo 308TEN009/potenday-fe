@@ -1,11 +1,13 @@
 import CommonModal from '@components/common/modal/CommonModal';
-import { Button, Flex, Input, Text, useDisclosure, useToast, VStack } from '@chakra-ui/react';
+import { Button, Center, Text, useDisclosure, useToast, VStack } from '@chakra-ui/react';
 import AddJobPostingButton from '@components/home/coverLetter/addJobPost/AddJobPostingButton';
 import type { FormEvent } from 'react';
-import { common, home } from '@/messages.json';
 import { useState } from 'react';
+import { common, home } from '@/messages.json';
 import HomeApi from '@/api/HomeApi';
 import { BASIC_SUCCESS } from '@/model/toast';
+import FormLabelInput from '@components/common/FormLabelInput';
+import useErrorHandler from '@/hooks/useErrorHandler';
 
 interface AddJobPostingModalProps {
   callBack: () => any;
@@ -16,46 +18,64 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [companyName, setCompanyName] = useState('');
   const [applicationJob, setApplicationJob] = useState('');
+  const [majorTask, setMajorTask] = useState('');
   const toast = useToast();
+
+  const onReset = () => {
+    setCompanyName('');
+    setApplicationJob('');
+    setMajorTask('');
+  };
 
   const onSubmitAndClose = (e: FormEvent) => {
     e.preventDefault();
     const request = {
       companyName,
       applicationJob,
+      jobDescription: majorTask,
     };
 
     HomeApi.createJobPost(request)
            .then(callBack)
+           .then(() => toast(BASIC_SUCCESS))
            .then(onClose)
-           .then(() => toast(BASIC_SUCCESS));
+           .then(onReset)
+           .catch(useErrorHandler);
+  };
+
+  const onOpenModal = () => {
+    onReset();
+    onOpen();
   };
 
   return <>
     {
       position === 'HOME'
-        ? <AddJobPostingButton onClick={onOpen} />
+        ? <AddJobPostingButton onClick={onOpenModal} />
         : <Button w={'100%'}
                   fontSize={'sm'}
                   backgroundColor={'white'}
                   boxShadow={'base'}
-                  onClick={onOpen}>
+                  onClick={onOpenModal}>
           {home.addJobAnnouncement}
         </Button>
     }
 
     <CommonModal isOpen={isOpen}
                  onClose={onClose}
+                 w={'980px'}
                  size={'3xl'}>
       <CommonModal.Header>
-        <Text fontSize={'md'}
-              mt={'50px'}
+        <Text mt={'10px'}
+              fontWeight={'normal'}
+              fontSize={'ml'}
               textAlign={'center'}>
           {home.addJobAnnouncementPopup.title}
         </Text>
         <Text mt={'10px'}
-              fontWeight={'normal'}
+              fontWeight={'thin'}
               fontSize={'sm'}
+              color={'lightgrey4.500'}
               textAlign={'center'}>
           {home.addJobAnnouncementPopup.subTitle}
         </Text>
@@ -63,30 +83,34 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
       <form onSubmit={e => onSubmitAndClose(e)}>
         <CommonModal.Body>
           <VStack alignItems={'start'} m={'50px'}>
-            <Text fontSize={'sm'}>
-              {home.addJobAnnouncementPopup.companyName}
-            </Text>
-            <Input fontSize={'sm'}
-                   p={5}
-                   value={companyName}
-                   onChange={e => setCompanyName(e.target.value)} />
-            <Text fontSize={'sm'}>
-              {home.addJobAnnouncementPopup.duty}
-            </Text>
-            <Input fontSize={'sm'}
-                   p={5}
-                   value={applicationJob}
-                   onChange={e => setApplicationJob(e.target.value)} />
+            <FormLabelInput label={home.addJobAnnouncementPopup.companyName}
+                            placeholder={home.addJobAnnouncementPopup.companyNamePlaceholder}
+                            value={companyName}
+                            onChange={setCompanyName}
+                            inputType={'TEXT'} />
+            <FormLabelInput label={home.addJobAnnouncementPopup.duty}
+                            placeholder={home.addJobAnnouncementPopup.dutyPlaceholder}
+                            value={applicationJob}
+                            onChange={setApplicationJob}
+                            inputType={'TEXT'} />
+            <FormLabelInput label={home.addJobAnnouncementPopup.majorTask}
+                            placeholder={home.addJobAnnouncementPopup.majorTaskPlaceholder}
+                            value={majorTask}
+                            onChange={setMajorTask}
+                            inputType={'TEXTAREA'}
+                            isLast={true} />
           </VStack>
         </CommonModal.Body>
         <CommonModal.Footer>
-          <Flex justifyContent={'space-around'}
-                w={'100%'}
-                p={'50px'}
-                ml={'10px'}>
-            <Button size={'md'} type={'submit'}>{common.InputCompleted}</Button>
-            <Button size={'md'} onClick={onClose}>{common.close}</Button>
-          </Flex>
+          <Center mb={'32px'} w={'100%'}>
+            <Button size={'md'}
+                    colorScheme={'main'}
+                    type={'submit'}
+                    p={'13px 75px'}
+                    borderRadius={'20px'}>
+              {common.save}
+            </Button>
+          </Center>
         </CommonModal.Footer>
       </form>
     </CommonModal>
