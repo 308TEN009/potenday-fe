@@ -8,10 +8,15 @@ import MyPageApi from '@/api/MyPageApi';
 import useErrorHandler from '@/hooks/useErrorHandler';
 import ExperienceItem from '@components/coverLetter/assistant/ExperienceItem';
 
+interface ExpModalInfo {
+  isEdit: boolean,
+  originExp: null | ExperienceListResponse
+}
+
 export const ExperienceContainer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [experienceList, setExperienceList] = useState<ExperienceListResponse[]>([]);
-  const [expModalInfo, setExpModalInfo] = useState({ isEdit: false, originExp: null });
+  const [expModalInfo, setExpModalInfo] = useState<ExpModalInfo>({ isEdit: false, originExp: null });
   useEffect(() => {
     retrieveExperienceList();
   }, []);
@@ -24,7 +29,7 @@ export const ExperienceContainer = () => {
   const onModalOpen = (isEdit: boolean, originExp?: ExperienceListResponse) => {
     setExpModalInfo({
       isEdit,
-      originExp,
+      originExp: originExp ?? null,
     });
 
     onOpen();

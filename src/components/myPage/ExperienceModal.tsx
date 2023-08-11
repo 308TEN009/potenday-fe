@@ -10,7 +10,7 @@ import MyPageApi from '@/api/MyPageApi';
 
 interface ExperienceModalProps extends CommonModalProps {
   isEdit: boolean,
-  originExp?: ExperienceListResponse
+  originExp: ExperienceListResponse | null
 }
 
 const ExperienceModal =
@@ -19,7 +19,7 @@ const ExperienceModal =
     const [experience1, setExperience1] = useState('');
     const [experience2, setExperience2] = useState('');
     useEffect(() => {
-      if (isEdit) {
+      if (isEdit && originExp) {
         initData(originExp);
         return;
       }
