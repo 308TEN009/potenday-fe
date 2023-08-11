@@ -1,28 +1,30 @@
 import type { CommonModalProps } from '@/model/common';
 import CommonModal from '@components/common/modal/CommonModal';
 import { Box, Button, Heading, Text } from '@chakra-ui/react';
-import { myPage, common } from '@/messages.json';
-import type { ExperienceRequest } from '@/model/mypage';
+import { common, myPage } from '@/messages.json';
+import type { ExperienceRequest, ExperienceListResponse } from '@/model/mypage';
 import { useEffect, useState } from 'react';
 import FormLabelInput from '@components/common/FormLabelInput';
-import MyPageApi from '@/api/MyPageApi';
 import useErrorHandler from '@/hooks/useErrorHandler';
+import MyPageApi from '@/api/MyPageApi';
 
 interface ExperienceModalProps extends CommonModalProps {
-  originExperience?: ExperienceRequest;
+  isEdit: boolean,
+  originExp?: ExperienceListResponse
 }
 
 const ExperienceModal =
-  ({ isOpen, onClose, originExperience, callBack }: ExperienceModalProps) => {
-    const [title, setTitle] = useState(originExperience?.title ?? '');
-    const [experience1, setExperience1] = useState(originExperience?.experienceDetailList[0].content ?? '');
-    const [experience2, setExperience2] = useState(originExperience?.experienceDetailList[0].content ?? '');
-
+  ({ isEdit, originExp, isOpen, callBack, onClose }: ExperienceModalProps) => {
+    const [title, setTitle] = useState('');
+    const [experience1, setExperience1] = useState('');
+    const [experience2, setExperience2] = useState('');
     useEffect(() => {
-      setTitle('');
-      setExperience1('');
-      setExperience2('');
-    }, [isOpen]);
+      if (isEdit) {
+        initData(originExp);
+        return;
+      }
+      initData();
+    }, [isOpen, isEdit, originExp]);
 
     const onSubmit = (e) => {
       e.preventDefault();
@@ -35,11 +37,25 @@ const ExperienceModal =
         ],
       };
 
-      console.log(request);
+      if (isEdit && originExp) {
+        console.log(callBack);
+        MyPageApi.updateExperience(originExp._id, request)
+                 .then(callBack)
+                 .catch(useErrorHandler)
+                 .finally(onClose);
+        return;
+      }
+
       MyPageApi.createExperience(request)
                .then(callBack)
                .catch(useErrorHandler)
                .finally(onClose);
+    };
+
+    const initData = (data?: ExperienceRequest) => {
+      setTitle(data?.title ?? '');
+      setExperience1(data?.experienceDetailList[0].content ?? '');
+      setExperience2(data?.experienceDetailList[1].content ?? '');
     };
 
     return <CommonModal isOpen={isOpen} onClose={onClose} w={'980px'}>

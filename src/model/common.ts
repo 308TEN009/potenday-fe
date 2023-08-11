@@ -2,13 +2,7 @@ export interface CommonModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSubmit?: (e: any) => void;
-  callBack?: () => void;
-}
-
-export interface OptionItem<T> {
-  index: number;
-  key: string;
-  value: T;
+  callBack?: () => any;
 }
 
 export const REDIRECTION_CHANNEL = 'REDIRECTION_CHANNEL';

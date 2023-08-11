@@ -10,9 +10,19 @@ const createExperience = (request: ExperienceRequest): Promise<any> =>
   apiClient.post('/v1/experience', request)
            .then((res: AxiosResponse) => res.data);
 
+const updateExperience = (id: string, request): Promise<any> =>
+  apiClient.patch(`/v1/experience/${id}`, request)
+           .then((res: AxiosResponse) => res.data);
+
+const deleteExperience = (id: string): Promise<any> =>
+  apiClient.delete(`/v1/experience/${id}`)
+           .then((res: AxiosResponse) => res.data);
+
 const MyPageApi = {
   createExperience,
   retrieveExperienceList,
+  updateExperience,
+  deleteExperience
 };
 
 export default MyPageApi;
