@@ -92,14 +92,16 @@ const CoverLetter = () => {
                           return;
                         }
                         setQuestionList(
-                          response.map(({ question, answer }) => ({ question, answer })),
+                          response.map(({ question, answer }) => ({ question, answer })).reverse(),
                         );
                       },
                     )
                     .catch(useErrorHandler);
     };
+
     const generatorNewCoverLetter = (index: number) => {
-      if (jobPostStore === null && jobPost === null) {
+      const id = jobPostStore?._id ?? jobPost?._id;
+      if (!id || !questionList[index].question) {
         toast(BASIC_FAIL);
         return;
       }
@@ -132,7 +134,8 @@ const CoverLetter = () => {
       CoverLetterApi.generateAICoverLetter(request)
                     .then(({ content }) =>
                       updateList(index, 'answer', content),
-                    );
+                    )
+                    .catch(useErrorHandler);
     };
 
     const updateList = (index: number, field: string, value: string) => {
@@ -144,11 +147,13 @@ const CoverLetter = () => {
 
     const saveCoverLetter = (index: number) => {
       const id = jobPostStore?._id ?? jobPost?._id;
-      if (!id) {
+      if (!id || !questionList[index].question) {
         toast(BASIC_FAIL);
         return;
       }
-      CoverLetterApi.createCoverLetter(id, questionList[index]);
+
+      CoverLetterApi.createCoverLetter(id, questionList[index])
+                    .catch(useErrorHandler);
     };
 
     return <Flex h={'100%'}

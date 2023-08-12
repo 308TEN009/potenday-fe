@@ -11,15 +11,11 @@ interface ExperienceItemProps {
 }
 
 export const ExperienceItem = ({ experience, onOpen, onDelete }: ExperienceItemProps) => {
-
-  // const onDelete = () => {
-  //
-  // };
   return <HStack p={'20px'}
                  justifyContent={'space-between'}
                  alignItems={'start'}
-                 border={'1px solid'}
-                 borderColor={'lightgrey4.500'}
+                 bgColor={'white'}
+                 className={'light-shadow'}
                  borderRadius={'8px'}
                  fontSize={'sm'}
                  my={'20px'}>

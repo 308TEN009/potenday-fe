@@ -1,6 +1,5 @@
 import { Button, Text } from '@chakra-ui/react';
 import type { BookmarkContent } from '@/model/home';
-import { memo } from 'react';
 
 interface BookmarkItemProps {
   bookmark: BookmarkContent;
@@ -30,4 +29,4 @@ const BookmarkItem = ({ bookmark }: BookmarkItemProps) => {
   </Button>;
 };
 
-export default memo(BookmarkItem);
+export default BookmarkItem;

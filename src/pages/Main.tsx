@@ -5,13 +5,13 @@ import { Outlet } from 'react-router';
 
 const Main = () => {
   return <Box w={'100%'}
-              h={'100vh'}
+              minH={'100vh'}
               alignItems={'start'}
               bgColor={'background'} zIndex={0}>
     <CommonHeader />
     <Container as={'main'}
+               p={0}
                flex={1}
-               bgColor={'background'}
                w={'initial'}
                maxW={'initial'}>
       <Suspense fallback={<div>loading...</div>}>

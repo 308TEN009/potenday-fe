@@ -27,7 +27,8 @@ const CommonHeader = () => {
            .then(() => {
              localStorage.removeItem('accessToken');
              localStorage.removeItem('refreshToken');
-           }).then(() => window.location.reload());
+           })
+           .then(() => window.location.reload());
   };
 
   return <header style={{ position: 'sticky', top: 0, zIndex: 999 }}>

@@ -1,6 +1,6 @@
 import {
   Box,
-  Button,
+  Button, Center,
   Heading,
   HStack,
   Img,
@@ -16,6 +16,7 @@ import { newsClipping } from '@/messages.json';
 import SearchIcon from '@assets/icons/search-02.svg';
 import NewsTable from '@components/newsClipping/NewsTable';
 import SortIcon from '@assets/icons/text-align-center.svg';
+import AddIcon from '@assets/icons/plus-sign-circle-grey.svg';
 
 const NewsClipping = () => {
   return <Box wordBreak={'keep-all'} m={['50px 0px', '106px 120px 0px 120px']}>
@@ -69,7 +70,14 @@ const NewsClipping = () => {
         </PopoverContent>
       </Popover>
     </HStack>
-    <NewsTable tableData={[]}/>
+    <NewsTable tableData={[]} />
+    <Center>
+      <Button colorScheme={'none'}
+              backgroundImage={`url(${AddIcon})`}
+              backgroundPosition={'center center'}
+              backgroundSize={'contain auto'}
+              backgroundRepeat={'no-repeat'} />
+    </Center>
   </Box>;
 };
 

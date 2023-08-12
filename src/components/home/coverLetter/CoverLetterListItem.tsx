@@ -7,20 +7,20 @@ import selectedJobPostStore from '@/store/selectedJobPostStore';
 
 const LabelByStatus = {
   start: {
-    label: home.complete,
-    color: 'sub1.500',
+    label: home.start,
+    color: 'white',
   },
   complete: {
     label: home.complete,
-    color: 'sub1.500',
+    color: 'lightgrey2.500',
   },
   pending: {
     label: home.pending,
-    color: 'lightgrey2.500',
+    color: 'sub1.500',
   },
 };
 
-const CoverLetterListItem = ({ _id, companyName, status, applicationJob, jobDescription }: JobPost) => {
+const CoverLetterListItem = ({ _id, companyName, status, applyStatus, applicationJob, jobDescription }: JobPost) => {
   const navigate = useNavigate();
   const setJobPostStore = useSetRecoilState(selectedJobPostStore);
   const gotoCoverLetter = () => {
@@ -29,7 +29,8 @@ const CoverLetterListItem = ({ _id, companyName, status, applicationJob, jobDesc
       companyName,
       applicationJob,
       jobDescription,
-      status
+      status,
+      applyStatus
     });
     navigate(`/cover-letter`);
   };
@@ -50,6 +51,8 @@ const CoverLetterListItem = ({ _id, companyName, status, applicationJob, jobDesc
       >
         <Box boxSize={'20px'}
              borderRadius={'100%'}
+             borderWidth={status === 'start' ? '4px' : 0}
+             borderColor={'sub1.500'}
              bgColor={LabelByStatus[status].color} />
         <Text fontSize={['xs', 'sm']}>
           {LabelByStatus[status].label}

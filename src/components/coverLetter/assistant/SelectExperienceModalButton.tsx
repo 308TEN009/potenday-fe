@@ -27,8 +27,7 @@ export const SelectExperienceModalButton = () => {
   const retrieveExperience = () => {
     MyPageApi.retrieveExperienceList()
              .then(setRetrieveList)
-             .catch(useErrorHandler)
-             .finally(() => console.log(retrieveList));
+             .catch(useErrorHandler);
   };
 
   const onCloseModal = () => {

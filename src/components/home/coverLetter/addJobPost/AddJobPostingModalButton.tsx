@@ -82,12 +82,14 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
       <form onSubmit={e => onSubmitAndClose(e)}>
         <CommonModal.Body>
           <VStack alignItems={'start'} m={'50px'}>
-            <FormLabelInput label={home.addJobPostPopup.companyName}
+            <FormLabelInput required
+                            label={home.addJobPostPopup.companyName}
                             placeholder={home.addJobPostPopup.companyNamePlaceholder}
                             value={companyName}
                             onChange={setCompanyName}
                             inputType={'TEXT'} />
-            <FormLabelInput label={home.addJobPostPopup.duty}
+            <FormLabelInput required
+                            label={home.addJobPostPopup.duty}
                             placeholder={home.addJobPostPopup.dutyPlaceholder}
                             value={applicationJob}
                             onChange={setApplicationJob}

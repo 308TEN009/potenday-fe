@@ -1,12 +1,13 @@
 import type { CommonModalProps } from '@/model/common';
 import CommonModal from '@components/common/modal/CommonModal';
-import { Box, Button, Heading, Spacer, Text } from '@chakra-ui/react';
+import { Box, Button, Heading, Spacer, Text, useToast } from '@chakra-ui/react';
 import { common, myPage } from '@/messages.json';
 import type { ExperienceRequest, ExperienceListResponse } from '@/model/mypage';
 import { useEffect, useState } from 'react';
 import FormLabelInput from '@components/common/FormLabelInput';
 import useErrorHandler from '@/hooks/useErrorHandler';
 import MyPageApi from '@/api/MyPageApi';
+import { BASIC_FAIL } from '@/model/toast';
 
 interface ExperienceModalProps extends CommonModalProps {
   isEdit: boolean,
@@ -15,6 +16,7 @@ interface ExperienceModalProps extends CommonModalProps {
 
 const ExperienceModal =
   ({ isEdit, originExp, isOpen, callBack, onClose }: ExperienceModalProps) => {
+    const toast = useToast();
     const [title, setTitle] = useState('');
     const [experience1, setExperience1] = useState('');
     const [experience2, setExperience2] = useState('');
@@ -28,6 +30,10 @@ const ExperienceModal =
 
     const onSubmit = (e) => {
       e.preventDefault();
+      if (!title || title.length < 0) {
+        toast(BASIC_FAIL);
+        return;
+      }
 
       const request: ExperienceRequest = {
         title,
@@ -38,7 +44,6 @@ const ExperienceModal =
       };
 
       if (isEdit && originExp) {
-        console.log(callBack);
         MyPageApi.updateExperience(originExp._id, request)
                  .then(callBack)
                  .catch(useErrorHandler)
@@ -62,7 +67,7 @@ const ExperienceModal =
       <CommonModal.Header>
         <Heading textAlign={'center'}
                  pt={5}>
-          {myPage.addMyExperience}
+          {isEdit ? myPage.editMyExperience : myPage.addMyExperience}
         </Heading>
         <Text fontSize={'sm'}
               color={'lightgrey4.500'}
@@ -76,12 +81,13 @@ const ExperienceModal =
           <Box p={['0 20px', '0 80px']}>
 
             <FormLabelInput label={myPage.subTitle}
+                            required
                             value={title}
                             onChange={setTitle}
                             placeholder={myPage.subTitlePlaceholder}
                             description={myPage.subtitleDesc}
                             inputType={'TEXT'} />
-            <Spacer/>
+            <Spacer />
             <FormLabelInput label={myPage.detail1}
                             value={experience1}
                             onChange={setExperience1}

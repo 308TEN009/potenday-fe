@@ -25,7 +25,6 @@ let retryCount = 0;
 apiClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    console.log(error);
     if (error.response && error.response.status === 401 && retryCount < MAX_RETRY_COUNT) {
       retryCount++;
       try {

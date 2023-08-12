@@ -10,11 +10,12 @@ interface LabelInput {
   inputType: 'TEXT' | 'TEXTAREA';
   isLast?: boolean;
   description?: string;
+  required?: boolean;
 }
 
 const FormLabelInput = ({
                           label, placeholder = '', value, onChange
-                          , inputType, isLast, description,
+                          , inputType, isLast, description, required = false,
                         }: LabelInput) => {
   const [showDesc, setShowDesc] = useState(false);
   return <Box mb={isLast ? 0 : '80px'} w={'100%'}>
@@ -36,6 +37,7 @@ const FormLabelInput = ({
     }
     {inputType === 'TEXT'
       ? <Input fontSize={'sm'}
+               required={required}
                placeholder={placeholder ?? ''}
                _placeholder={{ color: 'lightgrey4.500' }}
                focusBorderColor={'main.500'}
@@ -44,6 +46,7 @@ const FormLabelInput = ({
                borderBottomWidth={'2px'}
                onChange={e => onChange(e.target.value)} />
       : <Textarea fontSize={'sm'}
+                  required={required}
                   h={'180px'}
                   placeholder={placeholder ?? ''}
                   _placeholder={{ color: 'lightgrey4.500' }}

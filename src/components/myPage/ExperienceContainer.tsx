@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Heading, HStack, Image, List, ListItem, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Flex, HStack, Image, List, ListItem, Text, useDisclosure } from '@chakra-ui/react';
 import { common, myPage } from '@/messages.json';
 import addIcon from '@assets/icons/plus-sign-circle.svg';
 import ExperienceModal from '@components/myPage/ExperienceModal';
@@ -44,10 +44,10 @@ export const ExperienceContainer = () => {
   return <Box>
     <HStack justifyContent={'space-between'}>
       <Box>
-        <Heading fontSize={['md', 'lg']}
+        <Text fontSize={['md', 'lg']}
                  fontWeight={'normal'}>
           {myPage.myExperienceList}
-        </Heading>
+        </Text>
         <Text fontSize={'sm'}
               color={'lightgrey4.500'}
               whiteSpace={'break-spaces'}>
@@ -86,8 +86,7 @@ export const ExperienceContainer = () => {
           </ListItem>)}
       </List>}
     <ExperienceModal {...expModalInfo} isOpen={isOpen} onClose={onClose} callBack={retrieveExperienceList} />
-  </Box>
-    ;
+  </Box>;
 };
 
 export default ExperienceContainer;

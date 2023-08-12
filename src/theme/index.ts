@@ -73,6 +73,20 @@ const global = {
    1px 1px 3px 0 #6168B990,
     `,
   },
+  'input::placeholder': {
+    color: '#999999',
+  },
+  'textarea::placeholder': {
+    color: '#999999',
+  },
+
+  '.light-shadow': {
+    boxShadow: `-2px 2px 4px 0 rgba(230, 230, 230, 0.2),
+                 2px -2px 4px 0 rgba(230, 230, 230, 0.2),
+                 -2px -2px 4px 0 rgba(255, 255, 255, 0.9),
+                 2px 2px 5px 0 rgba(230, 230, 230, 0.9);`,
+  },
+
 };
 const styles = { global };
 
@@ -80,7 +94,8 @@ const components = {
   Button: {
     baseStyle: {
       fontWeight: 'normal',
-      borderRadius: '12px',
+      borderRadius: '30px',
+      p: '25px 53px',
     },
   },
   Heading: {

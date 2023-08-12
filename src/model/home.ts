@@ -25,6 +25,7 @@ export interface JobPost {
   applicationJob: string;
   jobDescription: string;
   status: string;
+  applyStatus: string;
 }
 
 export interface StatusBoardCnt {
