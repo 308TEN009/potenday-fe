@@ -1,4 +1,4 @@
-import { Box, Flex, Text, HStack, VStack, Center } from '@chakra-ui/react';
+import { Box, Flex, HStack, Text, VStack } from '@chakra-ui/react';
 import StatusBoard from '@components/home/statusBoard/StatusBoard';
 import Bookmark from '@components/home/bookmark/Bookmark';
 import CoverLetterContainer from '@components/home/coverLetter/CoverLetterContainer';
@@ -49,14 +49,6 @@ const Home = () => {
         <Bookmark />
       </VStack>
     </Flex>
-    <Center position={'absolute'}
-            bg
-            top={0}
-            bottom={0}
-            right={0}
-            lef={0}>
-
-    </Center>
   </Flex>;
 };
 

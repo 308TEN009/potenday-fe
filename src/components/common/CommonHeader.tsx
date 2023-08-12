@@ -15,7 +15,7 @@ const CommonHeader = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsLoggedIn(localStorage.getItem('accessToken'));
+    setIsLoggedIn(!!localStorage.getItem('accessToken'));
   }, []);
 
   const getFontWeight = (path: string) => {

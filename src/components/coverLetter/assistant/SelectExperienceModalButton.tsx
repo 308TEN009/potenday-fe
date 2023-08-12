@@ -32,10 +32,10 @@ export const SelectExperienceModalButton = () => {
   };
 
   const onCloseModal = () => {
-    setCheckedExpItem(prev => ({
+    setCheckedExpItem({
       currentSelected: [],
       originSelected: currentSelected,
-    }));
+    });
     onClose();
   };
   return <>
@@ -59,9 +59,8 @@ export const SelectExperienceModalButton = () => {
       </CommonModal.Header>
       <CommonModal.Body>
         <List h={'444px'} overflowY={'auto'} m={'0 56px'}>
-          {retrieveList.map((experience, index) =>
+          {retrieveList.map((experience) =>
             <CheckExperienceItem key={experience._id}
-                                 index={index}
                                  experience={experience} />)}
         </List>
       </CommonModal.Body>

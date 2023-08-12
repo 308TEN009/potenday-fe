@@ -19,7 +19,7 @@ export interface CoverLetterItemProps {
   duty: string;
 }
 
-type AssistantType = 'exp' | 'emp' | 'jd';
+export type AssistantType = 'exp' | 'emp' | 'jd';
 
 interface AssistantInput {
   type: AssistantType;

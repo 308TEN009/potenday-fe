@@ -7,11 +7,10 @@ import CheckedIcon from '@/assets/icons/checked-icon.svg';
 import UnCheckedIcon from '@/assets/icons/unchecked-icon.svg';
 
 interface CheckExperienceItemProps {
-  index: null;
   experience: ExperienceListResponse;
 }
 
-const CheckExperienceItem = ({ index, experience }: CheckExperienceItemProps) => {
+const CheckExperienceItem = ({ experience }: CheckExperienceItemProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const [checkedExpItem, setCheckedExpItem] = useRecoilState(selectedExpListStore);
 

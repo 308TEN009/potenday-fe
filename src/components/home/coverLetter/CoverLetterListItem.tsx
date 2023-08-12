@@ -29,6 +29,7 @@ const CoverLetterListItem = ({ _id, companyName, status, applicationJob, jobDesc
       companyName,
       applicationJob,
       jobDescription,
+      status
     });
     navigate(`/cover-letter`);
   };

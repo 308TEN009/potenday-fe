@@ -21,7 +21,7 @@ import { useRecoilState } from 'recoil';
 import selectedExpListStore from '@/store/selectedExpListStore';
 import FormHeader from '@components/coverLetter/form/FormHeader';
 import selectedJobPostStore from '@/store/selectedJobPostStore';
-import type { AIGeneratorRequest, SaveCoverLetterRequest } from '@/model/coverLetter';
+import type { AIGeneratorRequest, AssistantType, SaveCoverLetterRequest } from '@/model/coverLetter';
 import { coverLetter } from '@/messages.json';
 import AddIcon from '@assets/icons/plus-sign-circle-grey.svg';
 import { BASIC_FAIL } from '@/model/toast';
@@ -70,10 +70,11 @@ const CoverLetter = () => {
       }]);
     };
 
-    const retrieveJobPostOptions = () =>
+    const retrieveJobPostOptions = () => {
       HomeApi.retrieveJobPost()
              .then(setJobPostOptions)
              .catch(useErrorHandler);
+    };
 
     const retrieveAllCoverLetters = () => {
       const id = jobPostStore?._id ?? jobPost?._id;
@@ -82,30 +83,43 @@ const CoverLetter = () => {
       }
 
       CoverLetterApi.retrieveAllCoverLetters(id)
-                    .then(response =>
-                      setQuestionList(
-                        response.map(({ question, answer }) => ({ question, answer })),
-                      ),
-                    );
+                    .then(response => {
+                        if (response.length <= 0) {
+                          setQuestionList([{
+                            question: '',
+                            answer: '',
+                          }]);
+                          return;
+                        }
+                        setQuestionList(
+                          response.map(({ question, answer }) => ({ question, answer })),
+                        );
+                      },
+                    )
+                    .catch(useErrorHandler);
     };
     const generatorNewCoverLetter = (index: number) => {
-      if (!jobPostStore?._id && !jobPost?._id) {
+      if (jobPostStore === null && jobPost === null) {
         toast(BASIC_FAIL);
         return;
       }
-      const { companyName, applicationJob, jobDescription } = jobPostStore ?? jobPost;
+
+      const companyName = jobPostStore?.companyName ?? jobPost?.companyName ?? '';
+      const applicationJob = jobPostStore?.applicationJob ?? jobPost?.applicationJob ?? '';
+      const jobDescription = jobPostStore?.jobDescription ?? jobPost?.jobDescription ?? '';
+
       const request: AIGeneratorRequest = {
         question: questionList[index].question,
         assistantInput: [
           {
-            type: 'emp',
+            type: 'emp' as AssistantType,
             message: `${companyName}, ${applicationJob}`,
           }, {
-            type: 'jd',
+            type: 'jd' as AssistantType,
             message: jobDescription,
           },
           ...expListStore.originSelected.map(({ title, experienceDetailList }) => ({
-            type: 'exp',
+            type: 'exp' as AssistantType,
             message: `${title.trim()}, ${
               experienceDetailList
                 .filter(detail => detail)
@@ -134,13 +148,13 @@ const CoverLetter = () => {
         toast(BASIC_FAIL);
         return;
       }
-      console.log(questionList[index]);
       CoverLetterApi.createCoverLetter(id, questionList[index]);
     };
 
     return <Flex h={'100%'}
                  gap={'50px'}
-                 m={['50px 0px', '106px 120px 0px 120px']}>
+                 bgColor={'white'}
+                 p={['50px 0px', '106px 120px 0px 120px']}>
       <Box flex={1}
            zIndex={1}
            color={'lightgrey4.500'}>
@@ -153,7 +167,7 @@ const CoverLetter = () => {
         >
           <TabList alignItems={'center'}>
             {
-              questionList.map((question, index) =>
+              questionList.map((_, index) =>
                 <Tab key={index}
                      w={'104px'}
                      h={'46px'}
@@ -189,7 +203,7 @@ const CoverLetter = () => {
                         mb={'24px'}>
                     {coverLetter.question}
                   </Text>
-                  <Input value={questionList[index].question}
+                  <Input value={question.question}
                          onChange={e => updateList(index, 'question', e.target.value)}
                          fontSize={'md'}
                          border={'2px solid'}
@@ -202,7 +216,7 @@ const CoverLetter = () => {
                         mb={'24px'}>
                     {coverLetter.myAnswer}
                   </Text>
-                  <Textarea value={questionList[index].answer}
+                  <Textarea value={question.answer}
                             onChange={e => updateList(index, 'answer', e.target.value)}
                             fontSize={'md'}
                             border={'2px solid'}

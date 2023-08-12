@@ -1,6 +1,13 @@
 import { atom } from 'recoil';
+import type { ExperienceListResponse } from '@/model/mypage';
 
-const selectedExpListStore = atom({
+
+interface SelectedExpListStoreType {
+  originSelected: ExperienceListResponse[],
+  currentSelected: ExperienceListResponse[]
+}
+
+const selectedExpListStore = atom<SelectedExpListStoreType>({
   key: 'selectedExpStore',
   default: {
     originSelected: [],
