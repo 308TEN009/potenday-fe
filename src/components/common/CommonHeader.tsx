@@ -19,7 +19,7 @@ const CommonHeader = () => {
   }, []);
 
   const getFontWeight = (path: string) => {
-    return location.pathname.includes(path) ? 'normal' : 'thin';
+    return location.pathname.includes(path) ? 'medium' : 'regular';
   };
 
   const onLogout = () => {
@@ -40,17 +40,17 @@ const CommonHeader = () => {
       bg={'background'}
       boxShadow={bottomBoxShadow}
       p={4}
-      fontWeight={'thin'}
-      fontSize={['sx', 'sm']}
+      fontWeight={'normal'}
+      fontSize={'md'}
     >
-      <HStack spacing={['20px', '180px']} wordBreak={'keep-all'}
+      <HStack spacing={['20px', '104px']} wordBreak={'keep-all'}
               pl={[0, '124px']}>
         <Img src={LogoImg}
              w={'43px'}
              h={'32px'}
              onClick={() => navigate('/')} />
         <ChakraLink as={ReactRouterLink as any}
-                    fontWeight={location.pathname === '/' ? 'normal' : 'thin'}
+                    fontWeight={location.pathname === '/' ? 'medium' : 'regular'}
                     to={'/'}>
           {common.header.home}
         </ChakraLink>

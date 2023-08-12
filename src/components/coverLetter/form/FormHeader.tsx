@@ -1,10 +1,23 @@
-import CommonSelect from '@components/common/form/CommonSelect';
-import { Box, Divider, HStack, Text, useDisclosure, VStack } from '@chakra-ui/react';
-import AddJobPostingModalButton from '@components/home/coverLetter/addJobPost/AddJobPostingModalButton';
+import {
+  Box,
+  Button,
+  Divider,
+  HStack,
+  Img,
+  List,
+  ListItem,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Text,
+  useDisclosure,
+  VStack,
+} from '@chakra-ui/react';
 import type { JobPost } from '@/model/home';
-import SelectedJobPost from '@components/home/coverLetter/addJobPost/SelectedJobPost';
 import { useRecoilValue } from 'recoil';
 import selectedJobPostStore from '@/store/selectedJobPostStore';
+import { coverLetter } from '@/messages.json';
+import AddIcon from '@assets/icons/plus-sign-circle-main.svg';
 
 interface JobPostSelectorProps {
   options: JobPost[];
@@ -17,50 +30,101 @@ const FormHeader = ({
                       selectedJobPost,
                       setSelectedJobPost,
                     }: JobPostSelectorProps) => {
-  const { isOpen, onClose } = useDisclosure();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const jobPostStore = useRecoilValue(selectedJobPostStore);
 
-  const getSelectedNode = () =>
-    selectedJobPost
-      ? <SelectedJobPost {...selectedJobPost} />
-      : '지원공고 선택하기';
+  const onClickRow = (jobPost: JobPost) => {
+    setSelectedJobPost(jobPost);
+    onClose();
+  };
 
   const onSubmit = () => {
+    console.log(selectedJobPost);
 // TODO
   };
 
   return <Box>
     {jobPostStore !== null
       ? <VStack alignItems={'start'}>
-        <HStack justifyContent={'start'}>
-          <Text fontSize={'lg'}
-                mr={'40px'}>{jobPostStore.companyName}</Text>
-          <Text fontSize={'lg'}>
-            {jobPostStore.applicationJob}
-          </Text>
-
+        <HStack justifyContent={'space-between'} w={'100%'}>
+          <HStack>
+            <Text fontSize={'lg'}
+                  mr={'40px'}>{jobPostStore.companyName}</Text>
+            <Text fontSize={'lg'}>
+              {jobPostStore.applicationJob}
+            </Text>
+          </HStack>
+          <Button w={'248px'}
+                  h={'42px'}
+                  colorScheme={'none'}
+                  borderRadius={0}
+                  bgColor={'lightgrey1.500'}>
+            {coverLetter.addOtherCoverLetter}
+          </Button>
         </HStack>
         <Divider />
       </VStack>
-      : <CommonSelect defaultSelectedLabel={'선택'}
-                      selectedNode={getSelectedNode()}>
-        {
-          options.map((option) =>
-            <CommonSelect.Option key={option._id}>
-              <Text onClick={() => {
-                setSelectedJobPost(option);
-              }}>
-                {option.companyName} | {option.applicationJob}
-              </Text>
-            </CommonSelect.Option>,
-          )
-        }
-        {/* @ts-ignore */}
-        <AddJobPostingModalButton isOpen={isOpen}
-                                  position={'DROPDOWN'}
-                                  callBack={onSubmit}
-                                  onClose={onClose} />
-      </CommonSelect>
+      : <Box>
+        <Popover isOpen={isOpen}
+                 onClose={onClose}
+                 onOpen={onOpen}>
+          <PopoverTrigger>
+            <Button w={'1035px'}
+                    borderRadius={'8px'}
+                    colorScheme={'none'}
+                    h={'70px'}
+                    p={'20px 40px'}
+                    fontSize={'md'}
+                    border={'2px solid'}
+                    borderColor={'lightgrey2.500'}
+                    color={'darkgrey2.500'}
+                    justifyContent={'start'}
+                    textAlign={'left'}>
+
+              {selectedJobPost
+                ? <>
+                  <Text flex={4}>{selectedJobPost.companyName}</Text>
+                  <Text flex={5}>{selectedJobPost.applicationJob}</Text>
+                </>
+                : <Text color={'lightgrey4.500'}>{coverLetter.selectJobpost}</Text>}
+
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent w={'1035px'}
+                          mt={'-10px'}
+                          borderRadius={'8px'}
+                          border={'2px solid'}
+                          borderColor={'lightgrey2.500'}>
+            <Button
+              justifyContent={'start'}
+              colorScheme={'none'}
+              color={'main.500'}
+              w={'100%'}
+              h={'78px'}
+              p={'24px 40px'}>
+              <Img src={AddIcon}
+                   mr={'20px'} />
+              {coverLetter.addJobPost}
+            </Button>
+            <Divider color={'lightgrey1.500'} />
+            <List maxH={'246px'} overflowY={'scroll'}>
+              {options.map(option =>
+                <ListItem key={option._id}
+                          p={'16px 40px'}>
+                  <Button justifyContent={'start'}
+                          textAlign={'start'}
+                          w={'100%'}
+                          onClick={e => onClickRow(option)}
+                          colorScheme={'none'}>
+                    <Text flex={4}>{option.companyName}</Text>
+                    <Text flex={5}>{option.applicationJob}</Text>
+                  </Button>
+                </ListItem>,
+              )}
+            </List>
+          </PopoverContent>
+        </Popover>
+      </Box>
     }
   </Box>;
 };

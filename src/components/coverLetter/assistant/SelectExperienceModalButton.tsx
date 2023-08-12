@@ -50,7 +50,7 @@ export const SelectExperienceModalButton = () => {
               fontWeight={'normal'}>
           {coverLetter.selectExp.title}
         </Text>
-        <Text fontWeight={'thin'}
+        <Text fontWeight={'normal'}
               textAlign={'center'}
               fontSize={'sm'}>
           {coverLetter.selectExp.description}

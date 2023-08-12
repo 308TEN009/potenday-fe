@@ -16,7 +16,7 @@ const badgeStyle = {
   fontSize: 'sm',
   border: '1px solid',
   borderColor: 'lightgrey2.500',
-  color: 'lightgrey2.500',
+  color: 'lightgrey4.500',
   p: '5px 16px',
   mr: '16px',
   cursor: 'pointer',
@@ -38,7 +38,6 @@ export const CoverLetterCardItem = ({ jobPost }: { jobPost: JobPost }) => {
       companyName: jobPost.companyName,
       applicationJob: jobPost.applicationJob,
       jobDescription: jobPost.jobDescription,
-      status: 'complete',
       applyStatus: 'pass',
     };
 
@@ -84,19 +83,23 @@ export const CoverLetterCardItem = ({ jobPost }: { jobPost: JobPost }) => {
       <HStack alignItems={'center'}
               gap={0}
               mt={'60px'}>
-        <Button bgImage={isPassed ? PassIcon : PendingIcon}
-                bgRepeat={'no-repeat'}
-                bgPosition={'center'}
-                bgSize={'20px'}
-                boxSize={'20px'}
-                colorScheme={'none'}
-                onClick={checkCoverLetter}
-                ml={'-10px'} />
-        <Text as={'span'}
-              fontSize={'sm'}
-              color={isPassed ? 'sub1.500' : 'lightgrey4.500'}>
-          {myPage.pass}
-        </Text>
+        { ['complete'].includes(jobPost.status) && <>
+          <Button bgImage={isPassed ? PassIcon : PendingIcon}
+                  bgRepeat={'no-repeat'}
+                  bgPosition={'center'}
+                  bgSize={'20px'}
+                  boxSize={'20px'}
+                  colorScheme={'none'}
+                  onClick={checkCoverLetter}
+                  ml={'-10px'} />
+          <Text as={'span'}
+                fontSize={'sm'}
+                color={isPassed ? 'sub1.500' : 'lightgrey4.500'}>
+            {myPage.pass}
+          </Text>
+        </>
+        }
+
       </HStack>
     </Card>
 

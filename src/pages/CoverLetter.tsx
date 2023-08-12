@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Flex,
+  HStack,
   Input,
   Tab,
   TabList,
@@ -30,7 +31,6 @@ import CoverLetterApi from '@/api/CoverLetterApi';
 const CoverLetter = () => {
     const [jopPostOptions, setJobPostOptions] = useState<JobPost[]>([]);
     const [jobPost, setJobPost] = useState<JobPost | null>(null);
-    const [cleanupNeeded, setCleanupNeeded] = useState(false);
     const [expListStore, setExpListStore] = useRecoilState(selectedExpListStore);
     const [jobPostStore, setJobPostStore] = useRecoilState(selectedJobPostStore);
     const [questionList, setQuestionList] = useState<SaveCoverLetterRequest[]>([
@@ -40,30 +40,37 @@ const CoverLetter = () => {
       },
     ]);
     const toast = useToast();
+    const [tabIdx, setTabIdx] = useState(0);
+    const [loading, setLoading] = useState(false);
+    const [disabled, setDisabled] = useState(false);
 
     useEffect(() => {
+      setJobPost(jobPostStore);
       retrieveJobPostOptions();
-
-      setCleanupNeeded(true);
       return () => {
-        if (cleanupNeeded) {
-          setExpListStore({
-            currentSelected: [],
-            originSelected: [],
-          });
-          setJobPostStore(null);
-        }
+        setExpListStore({
+          currentSelected: [],
+          originSelected: [],
+        });
+        setJobPostStore(null);
       };
     }, []);
 
     useEffect(() => {
+      setDisabled((jobPostStore?.status ?? jobPost?.status) === 'complete');
       retrieveAllCoverLetters();
+      setExpListStore({
+        currentSelected: [],
+        originSelected: [],
+      });
+      setTabIdx(0);
     }, [jobPost, jobPostStore]);
 
     const addNewTab = () => {
       if (questionList.length >= 5) {
         return;
       }
+      setTabIdx(questionList.length);
       setQuestionList([...questionList, {
         question: '',
         answer: '',
@@ -71,9 +78,11 @@ const CoverLetter = () => {
     };
 
     const retrieveJobPostOptions = () => {
+      setLoading(true);
       HomeApi.retrieveJobPost()
              .then(setJobPostOptions)
-             .catch(useErrorHandler);
+             .catch(useErrorHandler)
+             .finally(() => setLoading(false));
     };
 
     const retrieveAllCoverLetters = () => {
@@ -81,7 +90,7 @@ const CoverLetter = () => {
       if (!id) {
         return;
       }
-
+      setLoading(true);
       CoverLetterApi.retrieveAllCoverLetters(id)
                     .then(response => {
                         if (response.length <= 0) {
@@ -91,27 +100,30 @@ const CoverLetter = () => {
                           }]);
                           return;
                         }
+                        console.log(response);
                         setQuestionList(
                           response.map(({ question, answer }) => ({ question, answer })).reverse(),
                         );
                       },
                     )
-                    .catch(useErrorHandler);
+                    .catch(useErrorHandler)
+                    .finally(() => setLoading(false));
     };
 
-    const generatorNewCoverLetter = (index: number) => {
+    const generatorNewCoverLetter = () => {
       const id = jobPostStore?._id ?? jobPost?._id;
-      if (!id || !questionList[index].question) {
+      if (!id || !questionList[tabIdx].question) {
         toast(BASIC_FAIL);
         return;
       }
 
+      setLoading(true);
       const companyName = jobPostStore?.companyName ?? jobPost?.companyName ?? '';
       const applicationJob = jobPostStore?.applicationJob ?? jobPost?.applicationJob ?? '';
       const jobDescription = jobPostStore?.jobDescription ?? jobPost?.jobDescription ?? '';
 
       const request: AIGeneratorRequest = {
-        question: questionList[index].question,
+        question: questionList[tabIdx].question,
         assistantInput: [
           {
             type: 'emp' as AssistantType,
@@ -133,9 +145,10 @@ const CoverLetter = () => {
 
       CoverLetterApi.generateAICoverLetter(request)
                     .then(({ content }) =>
-                      updateList(index, 'answer', content),
+                      updateList(tabIdx, 'answer', content),
                     )
-                    .catch(useErrorHandler);
+                    .catch(useErrorHandler)
+                    .finally(() => setLoading(false));
     };
 
     const updateList = (index: number, field: string, value: string) => {
@@ -145,15 +158,26 @@ const CoverLetter = () => {
       setQuestionList(changedList);
     };
 
-    const saveCoverLetter = (index: number) => {
+    const saveCoverLetter = (index: number, isFinal: boolean) => {
       const id = jobPostStore?._id ?? jobPost?._id;
       if (!id || !questionList[index].question) {
         toast(BASIC_FAIL);
         return;
       }
 
+      setLoading(true);
       CoverLetterApi.createCoverLetter(id, questionList[index])
-                    .catch(useErrorHandler);
+                    .then(() => {
+                      if (isFinal) {
+                        const request = {
+                          ...jobPost ?? jobPostStore,
+                          status: 'complete',
+                        };
+                        return CoverLetterApi.updateCoverLetter(id, request);
+                      }
+                    })
+                    .catch(useErrorHandler)
+                    .finally(() => setLoading(false));
     };
 
     return <Flex h={'100%'}
@@ -169,6 +193,8 @@ const CoverLetter = () => {
         <Tabs variant={'soft-rounded'}
               colorScheme={'sub1'}
               mt={'24px'}
+              index={tabIdx}
+              onChange={setTabIdx}
         >
           <TabList alignItems={'center'}>
             {
@@ -193,13 +219,13 @@ const CoverLetter = () => {
                 </Tab>)
             }
             {
-              questionList.length < 5 && <Button onClick={addNewTab}
-                                                 boxSize={'28px'}
-                                                 backgroundImage={`url(${AddIcon})`}
-                                                 backgroundPosition={'center center'}
-                                                 backgroundSize={'contain auto'}
-                                                 backgroundRepeat={'no-repeat'}
-                                                 colorScheme={'none'} />
+              !disabled && questionList.length < 5 && <Button onClick={addNewTab}
+                                                              boxSize={'28px'}
+                                                              backgroundImage={`url(${AddIcon})`}
+                                                              backgroundPosition={'center center'}
+                                                              backgroundSize={'contain auto'}
+                                                              backgroundRepeat={'no-repeat'}
+                                                              colorScheme={'none'} />
             }
           </TabList>
           <TabPanels>
@@ -211,20 +237,27 @@ const CoverLetter = () => {
                     {coverLetter.question}
                   </Text>
                   <Input value={question.question}
+                         disabled={disabled}
                          onChange={e => updateList(index, 'question', e.target.value)}
+                         placeholder={coverLetter.questionPlaceholder}
                          fontSize={'md'}
                          border={'2px solid'}
                          borderColor={'lightgrey2.500'}
                          bgColor={'white'}
                          focusBorderColor={'sub1.500'}
                          borderRadius={'8px'}
-                         mb={'56px'} />
+                         mb={'56px'}
+                         h={'74px'}
+                         p={'22px 40px'}
+                         lineHeight={'sm'} />
                   <Text fontSize={'md'}
                         mb={'24px'}>
                     {coverLetter.myAnswer}
                   </Text>
                   <Textarea value={question.answer}
+                            disabled={disabled}
                             onChange={e => updateList(index, 'answer', e.target.value)}
+                            placeholder={coverLetter.myAnswerPlaceholder}
                             fontSize={'md'}
                             border={'2px solid'}
                             borderColor={'lightgrey2.500'}
@@ -232,31 +265,41 @@ const CoverLetter = () => {
                             resize={'none'}
                             focusBorderColor={'sub1.500'}
                             borderRadius={'8px'}
+                            p={'32px 40px'}
                             h={'400px'}
                             mb={'40px'} />
-                  <Box float={'right'}
-                       mb={'58px'}
-                       fontWeight={'normal'}>
-                    <Button onClick={() => saveCoverLetter(index)}
+                  <HStack justifyContent={'end'}
+                          mb={'58px'}
+                          fontWeight={'normal'}>
+                    <Button onClick={() => saveCoverLetter(index, true)}
+                            disabled={disabled}
+                            w={'196px'}
+                            h={'56px'}
+                            isLoading={loading}
                             colorScheme={'lightgrey2'}
-                            borderRadius={'20px'}
+                            borderRadius={'30px'}
                             mr={'56px'}>
                       {coverLetter.finalSave}
                     </Button>
-                    <Button onClick={() => generatorNewCoverLetter(index)}
+                    <Button onClick={() => saveCoverLetter(index, false)}
+                            disabled={disabled}
+                            w={'196px'}
+                            h={'56px'}
+                            isLoading={loading}
                             colorScheme={'main'}
                             fontWeight={'normal'}
-                            borderRadius={'20px'}>
+                            borderRadius={'30px'}>
                       {coverLetter.save}
                     </Button>
-                  </Box>
+                  </HStack>
                 </TabPanel>)
             }
           </TabPanels>
         </Tabs>
       </Box>
       <Box w={'603px'} />
-      <AiAssistant />
+      <AiAssistant generatorCoverLetter={generatorNewCoverLetter}
+                   isLoading={loading} />
     </Flex>
       ;
   }

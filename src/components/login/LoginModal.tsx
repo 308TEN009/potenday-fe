@@ -30,7 +30,7 @@ const LoginModal = ({ isOpen, onClose }: any) => {
             textAlign={'center'}>
         {login.title}
       </Text>
-      <Text fontWeight={'thin'}
+      <Text fontWeight={'normal'}
             fontSize={'sm'}
             color={'lightgrey4.500'}
             textAlign={'center'}>

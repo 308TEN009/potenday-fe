@@ -40,7 +40,7 @@
       "unit": "건"
     },
     "bookmark": {
-      "title": "⭐공고 즐겨찾기",
+      "title": "⭐ 공고 즐겨찾기",
       "addBookmark": "즐겨찾기 추가",
       "editBookmark": "즐겨찾기 수정",
       "description": "관심기업 채용사이트를 즐겨찾기해보세요.\n (최대 5개까지 가능합니다)",
@@ -50,6 +50,8 @@
   },
   "coverLetter": {
     "addOtherCoverLetter": "다른 기업 자소서 작성하기",
+    "selectJobpost": "채용 공고 선택하기",
+    "addJobPost": "공고 추가하기",
     "aiAssistant": {
       "title": "AI 자소서 도우미",
       "description": "AI 버튼을 클릭해 손쉽게 작성되는 자기소개서를 경험해보세요",
@@ -63,7 +65,9 @@
       "gotoMypage": "혹은 경험 변경하러 가기 🏃"
     },
     "question": "문항",
+    "questionPlaceholder": "자기소개서 문항을 입력해주세요.",
     "myAnswer": "나의 답변",
+    "myAnswerPlaceholder": "문항에 대한 답변을 입력해주세요",
     "finalSave": "최종 저장하기",
     "save": "저장하기"
   },

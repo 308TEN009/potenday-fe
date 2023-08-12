@@ -1,6 +1,5 @@
 import CommonModal from '@components/common/modal/CommonModal';
-import { Button, Center, Text, useDisclosure, useToast, VStack } from '@chakra-ui/react';
-import AddJobPostingButton from '@components/home/coverLetter/addJobPost/AddJobPostingButton';
+import { Button, Center, Image, Text, useDisclosure, useToast, VStack } from '@chakra-ui/react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 import { common, home } from '@/messages.json';
@@ -8,6 +7,9 @@ import HomeApi from '@/api/HomeApi';
 import { BASIC_SUCCESS } from '@/model/toast';
 import FormLabelInput from '@components/common/FormLabelInput';
 import useErrorHandler from '@/hooks/useErrorHandler';
+import addIcon from '@assets/icons/plus-sign-circle-white.svg';
+import addIcon2 from '@assets/icons/plus-sign-circle-main.svg';
+import MainButton from '@components/common/button/MainButton';
 
 interface AddJobPostingModalProps {
   callBack: () => any;
@@ -51,12 +53,29 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
   return <>
     {
       position === 'HOME'
-        ? <AddJobPostingButton onClick={onOpenModal} />
+        ? <MainButton onClick={onOpenModal}
+                      w={'242px'}
+                      h={'62px'}>
+          <Image src={addIcon}
+                 boxSize={'24px'}
+                 mr={'16px'} />
+          {home.addJobPost}
+        </MainButton>
         : <Button w={'100%'}
-                  fontSize={'sm'}
-                  backgroundColor={'white'}
-                  boxShadow={'base'}
+                  colorScheme={'none'}
+                  color={'main.500'}
+                  fontSize={'md'}
+                  bgColor={'white'}
+                  borderRadius={'none'}
+                  borderTopLeftRadius={'8px'}
+                  borderTopRightRadius={'8px'}
+                  borderRadiusRightBottom={''}
+                  borderBottom={'1px solid'}
+                  borderColor={'lightgrey1.500'}
                   onClick={onOpenModal}>
+          <Image src={addIcon2}
+                 boxSize={'24px'}
+                 mr={'16px'} />
           {home.addJobPost}
         </Button>
     }
@@ -94,7 +113,8 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
                             value={applicationJob}
                             onChange={setApplicationJob}
                             inputType={'TEXT'} />
-            <FormLabelInput label={home.addJobPostPopup.majorTask}
+            <FormLabelInput required
+                            label={home.addJobPostPopup.majorTask}
                             placeholder={home.addJobPostPopup.majorTaskPlaceholder}
                             value={majorTask}
                             onChange={setMajorTask}

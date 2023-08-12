@@ -57,7 +57,6 @@ const global = {
     fontFamily: `'Spoqa Han Sans Neo', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important`,
     padding: 0,
     margin: 0,
-    color: '#333333',
   },
   '#root': {
     width: '100vw',
@@ -114,6 +113,7 @@ const components = {
   Text: {
     baseStyle: {
       wordBreak: 'keep-all',
+      color: '#333333',
     },
     defaultProps: {
       size: 'sm',

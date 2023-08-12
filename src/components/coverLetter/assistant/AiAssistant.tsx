@@ -3,7 +3,7 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-  Box,
+  Box, Button,
   Card,
   CardBody,
   CardHeader,
@@ -18,7 +18,12 @@ import DownArrowIcon from '@assets/icons/circle-arrow-down-01-sharp.svg';
 import UpArrowIcon from '@assets/icons/circle-arrow-up-01-sharp.svg';
 import { useState } from 'react';
 
-const AiAssistant = () => {
+interface AiAssistantProps {
+  generatorCoverLetter: () => void;
+  isLoading: boolean;
+}
+
+const AiAssistant = ({ generatorCoverLetter, isLoading }: AiAssistantProps) => {
   const [isOpen, onToggle] = useState(false);
   return <Center position={'fixed'}
                  top={'117x'}
@@ -26,7 +31,14 @@ const AiAssistant = () => {
                  zIndex={1}>
     <Card m={4} w={'521px'}>
       <CardHeader display={'flex'} p={'40px 32px'}>
-        <Img src={AiAssistantIcon} boxSize={'80px'} />
+        <Button bgImg={AiAssistantIcon}
+                bgPos={'center'}
+                bgSize={'100%'}
+                boxSize={'90px'}
+                borderRadius={'100%'}
+                colorScheme={'none'}
+                isLoading={isLoading}
+                onClick={generatorCoverLetter} />
         <Box ml={'12px'}>
           <Text>{coverLetter.aiAssistant.title}</Text>
           <Text fontSize={'sx'}
