@@ -19,7 +19,6 @@ const CheckExperienceItem = ({ experience }: CheckExperienceItemProps) => {
   }, []);
 
   const onCheck = () => {
-    console.log(checkedExpItem);
     const checked = !isChecked;
     if (!checked) {
       setCheckedExpItem((pre) =>
@@ -27,6 +26,7 @@ const CheckExperienceItem = ({ experience }: CheckExperienceItemProps) => {
           ...pre,
           currentSelected: pre.currentSelected.filter(({ _id }) => _id !== experience._id),
         }));
+      setIsChecked(checked);
     }
     if (checked && checkedExpItem.currentSelected.length < 3) {
       setCheckedExpItem(prev => ({

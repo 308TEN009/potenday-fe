@@ -187,13 +187,15 @@ const CoverLetter = () => {
                   {coverLetter.question} {index + 1}
                 </Tab>)
             }
-            <Button onClick={addNewTab}
-                    boxSize={'28px'}
-                    backgroundImage={`url(${AddIcon})`}
-                    backgroundPosition={'center center'}
-                    backgroundSize={'contain auto'}
-                    backgroundRepeat={'no-repeat'}
-                    colorScheme={'none'} />
+            {
+              questionList.length < 5 && <Button onClick={addNewTab}
+                                                 boxSize={'28px'}
+                                                 backgroundImage={`url(${AddIcon})`}
+                                                 backgroundPosition={'center center'}
+                                                 backgroundSize={'contain auto'}
+                                                 backgroundRepeat={'no-repeat'}
+                                                 colorScheme={'none'} />
+            }
           </TabList>
           <TabPanels>
             {
