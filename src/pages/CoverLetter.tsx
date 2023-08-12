@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  HStack,
   Input,
   Tab,
   TabList,
@@ -27,6 +26,7 @@ import { coverLetter } from '@/messages.json';
 import AddIcon from '@assets/icons/plus-sign-circle-grey.svg';
 import { BASIC_FAIL } from '@/model/toast';
 import CoverLetterApi from '@/api/CoverLetterApi';
+import MainButton from '@components/common/button/MainButton';
 
 const CoverLetter = () => {
     const [jopPostOptions, setJobPostOptions] = useState<JobPost[]>([]);
@@ -100,7 +100,6 @@ const CoverLetter = () => {
                           }]);
                           return;
                         }
-                        console.log(response);
                         setQuestionList(
                           response.map(({ question, answer }) => ({ question, answer })).reverse(),
                         );
@@ -237,7 +236,7 @@ const CoverLetter = () => {
                     {coverLetter.question}
                   </Text>
                   <Input value={question.question}
-                         disabled={disabled}
+                         isDisabled={disabled}
                          onChange={e => updateList(index, 'question', e.target.value)}
                          placeholder={coverLetter.questionPlaceholder}
                          fontSize={'md'}
@@ -246,6 +245,7 @@ const CoverLetter = () => {
                          bgColor={'white'}
                          focusBorderColor={'sub1.500'}
                          borderRadius={'8px'}
+                         color={'darkgrey2.500'}
                          mb={'56px'}
                          h={'74px'}
                          p={'22px 40px'}
@@ -261,6 +261,7 @@ const CoverLetter = () => {
                             fontSize={'md'}
                             border={'2px solid'}
                             borderColor={'lightgrey2.500'}
+                            color={'darkgrey2.500'}
                             bgColor={'white'}
                             resize={'none'}
                             focusBorderColor={'sub1.500'}
@@ -268,30 +269,38 @@ const CoverLetter = () => {
                             p={'32px 40px'}
                             h={'400px'}
                             mb={'40px'} />
-                  <HStack justifyContent={'end'}
-                          mb={'58px'}
-                          fontWeight={'normal'}>
+                  <Flex justifyContent={'end'}
+                        mb={'58px'}
+                        fontWeight={'normal'}>
                     <Button onClick={() => saveCoverLetter(index, true)}
                             disabled={disabled}
                             w={'196px'}
                             h={'56px'}
+                            color={'darkgrey2.500'}
                             isLoading={loading}
                             colorScheme={'lightgrey2'}
                             borderRadius={'30px'}
+                            boxShadow={`
+                              inset 1px 1px 2px 0 #FBFBFB30,
+                              inset -1px -1px 2px 0 #CDCDCD50,
+                              -1px 1px 2px 0 #CDCDCD20,
+                              1px -1px 2px 0 #CDCDCD20,
+                              -1px -1px 2px 0 #FBFBFB90,
+                              1px 1px 3px 0 #CDCDCD90
+                            `}
                             mr={'56px'}>
                       {coverLetter.finalSave}
                     </Button>
-                    <Button onClick={() => saveCoverLetter(index, false)}
-                            disabled={disabled}
-                            w={'196px'}
-                            h={'56px'}
-                            isLoading={loading}
-                            colorScheme={'main'}
-                            fontWeight={'normal'}
-                            borderRadius={'30px'}>
+                    <MainButton onClick={() => saveCoverLetter(index, false)}
+                                rounded
+                                w={'196px'}
+                                h={'56px'}
+                                borderRadius={'30px'}
+                                boxShadow={`
+                            `}>
                       {coverLetter.save}
-                    </Button>
-                  </HStack>
+                    </MainButton>
+                  </Flex>
                 </TabPanel>)
             }
           </TabPanels>

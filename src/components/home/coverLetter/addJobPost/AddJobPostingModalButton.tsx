@@ -69,7 +69,6 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
                   borderRadius={'none'}
                   borderTopLeftRadius={'8px'}
                   borderTopRightRadius={'8px'}
-                  borderRadiusRightBottom={''}
                   borderBottom={'1px solid'}
                   borderColor={'lightgrey1.500'}
                   onClick={onOpenModal}>

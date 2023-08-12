@@ -55,6 +55,7 @@
     "aiAssistant": {
       "title": "AI 자소서 도우미",
       "description": "AI 버튼을 클릭해 손쉽게 작성되는 자기소개서를 경험해보세요",
+      "selectExpBefore": "경험 선택하기",
       "selectExp": "⚡ 경험 선택하기",
       "selectExpDesc": "마이페이지에서 등록한 경험 중 최대 3개까지 반영할 수 있습니다."
     },
@@ -109,6 +110,19 @@
     },
     "lastOrder": "최신순",
     "oldestOrder": "오래된 순",
-    "sort": "정렬"
+    "sort": "정렬",
+    "select": "선택",
+    "modal": {
+      "addTitle": "뉴스 스크랩 추가하기",
+      "addSubTitle": "지원하고 싶은 기업에 관련된 뉴스를 나만의 언어로 정리해보세요.",
+      "editTitle": "뉴스 스크랩 수정하기",
+      "EditSubTitle": "지원하고 싶은 기업에 관련된 뉴스를 나만의 언어로 정리해보세요.",
+      "rowNoPlaceHolder": "순서",
+      "companyNamePlaceHolder": "해당되는 기업명을 입력해주세요",
+      "articleTitlePlaceHolder": "뉴스 기사 제목을 입력해주세요",
+      "memoPlaceHolder": "기업의 주목할 점, 수치적인 결과물 등 기업의 성과를 입력해주세요",
+      "linkPlaceHolder": "기사 링크를 입력해주세요",
+      "save": "선택 완료"
+    }
   }
 }

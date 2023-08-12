@@ -23,14 +23,13 @@ const Home = () => {
            .then(setJobPost)
            .catch(useErrorHandler);
 
-  return <Flex flexDir={flexDir} m={['50px 0px', '106px 120px 0px 120px']}>
+  return <Flex flexDir={flexDir} m={'106px 120px 0px 120px'}>
     <Box>
-      <HStack justifyContent={['center', 'initial']}
-              w={['auto', '1035px']}
+      <HStack w={'1035px'}
               height={'64px'}
               mb={'20px'}>
-        <Text fontSize={['md', 'lg']}
-              mr={['20px', '41px']}
+        <Text fontSize={'lg'}
+              mr={'41px'}
 
               wordBreak={'keep-all'}>
           {home.myCoverLetter}

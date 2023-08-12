@@ -32,7 +32,7 @@ const CoverLetterListItem = ({ _id, companyName, status, applyStatus, applicatio
       status,
       applyStatus
     });
-    navigate(`/cover-letter`);
+    navigate(`/cover-letter?fix=true`);
   };
   return <ListItem onClick={gotoCoverLetter}>
     <Flex h={'74px'}

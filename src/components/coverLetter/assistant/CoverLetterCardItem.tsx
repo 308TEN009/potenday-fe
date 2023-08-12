@@ -83,7 +83,7 @@ export const CoverLetterCardItem = ({ jobPost }: { jobPost: JobPost }) => {
       <HStack alignItems={'center'}
               gap={0}
               mt={'60px'}>
-        { ['complete'].includes(jobPost.status) && <>
+        {['complete'].includes(jobPost.status) && <>
           <Button bgImage={isPassed ? PassIcon : PendingIcon}
                   bgRepeat={'no-repeat'}
                   bgPosition={'center'}
@@ -91,12 +91,14 @@ export const CoverLetterCardItem = ({ jobPost }: { jobPost: JobPost }) => {
                   boxSize={'20px'}
                   colorScheme={'none'}
                   onClick={checkCoverLetter}
-                  ml={'-10px'} />
-          <Text as={'span'}
-                fontSize={'sm'}
-                color={isPassed ? 'sub1.500' : 'lightgrey4.500'}>
-            {myPage.pass}
-          </Text>
+                  ml={'-10px'}>
+            <Text as={'span'}
+                  ml={'110px'}
+                  fontSize={'sm'}
+                  color={isPassed ? 'sub1.500' : 'lightgrey4.500'}>
+              {myPage.pass}
+            </Text>
+          </Button>
         </>
         }
 

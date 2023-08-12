@@ -20,15 +20,17 @@ const MyCoverLetterList = () => {
         {myPage.viewMyCoverLetters}
       </Heading>
       <Text fontSize={'sm'}
+            mt={'16px'}
             color={'lightgrey4.500'}
             whiteSpace={'break-spaces'}>
         {myPage.viewMyCoverLettersDesc}
       </Text>
     </Box>
-    <Grid gridTemplateColumns={'repeat(3, 1fr)'}
+    <Grid gridTemplateColumns={'repeat(3, 472px)'}
+          mt={'40px'}
           borderRadius={'12px'}
-          p={'20px'}
-          gap={'20px'}>
+          p={'20px 0'}
+          gap={'40px'}>
       {
         myCoverLetterList.map((coverLetter) =>
           <CoverLetterCardItem key={coverLetter._id} jobPost={coverLetter} />)

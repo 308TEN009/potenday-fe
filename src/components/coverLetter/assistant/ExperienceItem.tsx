@@ -11,21 +11,22 @@ interface ExperienceItemProps {
 }
 
 export const ExperienceItem = ({ experience, onOpen, onDelete }: ExperienceItemProps) => {
-  return <HStack p={'20px'}
+  return <HStack p={'23px 40px'}
                  justifyContent={'space-between'}
                  alignItems={'start'}
                  bgColor={'white'}
                  className={'light-shadow'}
                  borderRadius={'8px'}
                  fontSize={'sm'}
-                 my={'20px'}>
-    <Box m={'20px'}>
-      <HStack key={'subTitle'} mb={3}>
+                 h={'176px'}
+                 mb={'32px'}>
+    <Box>
+      <HStack key={'subTitle'} mb={17}>
         <Text as={'span'}
-              w={'80px'}
+              w={'136px'}
               mr={'20px'}
               textAlign={'right'}
-              fontSize={'xs'}
+              fontSize={'sm'}
               color={'lightgrey4.500'}>
           {myPage.experienceItem.subTitle}
         </Text>
@@ -33,12 +34,12 @@ export const ExperienceItem = ({ experience, onOpen, onDelete }: ExperienceItemP
           {experience.title}
         </Text>
       </HStack>
-      <HStack key={'detail1'} mb={3}>
+      <HStack key={'detail1'} mb={17}>
         <Text as={'span'}
-              w={'80px'}
+              w={'136px'}
               mr={'20px'}
               textAlign={'right'}
-              fontSize={'xs'}
+              fontSize={'sm'}
               color={'lightgrey4.500'}>
           {myPage.experienceItem.detail1}
         </Text>
@@ -48,10 +49,10 @@ export const ExperienceItem = ({ experience, onOpen, onDelete }: ExperienceItemP
       </HStack>
       <HStack key={'detail2'}>
         <Text as={'span'}
-              w={'80px'}
+              w={'136px'}
               mr={'20px'}
               textAlign={'right'}
-              fontSize={'xs'}
+              fontSize={'sm'}
               color={'lightgrey4.500'}>
           {myPage.experienceItem.detail2}
         </Text>
@@ -60,22 +61,23 @@ export const ExperienceItem = ({ experience, onOpen, onDelete }: ExperienceItemP
         </Text>
       </HStack>
     </Box>
-    <Box justifyContent={'end'}
-         mr={'20px'}>
+    <Box justifyContent={'end'}>
       <Button colorScheme={'none'}
               backgroundImage={`url(${EditIcon})`}
               backgroundPosition={'center center'}
-              backgroundSize={'50% auto'}
+              backgroundSize={'80%'}
               backgroundRepeat={'no-repeat'}
               onClick={onOpen}
-              w={'10px'} />
+              boxSize={'24px'}
+              mr={'40px'} />
       <Button colorScheme={'none'}
               backgroundImage={`url(${DeleteIcon})`}
               backgroundPosition={'center center'}
-              backgroundSize={'50% auto'}
+              backgroundSize={'80%'}
               backgroundRepeat={'no-repeat'}
               onClick={() => onDelete(experience._id)}
-              w={'10px'} />
+              boxSize={'24px'}
+              mr={'40px'} />
     </Box>
   </HStack>;
 };

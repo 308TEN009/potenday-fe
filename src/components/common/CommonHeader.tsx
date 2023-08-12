@@ -42,6 +42,7 @@ const CommonHeader = () => {
       p={4}
       fontWeight={'normal'}
       fontSize={'md'}
+      color={'darkgrey2.500'}
     >
       <HStack spacing={['20px', '104px']} wordBreak={'keep-all'}
               pl={[0, '124px']}>
@@ -72,9 +73,9 @@ const CommonHeader = () => {
         </ChakraLink>
       </HStack>
       <Spacer />
-      <Button colorScheme={'transparent'}
-              color={'black'}
-              fontSize={['sx', 'sm']}
+      <Button colorScheme={'none'}
+              color={'darkgrey2.500'}
+              fontSize={'sm'}
               onClick={isLoggedIn ? onLogout : onOpen}
               pr={[0, '124px']}>
         {isLoggedIn ? common.header.logout : common.header.login}

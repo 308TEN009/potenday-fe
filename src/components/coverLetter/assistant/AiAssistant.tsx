@@ -3,7 +3,7 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-  Box, Button,
+  Box,
   Card,
   CardBody,
   CardHeader,
@@ -23,25 +23,28 @@ interface AiAssistantProps {
   isLoading: boolean;
 }
 
-const AiAssistant = ({ generatorCoverLetter, isLoading }: AiAssistantProps) => {
+const AiAssistant = ({ generatorCoverLetter }: AiAssistantProps) => {
   const [isOpen, onToggle] = useState(false);
   return <Center position={'fixed'}
                  top={'117x'}
                  right={'136px'}
                  zIndex={1}>
-    <Card m={4} w={'521px'}>
-      <CardHeader display={'flex'} p={'40px 32px'}>
-        <Button bgImg={AiAssistantIcon}
-                bgPos={'center'}
-                bgSize={'100%'}
-                boxSize={'90px'}
-                borderRadius={'100%'}
-                colorScheme={'none'}
-                isLoading={isLoading}
-                onClick={generatorCoverLetter} />
-        <Box ml={'12px'}>
-          <Text>{coverLetter.aiAssistant.title}</Text>
-          <Text fontSize={'sx'}
+    <Card m={4}
+          boxShadow={'none'}
+          border={'2px solid'}
+          borderColor={'lightgrey2.500'}
+          w={'524px'}>
+      <CardHeader display={'flex'} p={'44px 24px'}>
+        <Img src={AiAssistantIcon}
+             w={'80px'}
+             h={'80px'}
+             objectFit={'contain'}
+             onClick={generatorCoverLetter}
+             mr={'22px'} />
+        <Box w={'363px'} h={'111px'}>
+          <Text fontSize={'ml'} mb={'12px'}>
+            {coverLetter.aiAssistant.title}</Text>
+          <Text fontSize={'sm'}
                 whiteSpace={'break-spaces'}
                 color={'lightgrey4.500'}>
             {coverLetter.aiAssistant.description}
@@ -50,19 +53,29 @@ const AiAssistant = ({ generatorCoverLetter, isLoading }: AiAssistantProps) => {
       </CardHeader>
       <CardBody p={0}>
         <Accordion allowMultiple>
-          <AccordionItem p={'32px'}>
-            <AccordionButton onClick={() => onToggle(!isOpen)}>
+          <AccordionItem p={'24px 32px'}>
+            <AccordionButton
+              p={0}
+              onClick={() => onToggle(!isOpen)}>
               <Box as={'span'}
                    flex={'1'}
-                   fontSize={'sm'}
+                   lineHeight={'md'}
+                   fontSize={'md'}
+                   boxSizing={'border-box'}
+
+                   color={isOpen ? 'drakgrey2.500' : 'lightgrey4.500'}
                    textAlign={'left'}>
-                {coverLetter.aiAssistant.selectExp}
+                {isOpen
+                  ? coverLetter.aiAssistant.selectExp
+                  : coverLetter.aiAssistant.selectExpBefore}
               </Box>
-              <Img boxSize={'25px'}
+              <Img boxSize={'30px'}
                    src={isOpen ? UpArrowIcon : DownArrowIcon} />
             </AccordionButton>
-            <AccordionPanel pb={4}>
-              <Text mb={'24px'}
+            <AccordionPanel pb={4} p={0}>
+              <Text mt={'20px'}
+                    mb={'24px'}
+                    fontSize={'sm'}
                     whiteSpace={'break-spaces'}
                     color={'lightgrey4.500'}
                     w={'80%'}>

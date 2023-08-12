@@ -7,16 +7,17 @@ interface MainButtonProps {
   h: string;
   fontSize?: string;
   children: ReactNode;
+  rounded?: boolean;
 }
 
-const MainButton = ({ onClick, w, h, fontSize, children }: MainButtonProps) => {
+const MainButton = ({ onClick, w, h, fontSize, rounded = false, children }: MainButtonProps) => {
   return <Button fontSize={fontSize ?? 'md'}
                  colorScheme={'white'}
                  bgColor={'main.500'}
                  color={'white'}
                  onClick={onClick}
                  boxSizing={'border-box'}
-                 borderRadius={'12px'}
+                 borderRadius={rounded ? '30px' : '12px'}
                  boxShadow={`
                  1px 1px 2px 0 #778DBD30,
                  -1px 1px 2px 0 #61739B50,

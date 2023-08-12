@@ -11,14 +11,15 @@ interface LabelInput {
   isLast?: boolean;
   description?: string;
   required?: boolean;
+  gap?: string;
 }
 
 const FormLabelInput = ({
-                          label, placeholder = '', value, onChange
+                          label, placeholder = '', value, onChange, gap
                           , inputType, isLast, description, required = false,
                         }: LabelInput) => {
   const [showDesc, setShowDesc] = useState(false);
-  return <Box mb={isLast ? 0 : '80px'} w={'100%'}>
+  return <Box mb={isLast ? 0 : gap ?? '80px'} w={'100%'}>
     <Text fontSize={'sx'}
           mb={'12px'}
           as={'span'}

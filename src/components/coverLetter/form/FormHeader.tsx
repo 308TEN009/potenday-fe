@@ -14,10 +14,10 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import type { JobPost } from '@/model/home';
-import { useRecoilValue } from 'recoil';
-import selectedJobPostStore from '@/store/selectedJobPostStore';
 import { coverLetter } from '@/messages.json';
 import AddIcon from '@assets/icons/plus-sign-circle-main.svg';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 interface JobPostSelectorProps {
   options: JobPost[];
@@ -31,27 +31,32 @@ const FormHeader = ({
                       setSelectedJobPost,
                     }: JobPostSelectorProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const jobPostStore = useRecoilValue(selectedJobPostStore);
+  const [fixMode, setFixMode] = useState(false);
+  const [params] = useSearchParams();
+
+  useEffect(() => {
+    setFixMode(params.get('fix'));
+  }, [params]);
 
   const onClickRow = (jobPost: JobPost) => {
     setSelectedJobPost(jobPost);
     onClose();
   };
 
-  const onSubmit = () => {
-    console.log(selectedJobPost);
-// TODO
-  };
+//   const onSubmit = () => {
+//     console.log(selectedJobPost);
+// // TODO
+//   };
 
   return <Box>
-    {jobPostStore !== null
+    {fixMode
       ? <VStack alignItems={'start'}>
         <HStack justifyContent={'space-between'} w={'100%'}>
           <HStack>
             <Text fontSize={'lg'}
-                  mr={'40px'}>{jobPostStore.companyName}</Text>
+                  mr={'40px'}>{selectedJobPost?.companyName}</Text>
             <Text fontSize={'lg'}>
-              {jobPostStore.applicationJob}
+              {selectedJobPost?.applicationJob}
             </Text>
           </HStack>
           <Button w={'248px'}
@@ -114,7 +119,7 @@ const FormHeader = ({
                   <Button justifyContent={'start'}
                           textAlign={'start'}
                           w={'100%'}
-                          onClick={e => onClickRow(option)}
+                          onClick={() => onClickRow(option)}
                           colorScheme={'none'}>
                     <Text flex={4}>{option.companyName}</Text>
                     <Text flex={5}>{option.applicationJob}</Text>

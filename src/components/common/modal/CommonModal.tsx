@@ -8,7 +8,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
-import CancelIcon from '@assets/icons/cancel-circle.svg';
+import CancelIcon from '@assets/icons/cancel-circle-grey.svg';
 
 interface CommonModalProps {
   isOpen: boolean;
@@ -35,21 +35,25 @@ const CommonModal = ({ isOpen, onClose, children, w, h }: CommonModalProps) => {
 
 const CommonModalHeader = ({ children }: { children: ReactNode }) =>
   <>
-    <ModalHeader mt={'32px'}>
-       <ModalCloseButton bg={`url(${CancelIcon})`}
-                         boxSize={'32px'}
-                         m={'16px'} />
+    <ModalHeader m={0}
+                 mt={'62px'}
+                 p={0}>
+      <ModalCloseButton bg={`url(${CancelIcon})`}
+                        boxSize={'32px'}
+                        m={'16px'} />
       {children}
     </ModalHeader>
   </>;
 
 const CommonModalBody = ({ children }: { children: ReactNode }) =>
-  <ModalBody>
+  <ModalBody m={0}
+             p={0}>
     {children}
   </ModalBody>;
 
 const CommonModalFooter = ({ children }: { children: ReactNode }) =>
-  <ModalFooter>
+  <ModalFooter m={0}
+               p={0}>
     {children}
   </ModalFooter>;
 

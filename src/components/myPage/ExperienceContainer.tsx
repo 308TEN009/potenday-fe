@@ -1,12 +1,13 @@
-import { Box, Button, Flex, HStack, Image, List, ListItem, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, HStack, Image, List, ListItem, Text, useDisclosure } from '@chakra-ui/react';
 import { common, myPage } from '@/messages.json';
-import addIcon from '@assets/icons/plus-sign-circle.svg';
 import ExperienceModal from '@components/myPage/ExperienceModal';
 import { useEffect, useState } from 'react';
 import type { ExperienceListResponse } from '@/model/mypage';
 import MyPageApi from '@/api/MyPageApi';
 import useErrorHandler from '@/hooks/useErrorHandler';
 import ExperienceItem from '@components/coverLetter/assistant/ExperienceItem';
+import MainButton from '@components/common/button/MainButton';
+import addIcon from '@assets/icons/plus-sign-circle-white.svg';
 
 interface ExpModalInfo {
   isEdit: boolean,
@@ -43,29 +44,28 @@ export const ExperienceContainer = () => {
 
   return <Box>
     <HStack justifyContent={'space-between'}>
-      <Box>
+      <Box mb={'40px'}>
         <Text fontSize={['md', 'lg']}
-                 fontWeight={'normal'}>
+              fontWeight={'normal'}>
           {myPage.myExperienceList}
         </Text>
         <Text fontSize={'sm'}
+              mt={'16px'}
               color={'lightgrey4.500'}
               whiteSpace={'break-spaces'}>
           {myPage.myExperienceListDesc}
         </Text>
       </Box>
-      <Flex justifyContent={'end'} p={5}>
-        <Button fontSize={['sm', 'md']}
-                colorScheme={'white'}
-                bg={'white'}
-                color={'darkgrey2.500'}
-                p={'20px 25px'}
-                border={'1px solid'}
-                borderColor={'lightgrey4.500'}
-                onClick={() => onModalOpen(false)}>
-          <Image src={addIcon} boxSize={['20px', '24px']} mr={['16px', '10px']} />
+      <Flex justifyContent={'end'}>
+        <MainButton
+          w={'193px'}
+          h={'62px'}
+          onClick={() => onModalOpen(false)}>
+          <Image src={addIcon}
+                 boxSize={'24px'}
+                 mr={'16px'} />
           {common.add}
-        </Button>
+        </MainButton>
       </Flex>
     </HStack>
     {experienceList.length <= 0
@@ -77,7 +77,7 @@ export const ExperienceContainer = () => {
              borderRadius={'8px'}
              fontSize={'sm'}
              my={'20px'} />
-      : <List w={'100%'} maxH={'700px'} overflowY={'scroll'}>
+      : <List w={'100%'}>
         {experienceList.map(experience =>
           <ListItem key={experience._id}>
             <ExperienceItem onOpen={() => onModalOpen(true, experience)}
