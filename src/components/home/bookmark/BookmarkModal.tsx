@@ -32,7 +32,7 @@ const BookmarkModal = ({ isOpen, onClose, onSubmit, bookmark }: BookmarkModalPro
       <Text mt={'10px'}
             fontWeight={'normal'}
             fontSize={'sm'}>
-        {home.bookmark.description?.split('\n').map(msg => <>{msg}<br /></>)}
+        {home.bookmark.description?.split('\n').map((msg, i) => <span key={i}>{msg}<br /></span>)}
       </Text>
     </CommonModal.Header>
     <form onSubmit={createBookmark}>
