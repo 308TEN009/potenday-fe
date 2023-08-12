@@ -35,3 +35,13 @@ export interface SaveCoverLetterRequest {
   question: string;
   answer: string;
 }
+
+export interface CoverLetterResponse {
+  id: string;
+  question: string;
+  answer: string;
+  employmentOpportunityId: string;
+  createAt: string;
+  updatedAt: string;
+  deletedAt: string;
+}

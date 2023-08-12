@@ -43,6 +43,7 @@ const CoverLetter = () => {
 
     useEffect(() => {
       retrieveJobPostOptions();
+
       setCleanupNeeded(true);
       return () => {
         if (cleanupNeeded) {
@@ -54,6 +55,10 @@ const CoverLetter = () => {
         }
       };
     }, []);
+
+    useEffect(() => {
+      retrieveAllCoverLetters();
+    }, [jobPost, jobPostStore]);
 
     const addNewTab = () => {
       if (questionList.length >= 5) {
@@ -70,6 +75,19 @@ const CoverLetter = () => {
              .then(setJobPostOptions)
              .catch(useErrorHandler);
 
+    const retrieveAllCoverLetters = () => {
+      const id = jobPostStore?._id ?? jobPost?._id;
+      if (!id) {
+        return;
+      }
+
+      CoverLetterApi.retrieveAllCoverLetters(id)
+                    .then(response =>
+                      setQuestionList(
+                        response.map(({ question, answer }) => ({ question, answer })),
+                      ),
+                    );
+    };
     const generatorNewCoverLetter = (index: number) => {
       if (!jobPostStore?._id && !jobPost?._id) {
         toast(BASIC_FAIL);
@@ -98,21 +116,26 @@ const CoverLetter = () => {
       };
 
       CoverLetterApi.generateAICoverLetter(request)
-                    .then(({ contents }) =>
-                      setQuestionList(
-                        questionList.map(
-                          (listItem, idx) =>
-                            (index === idx
-                              ? {
-                                ...listItem,
-                                answer: contents,
-                              }
-                              : listItem))),
+                    .then(({ content }) =>
+                      updateList(index, 'answer', content),
                     );
     };
 
-    const saveCoverLetter = (index: number) => {
+    const updateList = (index: number, field: string, value: string) => {
+      const changedList = questionList.map((listItem, idx) => (
+        index === idx ? { ...listItem, [field]: value } : listItem
+      ));
+      setQuestionList(changedList);
+    };
 
+    const saveCoverLetter = (index: number) => {
+      const id = jobPostStore?._id ?? jobPost?._id;
+      if (!id) {
+        toast(BASIC_FAIL);
+        return;
+      }
+      console.log(questionList[index]);
+      CoverLetterApi.createCoverLetter(id, questionList[index]);
     };
 
     return <Flex h={'100%'}
@@ -167,15 +190,7 @@ const CoverLetter = () => {
                     {coverLetter.question}
                   </Text>
                   <Input value={questionList[index].question}
-                         onChange={e =>
-                           setQuestionList(
-                             questionList.map((listItem, idx) =>
-                               (index === idx
-                                 ? {
-                                   ...listItem,
-                                   question: e.target.value,
-                                 }
-                                 : listItem)))}
+                         onChange={e => updateList(index, 'question', e.target.value)}
                          fontSize={'md'}
                          border={'2px solid'}
                          borderColor={'lightgrey2.500'}
@@ -187,7 +202,9 @@ const CoverLetter = () => {
                         mb={'24px'}>
                     {coverLetter.myAnswer}
                   </Text>
-                  <Textarea fontSize={'md'}
+                  <Textarea value={questionList[index].answer}
+                            onChange={e => updateList(index, 'answer', e.target.value)}
+                            fontSize={'md'}
                             border={'2px solid'}
                             borderColor={'lightgrey2.500'}
                             bgColor={'white'}
@@ -199,7 +216,7 @@ const CoverLetter = () => {
                   <Box float={'right'}
                        mb={'58px'}
                        fontWeight={'normal'}>
-                    <Button onClick={() => generatorNewCoverLetter(index)}
+                    <Button onClick={() => saveCoverLetter(index)}
                             colorScheme={'lightgrey2'}
                             borderRadius={'20px'}
                             mr={'56px'}>
