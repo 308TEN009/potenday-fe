@@ -1,5 +1,5 @@
 import { Box, List } from '@chakra-ui/react';
-import CoverLatterListItem from '@components/home/coverLetter/CoverLatterListItem';
+import CoverLetterListItem from '@components/home/coverLetter/CoverLetterListItem';
 import type { JobPost } from '@/model/home';
 
 interface CoverLetterContainerProps {
@@ -12,7 +12,7 @@ const CoverLetterContainer = ({ jobPosts = [] }: CoverLetterContainerProps) => {
          boxSizing={'border-box'}>
       <List maxH={'500px'} overflowY={'auto'}>
         {jobPosts.map(jobPost =>
-          <CoverLatterListItem key={jobPost._id}
+          <CoverLetterListItem key={jobPost._id}
                                {...jobPost} />)}
       </List>
     </Box>

@@ -68,14 +68,23 @@ export const ExperienceContainer = () => {
         </Button>
       </Flex>
     </HStack>
-    <List w={'100%'} maxH={'700px'} overflowY={'scroll'}>
-      {experienceList.map(experience =>
-        <ListItem key={experience._id}>
-          <ExperienceItem onOpen={() => onModalOpen(true, experience)}
-                          onDelete={onDelete}
-                          experience={experience} />
-        </ListItem>)}
-    </List>
+    {experienceList.length <= 0
+      ? <Box p={'20px'}
+             justifyContent={'space-between'}
+             alignItems={'start'}
+             border={'1px solid'}
+             borderColor={'lightgrey4.500'}
+             borderRadius={'8px'}
+             fontSize={'sm'}
+             my={'20px'} />
+      : <List w={'100%'} maxH={'700px'} overflowY={'scroll'}>
+        {experienceList.map(experience =>
+          <ListItem key={experience._id}>
+            <ExperienceItem onOpen={() => onModalOpen(true, experience)}
+                            onDelete={onDelete}
+                            experience={experience} />
+          </ListItem>)}
+      </List>}
     <ExperienceModal {...expModalInfo} isOpen={isOpen} onClose={onClose} callBack={retrieveExperienceList} />
   </Box>
     ;

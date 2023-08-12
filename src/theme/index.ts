@@ -7,9 +7,12 @@ const colors = {
 
   main: {
     500: '#6C80AC',
+    700: 'white',
   },
   sub1: {
+    100: '#6C74CD',
     500: '#6C74CD',
+    700: 'white',
   },
   sub2: {
     500: '#8DB0FA',
@@ -60,6 +63,16 @@ const global = {
     width: '100vw',
     height: '100vh',
   },
+  '.css-v4o6wz[aria-selected=true]': {
+    boxShadow: `
+   inset 1px 1px 2px 0 #7780E230,
+   inset -1px -1px 2px 0 #6168B950,
+   -1px 1px 2px 0 #6168B920,
+   1px -1px 2px 0 #6168B920,
+   1px -1px 2px 0 #6168B920,
+   1px 1px 3px 0 #6168B990,
+    `,
+  },
 };
 const styles = { global };
 
@@ -86,7 +99,6 @@ const components = {
   Text: {
     baseStyle: {
       wordBreak: 'keep-all',
-      whiteSpace: 'nowrap',
     },
     defaultProps: {
       size: 'sm',

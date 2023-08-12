@@ -9,10 +9,9 @@ import {
   CardHeader,
   Center,
   Img,
-  List,
   Text,
 } from '@chakra-ui/react';
-import ExperienceSelectModalButton from '@components/coverLetter/assistant/ExperienceSelectModalButton';
+import SelectExperienceModalButton from '@components/coverLetter/assistant/SelectExperienceModalButton';
 import AiAssistantIcon from '@assets/images/ai-assistant-icon.svg';
 import { coverLetter } from '@/messages.json';
 import DownArrowIcon from '@assets/icons/circle-arrow-down-01-sharp.svg';
@@ -21,8 +20,9 @@ import { useState } from 'react';
 
 const AiAssistant = () => {
   const [isOpen, onToggle] = useState(false);
-  return <Center h={'100%'}
-                 position={'sticky'}
+  return <Center position={'fixed'}
+                 top={'117x'}
+                 right={'136px'}
                  zIndex={1}>
     <Card m={4} w={'521px'}>
       <CardHeader display={'flex'} p={'40px 32px'}>
@@ -56,11 +56,7 @@ const AiAssistant = () => {
                     w={'80%'}>
                 {coverLetter.aiAssistant.selectExpDesc}
               </Text>
-              <List>
-                <ExperienceSelectModalButton />
-                <ExperienceSelectModalButton />
-                <ExperienceSelectModalButton />
-              </List>
+              <SelectExperienceModalButton />
             </AccordionPanel>
           </AccordionItem>
         </Accordion>

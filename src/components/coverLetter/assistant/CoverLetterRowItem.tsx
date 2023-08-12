@@ -1,10 +1,10 @@
 import { Box, Flex, ListItem, Text } from '@chakra-ui/react';
-import type { CoverLatterItemProps } from '@/model/coverLetter';
+import type { CoverLetterItemProps } from '@/model/coverLetter';
 
-export const CoverLatterRowItem = ({
+export const CoverLetterRowItem = ({
                                      companyName,
                                      duty,
-                                   }: CoverLatterItemProps) => {
+                                   }: CoverLetterItemProps) => {
   return <ListItem h={'20px'}>
     <Flex>
       <Box flex={4} boxSizing={'border-box'}>
@@ -18,4 +18,4 @@ export const CoverLatterRowItem = ({
   </ListItem>;
 };
 
-export default CoverLatterRowItem;
+export default CoverLetterRowItem;

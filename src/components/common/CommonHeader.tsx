@@ -5,14 +5,29 @@ import { common } from '@/messages.json';
 import { bottomBoxShadow } from '@/theme';
 import { useLocation } from 'react-router';
 import LogoImg from '@assets/images/logo.svg';
+import { useEffect, useState } from 'react';
+import AuthApi from '@/api/AuthApi';
 
 const CommonHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const location = useLocation();
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem('accessToken'));
+  }, []);
 
   const getFontWeight = (path: string) => {
     return location.pathname.includes(path) ? 'normal' : 'thin';
+  };
+
+  const onLogout = () => {
+    AuthApi.logout()
+           .then(() => {
+             localStorage.removeItem('accessToken');
+             localStorage.removeItem('refreshToken');
+           }).then(() => window.location.reload());
   };
 
   return <header style={{ position: 'sticky', top: 0, zIndex: 999 }}>
@@ -59,9 +74,9 @@ const CommonHeader = () => {
       <Button colorScheme={'transparent'}
               color={'black'}
               fontSize={['sx', 'sm']}
-              onClick={onOpen}
+              onClick={isLoggedIn ? onLogout : onOpen}
               pr={[0, '124px']}>
-        {common.header.login}
+        {isLoggedIn ? common.header.logout : common.header.login}
       </Button>
     </Flex>
     <LoginModal isOpen={isOpen} onClose={onClose} />

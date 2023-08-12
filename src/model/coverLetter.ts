@@ -12,9 +12,26 @@ export interface CoverLetterForm {
   coverLetter: string;
 }
 
-export interface CoverLatterItemProps {
+export interface CoverLetterItemProps {
   companyName: string;
   status: string;
-  coverLatterKey: string;
+  coverLetterKey: string;
   duty: string;
-};
+}
+
+type AssistantType = 'exp' | 'emp' | 'jd';
+
+interface AssistantInput {
+  type: AssistantType;
+  message: string;
+}
+
+export interface AIGeneratorRequest {
+  question: string;
+  assistantInput: AssistantInput[];
+}
+
+export interface SaveCoverLetterRequest {
+  question: string;
+  answer: string;
+}

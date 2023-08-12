@@ -5,7 +5,8 @@
       "coverLetter": "자기소개서",
       "newsClipping": "뉴스 스크랩",
       "myPage": "마이페이지",
-      "login": "로그인"
+      "login": "로그인",
+      "logout": "로그아웃"
     },
     "InputCompleted": "입력 완료",
     "close": "닫기",
@@ -30,6 +31,7 @@
       "majorTaskPlaceholder": "주요 업무 내용을 입력해주세요"
     },
     "pending": "작성중",
+    "complete": "작성 완료",
     "statusBoard": {
       "title": "\uD83D\uDC40 지원 현황",
       "complete": "지원 완료",
@@ -49,8 +51,15 @@
       "selectExpDesc": "마이페이지에서 등록한 경험 중 최대 3개까지 반영할 수 있습니다."
     },
     "selectExp": {
-      "title": "나의 경험 리스트"
-    }
+      "title": "나의 경험 리스트",
+      "description": "자소서 문항에 어울리는 경험을 골라주세요. 최대 3개까지 선택 가능합니다.",
+      "completeSelect": "선택 완료",
+      "gotoMypage": "혹은 경험 변경하러 가기 🏃"
+    },
+    "question": "문항",
+    "myAnswer": "나의 답변",
+    "finalSave": "최종 저장하기",
+    "save": "저장하기"
   },
   "myPage": {
     "myExperienceList": "나의 경험 리스트",

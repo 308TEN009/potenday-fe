@@ -1,5 +1,5 @@
 import { Box, Heading, List, Text } from '@chakra-ui/react';
-import CoverLatterRowItem from '@components/coverLetter/assistant/CoverLatterRowItem';
+import CoverLetterRowItem from '@components/coverLetter/assistant/CoverLetterRowItem';
 import ExperienceContainer from '@components/myPage/ExperienceContainer';
 
 const MyPage = () => {
@@ -9,10 +9,10 @@ const MyPage = () => {
       <Heading>내가 지원한 공고 모아보기</Heading>
       <Text>지원한 공고의 결과를 업데이트 해주세요!</Text>
       <List>
-        <CoverLatterRowItem
+        <CoverLetterRowItem
           companyName={'삼성전자'}
           status={'마케팅'}
-          coverLatterKey={''}
+          coverLetterKey={''}
           duty={''}
         />
       </List>

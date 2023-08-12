@@ -16,13 +16,15 @@ export interface BookmarkContent {
 export interface JobPostRequest {
   companyName: string;
   applicationJob: string;
+  jobDescription: string;
 }
 
 export interface JobPost {
   _id: string;
   companyName: string;
   applicationJob: string;
-  status: string
+  jobDescription: string;
+  status: string;
 }
 
 export interface StatusBoardCnt {
