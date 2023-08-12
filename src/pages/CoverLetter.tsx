@@ -294,10 +294,7 @@ const CoverLetter = () => {
                     <MainButton onClick={() => saveCoverLetter(index, false)}
                                 rounded
                                 w={'196px'}
-                                h={'56px'}
-                                borderRadius={'30px'}
-                                boxShadow={`
-                            `}>
+                                h={'56px'}>
                       {coverLetter.save}
                     </MainButton>
                   </Flex>

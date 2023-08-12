@@ -35,7 +35,7 @@ const FormHeader = ({
   const [params] = useSearchParams();
 
   useEffect(() => {
-    setFixMode(params.get('fix'));
+    setFixMode(params.get('fix') !== null);
   }, [params]);
 
   const onClickRow = (jobPost: JobPost) => {

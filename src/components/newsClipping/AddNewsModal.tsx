@@ -8,7 +8,7 @@ import FormLabelInput from '@components/common/FormLabelInput';
 
 interface AddNewsModalProps extends CommonModalProps {
   newsData: NewsContents | null;
-  onSubmit: (e: any) => void;
+  onSubmit: (e: any) => any;
 }
 
 const initialState: NewsRequest = {
@@ -17,7 +17,7 @@ const initialState: NewsRequest = {
   content: '',
   url: '',
 };
-const reducer = (state, action) => {
+const reducer = (state: NewsRequest, action: any) => {
   switch (action.type) {
     case 'COM_NAME':
       return { ...state, companyName: action.value };
@@ -43,11 +43,12 @@ const AddNewsModal = ({ isOpen, onClose, newsData, onSubmit }: AddNewsModalProps
   const [newData, dispatch] = useReducer<any, NewsRequest>(reducer, initialState, init);
 
   const updateData = (type: string, value: string) => {
+    // @ts-ignore
     dispatch({ type, value });
   };
 
   useEffect(() => {
-    if (newsData) {
+    if (newsData) {  // @ts-ignore
       dispatch({
         type: 'ALL',
         value: newsData,

@@ -56,7 +56,6 @@ const NewsClipping = () => {
     <AddNewsModal newsData={data}
                   isOpen={isOpen}
                   onClose={onClose}
-                  {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
                   onSubmit={onCreateNews} />
   </Box>;
 };
