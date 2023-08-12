@@ -1,4 +1,4 @@
 [[redirects]]
-  from = "/redirect"
-  to = "${VITE_BASE_URL}"
-  status = 302
+  from = "${VITE_BASE_URL}"
+  to = "/redirect"
+  status = 200
