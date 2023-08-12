@@ -11,4 +11,13 @@ export default defineConfig({
       { find: '@', replacement: '/src' },
     ],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        globals: {
+          VITE_BASE_URL: process.env.VITE_BASE_URL,
+        },
+      },
+    },
+  },
 });
