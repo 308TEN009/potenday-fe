@@ -14,8 +14,8 @@ import {
 } from '@chakra-ui/react';
 import type { JobPost } from '@/model/home';
 import { coverLetter } from '@/messages.json';
-import { useEffect, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AddJobPostingModalButton from '@components/home/coverLetter/addJobPost/AddJobPostingModalButton';
 
 interface JobPostSelectorProps {
@@ -33,12 +33,7 @@ const FormHeader = ({
                     }: JobPostSelectorProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const navigate = useNavigate();
-  const [fixMode, setFixMode] = useState(false);
-  const [params] = useSearchParams();
-
-  useEffect(() => {
-    setFixMode(params.get('fix') !== null || selectedJobPost != null);
-  }, [params]);
+  const isPassed = useMemo(() => selectedJobPost?.status === 'complete', [selectedJobPost]);
 
   const onClickRow = (jobPost: JobPost) => {
     setSelectedJobPost(jobPost);
@@ -46,11 +41,12 @@ const FormHeader = ({
   };
 
   return <Box>
-    {fixMode
+    {selectedJobPost
       ? <VStack alignItems={'start'}>
         <HStack justifyContent={'space-between'} w={'100%'}>
           <HStack>
             <Text fontSize={'lg'}
+                  fontWeight={'medium'}
                   mr={'40px'}>{selectedJobPost?.companyName}</Text>
             <Text fontSize={'lg'}>
               {selectedJobPost?.applicationJob}
@@ -62,17 +58,18 @@ const FormHeader = ({
                   fontSize={'20px'}
                   borderRadius={'8px'}
                   p={'5px 16px'}
-                  color={'darkgrey1.500'}
+
                   boxShadow={`
-                              1px 1px 2px 0 #ffffff30, 
-                              -1px -1px 2px 0 #D6D6D605, 
+                              1px 1px 2px 0 #ffffff30,
+                              -1px -1px 2px 0 #D6D6D605,
                               inset -1px 1px 2px 0 #D6D6D620,
-                               inset -1px 1px 2px 0 #D6D6D620, 
+                               inset -1px 1px 2px 0 #D6D6D620,
                                inset -1px -1px 2px 0 #D6D6D690,
                                inset 1px 1px 3px 0 #D6D6D690
                             `}
                   onClick={() => navigate('/')}
-                  bgColor={'lightgrey1.500'}>
+                  color={isPassed ? 'white' : 'darkgrey1.500'}
+                  bgColor={isPassed ? 'sub1.500' : 'lightgrey1.500'}>
             {coverLetter.addOtherCoverLetter}
           </Button>
         </HStack>
@@ -94,12 +91,7 @@ const FormHeader = ({
                     color={'darkgrey2.500'}
                     justifyContent={'start'}
                     textAlign={'left'}>
-              {selectedJobPost
-                ? <>
-                  <Text flex={2} fontSize={'lg'}>{selectedJobPost.companyName}</Text>
-                  <Text flex={5} fontSize={'lg'}>{selectedJobPost.applicationJob}</Text>
-                </>
-                : <Text color={'lightgrey4.500'}>{coverLetter.selectJobpost}</Text>}
+              <Text color={'lightgrey4.500'}>{coverLetter.selectJobpost}</Text>
             </Button>
           </PopoverTrigger>
           <PopoverContent w={'1035px'}
