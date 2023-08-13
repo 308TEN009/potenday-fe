@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "*"
+  from = "${VITE_BASE_URL}/*"
   to = "https://main--extraordinary-cendol-09f96b.netlify.app/redirect"
   status = 200
   force = true # COMMENT: ensure that we always redirect
