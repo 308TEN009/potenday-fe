@@ -23,10 +23,17 @@ import type { NewsContents } from '@/model/newsClipping';
 import SearchIcon from '@assets/icons/search-02.svg';
 import SortIcon from '@assets/icons/text-align-center.svg';
 import CheckIcon from '@assets/icons/checkmark-circle-grey.svg';
-import { useMemo, useState } from 'react';
+import ActiveCheckIcon from '@assets/icons/checkmark-active.svg';
+import InActiveCheckIcon from '@assets/icons/checkmark-inactive.svg';
+import { useEffect, useMemo, useState } from 'react';
+import LinkIcon from '@assets/icons/link-01.svg';
+import DeleteIcon from '@assets/icons/delete-icon.svg';
+import NewsApi from '@/api/NewsApi';
+import useErrorHandler from '@/hooks/useErrorHandler';
 
 interface NewsTableProps {
   tableData: NewsContents[];
+  callback: () => any;
 }
 
 const tableHeaderStyle = {
@@ -39,28 +46,60 @@ const tableHeaderStyle = {
 };
 
 const { color, ...tableCellStyle } = tableHeaderStyle;
-const NewsTable = ({ tableData }: NewsTableProps) => {
+const NewsTable = ({ tableData, callback }: NewsTableProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [renderTableData, setRenderTableData] = useState<NewsContents[]>([]);
   const [orderByOlder, setOrderByOlder] = useState(false);
   const [keyword, setKeyword] = useState('');
+  const [deleteMode, setDeleteMode] = useState(false);
   const sortedTableData = useMemo(() => {
-    const sortedData = [...tableData];
+    const sortedData = [...renderTableData];
     if (orderByOlder) {
       sortedData.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
     } else {
       sortedData.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     }
     return sortedData;
-  }, [tableData, orderByOlder]);
-
+  }, [renderTableData, orderByOlder]);
   const filteredTableData = useMemo(() => {
     return sortedTableData.filter(row => {
       return row.companyName.toLowerCase().includes(keyword.toLowerCase());
     });
   }, [sortedTableData, keyword]);
 
+  useEffect(() => {
+    setRenderTableData(tableData.map(data => ({ ...data, isChecked: false })));
+  }, [tableData]);
+
   const onSearchKeyword = (value) => {
     setKeyword(value);
+  };
+
+  const onCheck = (id) => {
+    setRenderTableData(renderTableData.map(
+      data => data._id === id
+        ? ({ ...data, isChecked: !data.isChecked })
+        : data,
+    ));
+  };
+
+  const onAllSelect = () => {
+    if (!deleteMode) {
+      setDeleteMode(true);
+      return;
+    }
+    const isAllSelected = renderTableData.filter(data => data.isChecked).length === renderTableData.length;
+    setRenderTableData(renderTableData.map(
+      data => ({ ...data, isChecked: !isAllSelected }),
+    ));
+  };
+
+  const onDelete = () => {
+    Promise.all(renderTableData
+      .filter(data => data.isChecked)
+      .map(async (data) => NewsApi.deleteNews(data._id)))
+           .then(callback)
+           .catch(useErrorHandler);
   };
 
   return <>
@@ -87,53 +126,68 @@ const NewsTable = ({ tableData }: NewsTableProps) => {
                p={'28px 18px 28px 68px'} />
       </InputGroup>
       <Box>
-        <Button colorScheme={'none'} mr={'40px'}>
-          <Img src={CheckIcon} mr={'16px'} />
+        <Button colorScheme={'none'} mr={'40px'} onClick={onAllSelect}>
+          <Img src={CheckIcon} mr={'16px'} boxSize={'28px'} />
           <Text fontSize={'sm'}
                 color={'lightgrey4.500'}>
-            {newsClipping.select}
+            {deleteMode
+              ? newsClipping.selectAll
+              : newsClipping.select}
           </Text>
         </Button>
-        <Popover onClose={onClose}
-                 isOpen={isOpen}
-                 onOpen={onOpen}>
-          <PopoverTrigger>
-            <Button colorScheme={'none'}>
-              <Img src={SortIcon} mr={'16px'} />
-              <Text fontSize={'sm'}
-                    color={'lightgrey4.500'}>
-                {newsClipping.sort}
-              </Text>
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent w={'113px'}
-                          h={'94px'}
-                          p={'12px 0'}>
-            <Button colorScheme={'none'}
-                    fontSize={'sx'}
-                    lineHeight={'20px'}
-                    color={'lightgrey4.500'}
-                    p={'0'}
-                    pb={'18px'}
-                    onClick={() => {
-                      setOrderByOlder(false);
-                      onClose();
-                    }}>
-              {newsClipping.lastOrder}
-            </Button>
-            <Button colorScheme={'none'}
-                    lineHeight={'20px'}
-                    fontSize={'sx'}
-                    color={'lightgrey4.500'}
-                    p={'0'}
-                    onClick={() => {
-                      setOrderByOlder(true);
-                      onClose();
-                    }}>
-              {newsClipping.oldestOrder}
-            </Button>
-          </PopoverContent>
-        </Popover>
+        {deleteMode
+          ? <Button colorScheme={'none'} onClick={onDelete}>
+            <Img src={DeleteIcon}
+                 mr={'16px'}
+                 boxSize={'28px'} />
+            <Text fontSize={'sm'}
+                  color={'lightgrey4.500'}>
+              {newsClipping.delete}
+            </Text>
+          </Button>
+          : <Popover onClose={onClose}
+                     isOpen={isOpen}
+                     onOpen={onOpen}>
+            <PopoverTrigger>
+              <Button colorScheme={'none'}>
+                <Img src={deleteMode ? DeleteIcon : SortIcon}
+                     mr={'16px'}
+                     boxSize={'28px'} />
+                <Text fontSize={'sm'}
+                      color={'lightgrey4.500'}>
+                  {deleteMode ? newsClipping.delete : newsClipping.sort}
+                </Text>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent w={'113px'}
+                            h={'94px'}
+                            p={'12px 0'}>
+              <Button colorScheme={'none'}
+                      fontSize={'sm'}
+                      lineHeight={'20px'}
+                      color={'lightgrey4.500'}
+                      p={'0'}
+                      pb={'18px'}
+                      onClick={() => {
+                        setOrderByOlder(false);
+                        onClose();
+                      }}>
+                {newsClipping.lastOrder}
+              </Button>
+              <Button colorScheme={'none'}
+                      lineHeight={'20px'}
+                      fontSize={'sm'}
+                      color={'lightgrey4.500'}
+                      p={'0'}
+                      onClick={() => {
+                        setOrderByOlder(true);
+                        onClose();
+                      }}>
+                {newsClipping.oldestOrder}
+              </Button>
+            </PopoverContent>
+          </Popover>
+        }
       </Box>
     </HStack>
 
@@ -158,22 +212,46 @@ const NewsTable = ({ tableData }: NewsTableProps) => {
         </colgroup>
         <Thead>
           <Tr>
-            <Th {...tableHeaderStyle}>{newsClipping.tableHeader.rowNo}</Th>
-            <Th {...tableHeaderStyle}>{newsClipping.tableHeader.companyName}</Th>
-            <Th {...tableHeaderStyle}>{newsClipping.tableHeader.articleTitle}</Th>
-            <Th {...tableHeaderStyle}>{newsClipping.tableHeader.memo}</Th>
-            <Th {...tableHeaderStyle} borderRight={'none'}>{newsClipping.tableHeader.link}</Th>
+            <Th {...tableHeaderStyle} textAlign={'center'}>
+              {deleteMode ? newsClipping.select : newsClipping.tableHeader.rowNo}
+            </Th>
+            <Th {...tableHeaderStyle} textAlign={'center'}>{newsClipping.tableHeader.companyName}</Th>
+            <Th {...tableHeaderStyle} textAlign={'center'}>{newsClipping.tableHeader.articleTitle}</Th>
+            <Th {...tableHeaderStyle} textAlign={'center'}>{newsClipping.tableHeader.memo}</Th>
+            <Th {...tableHeaderStyle} textAlign={'center'} borderRight={'none'}>{newsClipping.tableHeader.link}</Th>
           </Tr>
         </Thead>
         <Tbody>
           {filteredTableData
             .map((row, index) =>
               <Tr fontSize={'sm'} key={row._id}>
-                <Td {...tableCellStyle}>{index + 1}</Td>
+                <Td {...tableCellStyle}>
+                  {deleteMode
+                    ? <Button colorScheme={'none'}
+                              bgImg={row.isChecked ? ActiveCheckIcon : InActiveCheckIcon}
+                              m={'auto'}
+                              bgRepeat={'no-repeat'}
+                              bgPos={'center'}
+                              onClick={() => onCheck(row._id)}
+                              bgSize={'100%'} />
+                    : index + 1}
+                </Td>
                 <Td {...tableCellStyle}>{row.companyName}</Td>
                 <Td {...tableCellStyle}>{row.title}</Td>
                 <Td {...tableCellStyle}>{row.content}</Td>
-                <Td {...tableCellStyle}>{row.url}</Td>
+                <Td {...tableCellStyle}>
+                  {
+                    row.url &&
+                    <Button colorScheme={'none'}
+                            bgImg={LinkIcon}
+                            m={'auto'}
+                            bgRepeat={'no-repeat'}
+                            bgPos={'center'}
+                            bgSize={'100%'}
+                            onClick={() => window.open(row.url)}
+                    />
+                  }
+                </Td>
               </Tr>)}
         </Tbody>
       </Table>

@@ -8,13 +8,15 @@ interface MainButtonProps {
   fontSize?: string;
   children: ReactNode;
   rounded?: boolean;
+  isLoading?: boolean;
 }
 
-const MainButton = ({ onClick, w, h, fontSize, rounded = false, children }: MainButtonProps) => {
+const MainButton = ({ onClick, w, h, fontSize, rounded = false, children, isLoading = false }: MainButtonProps) => {
   return <Button fontSize={fontSize ?? 'md'}
                  colorScheme={'white'}
                  bgColor={'main.500'}
                  color={'white'}
+                 isLoading={isLoading}
                  onClick={onClick}
                  boxSizing={'border-box'}
                  borderRadius={rounded ? '30px' : '12px'}

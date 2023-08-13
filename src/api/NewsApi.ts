@@ -11,6 +11,10 @@ const NewsApi = {
     return apiClient.post('/v1/news', request)
                     .then((res: AxiosResponse) => res.data);
   },
+  deleteNews(id: string) {
+    return apiClient.delete(`/v1/news/${id}`)
+                    .then((res: AxiosResponse) => res.data);
+  },
 };
 
 export default NewsApi;

@@ -1,7 +1,7 @@
 import { Box, Button, Center, Heading, Text, useDisclosure } from '@chakra-ui/react';
 import { newsClipping } from '@/messages.json';
 import NewsTable from '@components/newsClipping/NewsTable';
-import AddIcon from '@assets/icons/plus-sign-circle-grey.svg';
+import AddIcon from '@assets/icons/add-shadow.svg';
 import { useEffect, useState } from 'react';
 import type { NewsContents, NewsRequest } from '@/model/newsClipping';
 import NewsApi from '@/api/NewsApi';
@@ -29,7 +29,6 @@ const NewsClipping = () => {
   };
 
   const onCreateNews = (request: NewsRequest) => {
-    console.log(request);
     return NewsApi.createNews(request)
                   .then(retrieveNews)
                   .catch(useErrorHandler);
@@ -44,13 +43,14 @@ const NewsClipping = () => {
       {newsClipping.description}
     </Text>
 
-    <NewsTable tableData={newsData} />
+    <NewsTable tableData={newsData} callback={retrieveNews} />
     <Center>
       <Button colorScheme={'none'}
               backgroundImage={`url(${AddIcon})`}
               backgroundPosition={'center center'}
               backgroundSize={'contain auto'}
               backgroundRepeat={'no-repeat'}
+              mt={'40'}
               onClick={() => onOpenModal(null)} />
     </Center>
     <AddNewsModal newsData={data}

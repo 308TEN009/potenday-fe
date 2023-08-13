@@ -294,6 +294,7 @@ const CoverLetter = () => {
                     </Button>
                     <MainButton onClick={() => saveCoverLetter(index, false)}
                                 rounded
+                                isLoading={loading}
                                 w={'196px'}
                                 h={'56px'}>
                       {coverLetter.save}

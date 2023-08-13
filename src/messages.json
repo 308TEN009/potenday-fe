@@ -3,7 +3,7 @@
     "header": {
       "home": "홈",
       "coverLetter": "자기소개서",
-      "newsClipping": "뉴스 스크랩",
+      "newsClipping": "뉴스스크랩",
       "myPage": "마이페이지",
       "login": "로그인",
       "logout": "로그아웃"
@@ -43,7 +43,7 @@
       "unit": "건"
     },
     "bookmark": {
-      "title": "⭐ 공고 즐겨찾기",
+      "title": "⭐ 즐겨찾기",
       "addBookmark": "즐겨찾기 추가",
       "editBookmark": "즐겨찾기 수정",
       "description": "관심기업 채용사이트를 즐겨찾기해보세요.\n (최대 5개까지 가능합니다)",
@@ -115,6 +115,8 @@
     "oldestOrder": "오래된 순",
     "sort": "정렬",
     "select": "선택",
+    "delete": "삭제",
+    "selectAll": "전체 선택",
     "modal": {
       "addTitle": "뉴스 스크랩 추가하기",
       "addSubTitle": "지원하고 싶은 기업에 관련된 뉴스를 나만의 언어로 정리해보세요.",

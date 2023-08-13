@@ -8,6 +8,8 @@ export interface NewsContents {
   createdAt: string;
   updatedAt: string;
   deletedAt: string;
+
+  isChecked?: boolean;
 }
 
 export interface NewsRequest {
