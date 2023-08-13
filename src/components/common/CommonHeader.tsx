@@ -4,7 +4,7 @@ import LoginModal from '@components/login/LoginModal';
 import { common } from '@/messages.json';
 import { bottomBoxShadow } from '@/theme';
 import { useLocation } from 'react-router';
-import LogoImg from '@assets/images/logo.svg';
+import LogoImg from '@assets/images/logo-header.png';
 import { useEffect, useState } from 'react';
 import AuthApi from '@/api/AuthApi';
 import GoLoginModal from '@components/login/GoLoginModal';
@@ -52,8 +52,8 @@ const CommonHeader = () => {
       <HStack spacing={['20px', '104px']} wordBreak={'keep-all'}
               pl={[0, '124px']}>
         <Img src={LogoImg}
-             w={'43px'}
-             h={'32px'}
+             w={'77px'}
+             h={'30px'}
              onClick={() => navigate('/')} />
         <ChakraLink as={ReactRouterLink as any}
                     fontWeight={location.pathname === '/' ? 'medium' : 'regular'}
