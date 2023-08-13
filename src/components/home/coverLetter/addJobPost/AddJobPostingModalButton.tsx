@@ -1,14 +1,13 @@
 import CommonModal from '@components/common/modal/CommonModal';
-import { Button, Center, Image, Text, useDisclosure, useToast, VStack } from '@chakra-ui/react';
+import { Button, Center, Image, Img, Text, useDisclosure, VStack } from '@chakra-ui/react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
-import { common, home } from '@/messages.json';
+import { common, coverLetter, home } from '@/messages.json';
 import HomeApi from '@/api/HomeApi';
-import { BASIC_SUCCESS } from '@/model/toast';
 import FormLabelInput from '@components/common/FormLabelInput';
 import useErrorHandler from '@/hooks/useErrorHandler';
 import addIcon from '@assets/icons/plus-sign-circle-white.svg';
-import addIcon2 from '@assets/icons/plus-sign-circle-main.svg';
+import AddIcon from '@assets/icons/plus-sign-circle-main.svg';
 import MainButton from '@components/common/button/MainButton';
 
 interface AddJobPostingModalProps {
@@ -21,7 +20,6 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
   const [companyName, setCompanyName] = useState('');
   const [applicationJob, setApplicationJob] = useState('');
   const [majorTask, setMajorTask] = useState('');
-  const toast = useToast();
 
   const onReset = () => {
     setCompanyName('');
@@ -39,7 +37,6 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
 
     HomeApi.createJobPost(request)
            .then(callBack)
-           .then(() => toast(BASIC_SUCCESS))
            .then(onClose)
            .then(onReset)
            .catch(useErrorHandler);
@@ -61,21 +58,17 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
                  mr={'16px'} />
           {home.addJobPost}
         </MainButton>
-        : <Button w={'100%'}
-                  colorScheme={'none'}
-                  color={'main.500'}
-                  fontSize={'md'}
-                  bgColor={'white'}
-                  borderRadius={'none'}
-                  borderTopLeftRadius={'8px'}
-                  borderTopRightRadius={'8px'}
-                  borderBottom={'1px solid'}
-                  borderColor={'lightgrey1.500'}
-                  onClick={onOpenModal}>
-          <Image src={addIcon2}
-                 boxSize={'24px'}
-                 mr={'16px'} />
-          {home.addJobPost}
+        : <Button
+          onClick={onOpenModal}
+          justifyContent={'start'}
+          colorScheme={'none'}
+          color={'main.500'}
+          w={'100%'}
+          h={'78px'}
+          p={'24px 40px'}>
+          <Img src={AddIcon}
+               mr={'20px'} />
+          {coverLetter.addJobPost}
         </Button>
     }
 

@@ -3,7 +3,6 @@ import {
   Button,
   Divider,
   HStack,
-  Img,
   List,
   ListItem,
   Popover,
@@ -15,38 +14,36 @@ import {
 } from '@chakra-ui/react';
 import type { JobPost } from '@/model/home';
 import { coverLetter } from '@/messages.json';
-import AddIcon from '@assets/icons/plus-sign-circle-main.svg';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import AddJobPostingModalButton from '@components/home/coverLetter/addJobPost/AddJobPostingModalButton';
 
 interface JobPostSelectorProps {
   options: JobPost[];
   selectedJobPost: JobPost | null;
   setSelectedJobPost: (selected: JobPost) => void;
+  callback: () => any;
 }
 
 const FormHeader = ({
                       options,
                       selectedJobPost,
                       setSelectedJobPost,
+                      callback,
                     }: JobPostSelectorProps) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const navigate = useNavigate();
   const [fixMode, setFixMode] = useState(false);
   const [params] = useSearchParams();
 
   useEffect(() => {
-    setFixMode(params.get('fix') !== null);
+    setFixMode(params.get('fix') !== null || selectedJobPost != null);
   }, [params]);
 
   const onClickRow = (jobPost: JobPost) => {
     setSelectedJobPost(jobPost);
     onClose();
   };
-
-//   const onSubmit = () => {
-//     console.log(selectedJobPost);
-// // TODO
-//   };
 
   return <Box>
     {fixMode
@@ -62,7 +59,19 @@ const FormHeader = ({
           <Button w={'248px'}
                   h={'42px'}
                   colorScheme={'none'}
-                  borderRadius={0}
+                  fontSize={'20px'}
+                  borderRadius={'8px'}
+                  p={'5px 16px'}
+                  color={'darkgrey1.500'}
+                  boxShadow={`
+                              1px 1px 2px 0 #ffffff30, 
+                              -1px -1px 2px 0 #D6D6D605, 
+                              inset -1px 1px 2px 0 #D6D6D620,
+                               inset -1px 1px 2px 0 #D6D6D620, 
+                               inset -1px -1px 2px 0 #D6D6D690,
+                               inset 1px 1px 3px 0 #D6D6D690
+                            `}
+                  onClick={() => navigate('/')}
                   bgColor={'lightgrey1.500'}>
             {coverLetter.addOtherCoverLetter}
           </Button>
@@ -85,14 +94,12 @@ const FormHeader = ({
                     color={'darkgrey2.500'}
                     justifyContent={'start'}
                     textAlign={'left'}>
-
               {selectedJobPost
                 ? <>
-                  <Text flex={4}>{selectedJobPost.companyName}</Text>
-                  <Text flex={5}>{selectedJobPost.applicationJob}</Text>
+                  <Text flex={2} fontSize={'lg'}>{selectedJobPost.companyName}</Text>
+                  <Text flex={5} fontSize={'lg'}>{selectedJobPost.applicationJob}</Text>
                 </>
                 : <Text color={'lightgrey4.500'}>{coverLetter.selectJobpost}</Text>}
-
             </Button>
           </PopoverTrigger>
           <PopoverContent w={'1035px'}
@@ -100,17 +107,19 @@ const FormHeader = ({
                           borderRadius={'8px'}
                           border={'2px solid'}
                           borderColor={'lightgrey2.500'}>
-            <Button
-              justifyContent={'start'}
-              colorScheme={'none'}
-              color={'main.500'}
-              w={'100%'}
-              h={'78px'}
-              p={'24px 40px'}>
-              <Img src={AddIcon}
-                   mr={'20px'} />
-              {coverLetter.addJobPost}
-            </Button>
+            {/* <Button */}
+            {/*  justifyContent={'start'} */}
+            {/*  colorScheme={'none'} */}
+            {/*  color={'main.500'} */}
+            {/*  w={'100%'} */}
+            {/*  h={'78px'} */}
+            {/*  p={'24px 40px'}> */}
+            {/*  <Img src={AddIcon} */}
+            {/*       mr={'20px'} /> */}
+            {/*  {coverLetter.addJobPost} */}
+            {/* </Button> */}
+            <AddJobPostingModalButton callBack={callback}
+                                      position={'DROPDOWN'} />
             <Divider color={'lightgrey1.500'} />
             <List maxH={'246px'} overflowY={'scroll'}>
               {options.map(option =>

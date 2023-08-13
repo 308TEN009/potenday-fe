@@ -187,6 +187,7 @@ const CoverLetter = () => {
            zIndex={1}
            color={'lightgrey4.500'}>
         <FormHeader options={jopPostOptions}
+                    callback={retrieveJobPostOptions}
                     selectedJobPost={jobPost}
                     setSelectedJobPost={setJobPost} />
         <Tabs variant={'soft-rounded'}
