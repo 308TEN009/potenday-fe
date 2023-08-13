@@ -8,7 +8,7 @@ import LogoImg from '@assets/images/logo-header.png';
 import { useEffect, useState } from 'react';
 import AuthApi from '@/api/AuthApi';
 import GoLoginModal from '@components/login/GoLoginModal';
-import { LOGOUT_CHANNEL } from '@/model/common';
+import { LOGOUT_CHANNEL, REDIRECTION_CHANNEL } from '@/model/common';
 
 const CommonHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -17,10 +17,14 @@ const CommonHeader = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const logoutChannel = new BroadcastChannel(LOGOUT_CHANNEL);
-
+  const redirectWindowChannel = new BroadcastChannel(REDIRECTION_CHANNEL);
   useEffect(() => {
     setIsLoggedIn(() => !!localStorage.getItem('accessToken'));
     logoutChannel.onmessage = () => setIsLoggedIn(false);
+    redirectWindowChannel.onmessage = () => {
+      window.location.reload();
+      onClose();
+    };
     if (!isLoggedIn) {
       onPopupOpen();
     }

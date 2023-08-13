@@ -1,6 +1,5 @@
 import CommonModal from '@components/common/modal/CommonModal';
 import { Button, Center, Text } from '@chakra-ui/react';
-import { REDIRECTION_CHANNEL } from '@/model/common';
 import { login } from '@/messages.json';
 import KakaoLogin from '@assets/images/kakao-login.svg';
 
@@ -13,11 +12,6 @@ const LoginModal = ({ isOpen, onClose }: any) => {
       'Redirect Window',
       `status=no, height=520, width=600, left='${popupX}', top=${popupY}`,
     );
-    const redirectWindowChannel = new BroadcastChannel(REDIRECTION_CHANNEL);
-    redirectWindowChannel.onmessage = () => {
-      window.location.reload();
-      onClose();
-    };
   };
   return <CommonModal isOpen={isOpen}
                       onClose={onClose}
