@@ -8,6 +8,7 @@ import LogoImg from '@assets/images/logo-header.png';
 import { useEffect, useState } from 'react';
 import AuthApi from '@/api/AuthApi';
 import GoLoginModal from '@components/login/GoLoginModal';
+import { LOGOUT_CHANNEL } from '@/model/common';
 
 const CommonHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -15,9 +16,11 @@ const CommonHeader = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const logoutChannel = new BroadcastChannel(LOGOUT_CHANNEL);
 
   useEffect(() => {
     setIsLoggedIn(() => !!localStorage.getItem('accessToken'));
+    logoutChannel.onmessage = () => setIsLoggedIn(false);
     if (!isLoggedIn) {
       onPopupOpen();
     }
@@ -33,7 +36,10 @@ const CommonHeader = () => {
              localStorage.removeItem('accessToken');
              localStorage.removeItem('refreshToken');
            })
-           .then(() => window.location.reload());
+           .then(() => {
+             window.location.reload();
+             logoutChannel.postMessage('logout');
+           });
   };
 
   return <header style={{ position: 'sticky', top: 0, zIndex: 999 }}>

@@ -16,6 +16,7 @@ const GoLoginModal = ({ isOpen, onClose, onLogin }: GoLoginModalProps) => {
   return <CommonModal isOpen={isOpen}
                       w={'582px'}
                       h={'178px'}
+                      closeOnOverlayClick={false}
                       isCentered={false}
                       onClose={onClose}>
     <CommonModal.Body>

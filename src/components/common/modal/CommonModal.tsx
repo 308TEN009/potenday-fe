@@ -17,12 +17,18 @@ interface CommonModalProps {
   w?: string | string[];
   h?: string | string[];
   isCentered?: boolean;
+  closeOnOverlayClick?: boolean;
 }
 
-const CommonModal = ({ isOpen, onClose, children, w, h, isCentered = true }: CommonModalProps) => {
+const CommonModal = ({
+                       isOpen, onClose, children
+                       , w, h, isCentered = true,
+                       closeOnOverlayClick = true,
+                     }: CommonModalProps) => {
   return <>
     <Modal isOpen={isOpen}
            onClose={onClose}
+           closeOnOverlayClick={closeOnOverlayClick}
            isCentered={isCentered}>
       <ModalOverlay />
       <ModalContent borderRadius={'8px'}
@@ -46,7 +52,7 @@ const CommonModalHeader = ({ children }: { children: ReactNode }) =>
                         color={'transparent'}
                         bgRepeat={'no-repeat'}
                         boxSize={'32px'}
-                        m={'16px'} >
+                        m={'16px'}>
       </ModalCloseButton>
       {children}
     </ModalHeader>
