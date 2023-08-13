@@ -233,7 +233,11 @@ const NewsTable = ({ tableData, callback, onModalOpen }: NewsTableProps) => {
                               m={'auto'}
                               bgRepeat={'no-repeat'}
                               bgPos={'center'}
-                              onClick={() => onCheck(row._id)}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onCheck(row._id);
+                              }
+                              }
                               bgSize={'100%'} />
                     : index + 1}
                 </Td>
