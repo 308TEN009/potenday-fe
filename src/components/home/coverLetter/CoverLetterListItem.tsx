@@ -45,7 +45,7 @@ const CoverLetterListItem = ({ _id, companyName, status, applyStatus, applicatio
           p={'40px 22px'}
           m={'auto'}
           mb={'20px'}>
-      <Text flex={2}>{companyName}</Text>
+      <Text flex={3}>{companyName}</Text>
       <Text flex={5}>{applicationJob}</Text>
       <HStack w={'150px'}
       >
