@@ -12,7 +12,6 @@ const LoginRedirect = () => {
 
     if (accessToken) localStorage.setItem('accessToken', accessToken);
     if (refreshToken) localStorage.setItem('refreshToken', refreshToken);
-    alert(`accessToken: ${accessToken} refreshToken: ${refreshToken}`)
     if (!accessToken || !refreshToken) {
       setHasError(true);
       return;
