@@ -34,6 +34,7 @@ import useErrorHandler from '@/hooks/useErrorHandler';
 interface NewsTableProps {
   tableData: NewsContents[];
   callback: () => any;
+  onModalOpen: (...e: any) => any;
 }
 
 const tableHeaderStyle = {
@@ -46,7 +47,7 @@ const tableHeaderStyle = {
 };
 
 const { color, ...tableCellStyle } = tableHeaderStyle;
-const NewsTable = ({ tableData, callback }: NewsTableProps) => {
+const NewsTable = ({ tableData, callback, onModalOpen }: NewsTableProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [renderTableData, setRenderTableData] = useState<NewsContents[]>([]);
   const [orderByOlder, setOrderByOlder] = useState(false);
@@ -224,7 +225,7 @@ const NewsTable = ({ tableData, callback }: NewsTableProps) => {
         <Tbody>
           {filteredTableData
             .map((row, index) =>
-              <Tr fontSize={'sm'} key={row._id}>
+              <Tr fontSize={'sm'} key={row._id} onClick={() => onModalOpen(row)}>
                 <Td {...tableCellStyle}>
                   {deleteMode
                     ? <Button colorScheme={'none'}
@@ -248,7 +249,11 @@ const NewsTable = ({ tableData, callback }: NewsTableProps) => {
                             bgRepeat={'no-repeat'}
                             bgPos={'center'}
                             bgSize={'100%'}
-                            onClick={() => window.open(row.url)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(row.url);
+                            }
+                            }
                     />
                   }
                 </Td>

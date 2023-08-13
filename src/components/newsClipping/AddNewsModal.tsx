@@ -8,7 +8,7 @@ import FormLabelInput from '@components/common/FormLabelInput';
 
 interface AddNewsModalProps extends CommonModalProps {
   newsData: NewsContents | null;
-  onSubmit: (e: any) => any;
+  onSubmit: (...e: any) => any;
 }
 
 const initialState: NewsRequest = {

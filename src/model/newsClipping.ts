@@ -13,6 +13,7 @@ export interface NewsContents {
 }
 
 export interface NewsRequest {
+  _id?: string;
   companyName: string;
   title: string;
   content: string;

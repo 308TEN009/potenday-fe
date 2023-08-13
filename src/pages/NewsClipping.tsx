@@ -28,10 +28,12 @@ const NewsClipping = () => {
            .finally(onClose);
   };
 
-  const onCreateNews = (request: NewsRequest) => {
-    return NewsApi.createNews(request)
-                  .then(retrieveNews)
-                  .catch(useErrorHandler);
+  const onCreateNews = (request: NewsRequest, isNew) => {
+    return (isNew
+      ? NewsApi.createNews(request)
+      : NewsApi.updateNews(request, request?._id))
+      .then(retrieveNews)
+      .catch(useErrorHandler);
   };
 
   return <Box wordBreak={'keep-all'} m={['50px 0px', '106px 120px 0px 120px']}>
@@ -43,7 +45,9 @@ const NewsClipping = () => {
       {newsClipping.description}
     </Text>
 
-    <NewsTable tableData={newsData} callback={retrieveNews} />
+    <NewsTable tableData={newsData}
+               onModalOpen={onOpenModal}
+               callback={retrieveNews} />
     <Center>
       <Button colorScheme={'none'}
               backgroundImage={`url(${AddIcon})`}
