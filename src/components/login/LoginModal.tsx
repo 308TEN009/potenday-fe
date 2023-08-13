@@ -21,17 +21,18 @@ const LoginModal = ({ isOpen, onClose }: any) => {
   };
   return <CommonModal isOpen={isOpen}
                       onClose={onClose}
-                      w={['500px', '900px']}
-                      h={['453px']}>
+                      w={'900px'}
+                      h={'453px'}>
     <CommonModal.Header>
       <Text fontSize={'md'}
-            mt={'90px'}
+            mt={'58px'}
             fontWeight={'normal'}
             textAlign={'center'}>
         {login.title}
       </Text>
       <Text fontWeight={'normal'}
             fontSize={'sm'}
+            mt={'16px'}
             color={'lightgrey4.500'}
             textAlign={'center'}>
         {login.subTitle}
@@ -41,9 +42,11 @@ const LoginModal = ({ isOpen, onClose }: any) => {
       <Center>
         <Button onClick={onLogin}
                 bg={`url(${KakaoLogin}) center / cover no-repeat transparent`}
-                w={['400px', '534px']}
-                h={['60px', '80px']}
-                mt={'52px'}
+                w={'534px'}
+                h={'80px'}
+                mt={'56px'}
+                mb={'114px'}
+                borderRadius={'8px'}
                 colorScheme={'white'}>
         </Button>
       </Center>

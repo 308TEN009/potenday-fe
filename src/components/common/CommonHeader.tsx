@@ -7,15 +7,20 @@ import { useLocation } from 'react-router';
 import LogoImg from '@assets/images/logo.svg';
 import { useEffect, useState } from 'react';
 import AuthApi from '@/api/AuthApi';
+import GoLoginModal from '@components/login/GoLoginModal';
 
 const CommonHeader = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isPopupOpen, onOpen: onPopupOpen, onClose: onPopupClose } = useDisclosure();
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem('accessToken'));
+    setIsLoggedIn(() => !!localStorage.getItem('accessToken'));
+    if (!isLoggedIn) {
+      onPopupOpen();
+    }
   }, []);
 
   const getFontWeight = (path: string) => {
@@ -82,6 +87,12 @@ const CommonHeader = () => {
       </Button>
     </Flex>
     <LoginModal isOpen={isOpen} onClose={onClose} />
+    {
+      !isLoggedIn &&
+      <GoLoginModal isOpen={isPopupOpen}
+                    onClose={onPopupClose}
+                    onLogin={onOpen} />
+    }
   </header>;
 };
 

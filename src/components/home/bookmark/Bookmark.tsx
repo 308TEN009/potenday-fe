@@ -6,14 +6,15 @@ import type { BookmarkContent } from '@/model/home';
 import HomeApi from '@/api/HomeApi';
 import { home } from '@/messages.json';
 import EditIcon from '@assets/icons/edit-02.svg';
-import AddIcon from '@assets/icons/plus-sign-circle.svg';
+import CheckIcon from '@assets/icons/checkmark-circle-grey.svg';
+import AddIcon from '@assets/icons/add-shadow.svg';
 
 const Bookmark = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [bookmarkList, setBookmarkList] = useState<BookmarkContent[]>([]);
   const [bookmark, setBookmark] = useState<BookmarkContent | null>(null);
   const [isMobile] = useMediaQuery('(max-width: 768px)');
-
+  const [edit, onEditMode] = useState<boolean>(false);
   useEffect(() => {
     retrieveBookMarkList();
   }, []);
@@ -30,7 +31,13 @@ const Bookmark = () => {
     onOpen();
   };
 
-  const onSubmit = (request: BookmarkContent) => {
+  const onSubmit = (request: BookmarkContent, isEdit?: boolean) => {
+    if (isEdit && bookmark?._id) {
+      HomeApi.updateBookmark(bookmark?._id, request)
+             .then(onClose)
+             .then(retrieveBookMarkList);
+      return;
+    }
     HomeApi.createBookmark(request)
            .then(onClose)
            .then(retrieveBookMarkList);
@@ -42,8 +49,8 @@ const Bookmark = () => {
       </Text>
       <Button size={'sm'}
               colorScheme={'white'}
-              onClick={() => openCreateBookmarkModal()}>
-        <Image src={EditIcon} boxSize={'30px'} />
+              onClick={() => onEditMode(!edit)}>
+        <Image src={edit ? CheckIcon : EditIcon} boxSize={'30px'} />
       </Button>
     </HStack>
     <Flex justifyContent={['center', 'start']}
@@ -51,10 +58,13 @@ const Bookmark = () => {
           flexWrap={'wrap'}
           w={'100%'}>
       {bookmarkList.map((bookmark) =>
-        <BookmarkItem key={bookmark._id} bookmark={bookmark} />,
+        <BookmarkItem key={bookmark._id}
+                      isEdit={edit}
+                      onOpenEditModal={openCreateBookmarkModal}
+                      bookmark={bookmark} />,
       )}
     </Flex>
-    <Center>
+    <Center pr={'21px'}>
       <Button mt={'31px'}
               colorScheme={'white'}
               onClick={() => openCreateBookmarkModal()}>

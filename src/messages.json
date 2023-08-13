@@ -11,11 +11,14 @@
     "InputCompleted": "입력 완료",
     "close": "닫기",
     "save": "저장",
+    "edit": "수정",
     "add": "추가하기"
   },
   "login": {
     "title": "간편하게 로그인하기",
-    "subTitle": "10초만에 로그인하고 AI자소서를 작성해보세요!"
+    "subTitle": "10초만에 로그인하고 AI자소서를 작성해보세요!",
+    "info": "지금 바로 로그인하고 다양한 서비스를 경험해보세요!",
+    "doLogin": "로그인  하기"
   },
   "home": {
     "myCoverLetter": "\uD83D\uDCC4 나의 자소서",

@@ -63,7 +63,7 @@ const ExperienceModal =
       setExperience2(data?.experienceDetailList[1].content ?? '');
     };
 
-    return <CommonModal isOpen={isOpen} onClose={onClose} w={'980px'}>
+    return <CommonModal isOpen={isOpen} onClose={onClose} w={'980px'} h={'815px'}>
       <CommonModal.Header>
         <Heading textAlign={'center'}
                  pt={5}>
@@ -78,8 +78,7 @@ const ExperienceModal =
       </CommonModal.Header>
       <form onSubmit={onSubmit}>
         <CommonModal.Body>
-          <Box p={['0 20px', '0 80px']}>
-
+          <Box p={'20px 80px'}>
             <FormLabelInput label={myPage.subTitle}
                             required
                             value={title}

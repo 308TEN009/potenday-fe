@@ -19,7 +19,9 @@ const FormLabelInput = ({
                           , inputType, isLast, description, required = false,
                         }: LabelInput) => {
   const [showDesc, setShowDesc] = useState(false);
-  return <Box mb={isLast ? 0 : gap ?? '80px'} w={'100%'}>
+  return <Box mb={isLast ? 0 : gap ?? '80px'}
+              position={'relative'}
+              w={'100%'}>
     <Text fontSize={'sx'}
           mb={'12px'}
           as={'span'}
@@ -58,7 +60,9 @@ const FormLabelInput = ({
                   value={value}
                   onChange={e => onChange(e.target.value)} />
     }
-    {showDesc && <Text fontSize={'xs'} color={'sub2.500'}>
+    {showDesc && <Text fontSize={'xs'}
+                       position={'absolute'}
+                       color={'sub2.500'}>
       {description?.split('\n').map(msg => <>{msg}<br /></>)}
     </Text>}
   </Box>;
