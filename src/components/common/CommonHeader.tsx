@@ -52,8 +52,8 @@ const CommonHeader = () => {
       <HStack spacing={['20px', '104px']} wordBreak={'keep-all'}
               pl={[0, '124px']}>
         <Img src={LogoImg}
-             w={'77px'}
-             h={'30px'}
+             w={'136px'}
+             h={'45px'}
              onClick={() => navigate('/')} />
         <ChakraLink as={ReactRouterLink as any}
                     fontWeight={location.pathname === '/' ? 'medium' : 'regular'}
