@@ -34,6 +34,11 @@ const CommonHeader = () => {
     return location.pathname.includes(path) ? 'medium' : 'regular';
   };
 
+  const onLoginOrLogout = () => {
+    setIsLoggedIn(() => !!localStorage.getItem('accessToken'));
+    isLoggedIn ? onLogout() : onOpen();
+  };
+
   const onLogout = () => {
     AuthApi.logout()
            .then(() => {
@@ -91,7 +96,7 @@ const CommonHeader = () => {
       <Button colorScheme={'none'}
               color={'darkgrey2.500'}
               fontSize={'sm'}
-              onClick={isLoggedIn ? onLogout : onOpen}
+              onClick={onLoginOrLogout}
               pr={[0, '124px']}>
         {isLoggedIn ? common.header.logout : common.header.login}
       </Button>
