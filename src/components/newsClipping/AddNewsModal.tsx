@@ -58,7 +58,7 @@ const AddNewsModal = ({ isOpen, onClose, newsData, onSubmit }: AddNewsModalProps
 
   const onCreateNews = (e) => {
     e.preventDefault();
-    onSubmit(newData);
+    onSubmit(newData, isNew);
   };
 
   return <CommonModal isOpen={isOpen}
