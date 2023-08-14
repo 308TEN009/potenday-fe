@@ -43,17 +43,18 @@ const CommonModal = ({
   </>;
 };
 
-const CommonModalHeader = ({ children }: { children: ReactNode }) =>
+const CommonModalHeader = ({ children, canClose = true }: { children: ReactNode, canClose: boolean }) =>
   <>
     <ModalHeader m={0}
                  mt={'62px'}
                  p={0}>
-      <ModalCloseButton bg={`url(${CancelIcon})`}
-                        color={'transparent'}
-                        bgRepeat={'no-repeat'}
-                        boxSize={'32px'}
-                        m={'16px'}>
-      </ModalCloseButton>
+      {canClose && <ModalCloseButton bg={`url(${CancelIcon})`}
+                                     color={'transparent'}
+                                     bgRepeat={'no-repeat'}
+                                     boxSize={'32px'}
+                                     m={'16px'}>
+      </ModalCloseButton>}
+
       {children}
     </ModalHeader>
   </>;

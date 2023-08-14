@@ -15,9 +15,10 @@ const LoginModal = ({ isOpen, onClose }: any) => {
   };
   return <CommonModal isOpen={isOpen}
                       onClose={onClose}
+                      closeOnOverlayClick={false}
                       w={'900px'}
                       h={'453px'}>
-    <CommonModal.Header>
+    <CommonModal.Header canClose={false}>
       <Text fontSize={'md'}
             mt={'58px'}
             fontWeight={'normal'}
