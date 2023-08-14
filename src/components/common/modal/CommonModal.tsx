@@ -43,7 +43,7 @@ const CommonModal = ({
   </>;
 };
 
-const CommonModalHeader = ({ children, canClose = true }: { children: ReactNode, canClose: boolean }) =>
+const CommonModalHeader = ({ children, canClose = true }: { children: ReactNode, canClose?: boolean }) =>
   <>
     <ModalHeader m={0}
                  mt={'62px'}
