@@ -44,7 +44,6 @@ const CommonHeader = () => {
            .finally(() => {
              localStorage.removeItem('accessToken');
              localStorage.removeItem('refreshToken');
-             window.location.reload();
              logoutChannel.postMessage('logout');
            });
   };
