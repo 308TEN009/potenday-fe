@@ -41,11 +41,9 @@ const CommonHeader = () => {
 
   const onLogout = () => {
     AuthApi.logout()
-           .then(() => {
+           .finally(() => {
              localStorage.removeItem('accessToken');
              localStorage.removeItem('refreshToken');
-           })
-           .then(() => {
              window.location.reload();
              logoutChannel.postMessage('logout');
            });
