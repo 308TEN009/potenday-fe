@@ -39,7 +39,7 @@ apiClient.interceptors.response.use(
     }
 
     if (error.response && error.response.status === 401) {
-      error.response = 437;
+      error.response.status = 437;
       return Promise.reject(error);
     }
     retryCount = 0;
