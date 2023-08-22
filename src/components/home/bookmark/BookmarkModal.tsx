@@ -50,12 +50,14 @@ const BookmarkModal = ({ isOpen, onClose, onSubmit, bookmark }: BookmarkModalPro
         <VStack alignItems={'start'} p={'0 72px'} mt={'40px'}>
           <FormLabelInput required
                           label={home.bookmark.name}
+                          placeholder={home.bookmark.namePlaceholder}
                           value={name}
                           onChange={setName}
                           gap={'32px'}
                           inputType={'TEXT'} />
           <FormLabelInput required
                           label={home.bookmark.url}
+                          placeholder={home.bookmark.urlPlaceholder}
                           value={url}
                           onChange={setUrl}
                           isLast

@@ -48,7 +48,9 @@
       "editBookmark": "즐겨찾기 수정",
       "description": "관심기업 채용사이트를 즐겨찾기해보세요.\n (최대 5개까지 가능합니다)",
       "name": "이름",
-      "url": "URL"
+      "url": "URL",
+      "namePlaceholder": "기업명을 작성해주세요",
+      "urlPlaceholder": "채용공고 링크를 입력해주세요."
     }
   },
   "coverLetter": {
