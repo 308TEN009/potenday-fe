@@ -93,7 +93,7 @@ const FormHeader = ({
                     textAlign={'left'}>
               <Text color={'lightgrey4.500'}>{coverLetter.selectJobpost}</Text>
               <Img src={ArrowIcon}
-                   translate={'transform .3s'}
+                   transition={'transform .3s'}
                    transform={`rotateZ(${isOpen ? 0 : 180}deg)`} />
             </Button>
           </PopoverTrigger>

@@ -1,6 +1,6 @@
 import CommonModal from '@components/common/modal/CommonModal';
 import ExperienceInputButton from '@components/coverLetter/assistant/ExperienceInputButton';
-import { Button, Center, Link as ChakraLink, List, Text, useDisclosure } from '@chakra-ui/react';
+import { Center, Link as ChakraLink, List, Text, useDisclosure } from '@chakra-ui/react';
 import { Link as ReactRouterLink } from 'react-router-dom';
 import { coverLetter } from '@/messages.json';
 import MyPageApi from '@/api/MyPageApi';

@@ -77,6 +77,7 @@ const CoverLetter = () => {
     setQuestionList([...questionList, {
       question: '',
       answer: '',
+      maxLen: 0,
     }]);
   };
 
@@ -100,6 +101,7 @@ const CoverLetter = () => {
                         setQuestionList([{
                           question: '',
                           answer: '',
+                          maxLen: 0,
                         }]);
                         return;
                       }
@@ -124,8 +126,9 @@ const CoverLetter = () => {
       const applicationJob = jobPostStore?.applicationJob ?? jobPost?.applicationJob ?? '';
       const jobDescription = jobPostStore?.jobDescription ?? jobPost?.jobDescription ?? '';
 
+      const maxLen = questionList[tabIdx].maxLen;
       const question = questionList[tabIdx].question +
-        (maxLen ? `해당 답변을${maxLen}자 이내로 작성` : '');
+        (maxLen && maxLen > 0 ? `해당 답변을${maxLen}자 이내로 작성` : '');
       const request: AIGeneratorRequest = {
         question,
         assistantInput: [
@@ -155,19 +158,18 @@ const CoverLetter = () => {
                     .finally(() => setLoading(false));
     };
 
-    const updateList = (index: number, field: string, value: string) => {
+  const updateList = (index: number, field: string, inputValue: string) => {
+    let value = inputValue;
+    if (field === 'maxLen' && questionList[index].maxLen! > 700) {
+      value = '700';
+    }
+    const changedList = questionList.map((listItem, idx) => (
+      index === idx ? { ...listItem, [field]: value } : listItem
+    ));
+    setQuestionList(changedList);
+  };
 
-      if (field === 'maxLen' && questionList[index].maxLen > 700) {
-        value = 700;
-      }
-      const changedList = questionList.map((listItem, idx) => (
-        index === idx ? { ...listItem, [field]: value } : listItem
-      ));
-      setQuestionList(changedList);
-
-    };
-
-    const saveCoverLetter = (index: number, isFinal: boolean) => {
+  const saveCoverLetter = (index: number, isFinal: boolean) => {
       const id = jobPostStore?._id ?? jobPost?._id;
       if (!id || !questionList[index].question) {
         toast(BASIC_FAIL);
