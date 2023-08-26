@@ -14,7 +14,7 @@ import {
   Td,
   Text,
   Th,
-  Thead,
+  Thead, Tooltip,
   Tr,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -247,18 +247,21 @@ const NewsTable = ({ tableData, callback, onModalOpen }: NewsTableProps) => {
                 <Td {...tableCellStyle}>
                   {
                     row.url &&
-                    <Button colorScheme={'none'}
-                            bgImg={LinkIcon}
-                            m={'auto'}
-                            bgRepeat={'no-repeat'}
-                            bgPos={'center'}
-                            bgSize={'100%'}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              window.open(row.url);
-                            }
-                            }
-                    />
+                    <Tooltip label={row.url}>
+                      <Button colorScheme={'none'}
+                              bgImg={LinkIcon}
+                              m={'auto'}
+                              bgRepeat={'no-repeat'}
+                              bgPos={'center'}
+                              bgSize={'100%'}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(row.url);
+                              }
+                              }
+                      />
+                    </Tooltip>
+
                   }
                 </Td>
               </Tr>)}

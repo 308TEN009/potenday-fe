@@ -60,7 +60,8 @@ const FormLabelInput = ({
                   value={value}
                   onChange={e => onChange(e.target.value)} />
     }
-    {showDesc && <Text fontSize={'xs'}
+    {showDesc && <Text fontSize={'16px'}
+                       mt={'8px'}
                        position={'absolute'}
                        color={'sub2.500'}>
       {description?.split('\n').map(msg => <>{msg}<br /></>)}

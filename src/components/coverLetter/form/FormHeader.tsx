@@ -2,7 +2,7 @@ import {
   Box,
   Button,
   Divider,
-  HStack,
+  HStack, Img,
   List,
   ListItem,
   Popover,
@@ -17,7 +17,7 @@ import { coverLetter } from '@/messages.json';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddJobPostingModalButton from '@components/home/coverLetter/addJobPost/AddJobPostingModalButton';
-
+import ArrowIcon from '@assets/icons/circle-arrow-grey.svg';
 interface JobPostSelectorProps {
   options: JobPost[];
   selectedJobPost: JobPost | null;
@@ -89,9 +89,12 @@ const FormHeader = ({
                     border={'2px solid'}
                     borderColor={'lightgrey2.500'}
                     color={'darkgrey2.500'}
-                    justifyContent={'start'}
+                    justifyContent={'space-between'}
                     textAlign={'left'}>
               <Text color={'lightgrey4.500'}>{coverLetter.selectJobpost}</Text>
+              <Img src={ArrowIcon}
+                   translate={'transform .3s'}
+                   transform={`rotateZ(${isOpen ? 0 : 180}deg)`} />
             </Button>
           </PopoverTrigger>
           <PopoverContent w={'1035px'}
@@ -99,17 +102,6 @@ const FormHeader = ({
                           borderRadius={'8px'}
                           border={'2px solid'}
                           borderColor={'lightgrey2.500'}>
-            {/* <Button */}
-            {/*  justifyContent={'start'} */}
-            {/*  colorScheme={'none'} */}
-            {/*  color={'main.500'} */}
-            {/*  w={'100%'} */}
-            {/*  h={'78px'} */}
-            {/*  p={'24px 40px'}> */}
-            {/*  <Img src={AddIcon} */}
-            {/*       mr={'20px'} /> */}
-            {/*  {coverLetter.addJobPost} */}
-            {/* </Button> */}
             <AddJobPostingModalButton callBack={callback}
                                       position={'DROPDOWN'} />
             <Divider color={'lightgrey1.500'} />
