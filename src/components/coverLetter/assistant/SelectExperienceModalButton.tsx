@@ -10,6 +10,7 @@ import useErrorHandler from '@/hooks/useErrorHandler';
 import CheckExperienceItem from '@components/coverLetter/form/CheckExperienceItem';
 import { useRecoilState } from 'recoil';
 import selectedExpListStore from '@/store/selectedExpListStore';
+import MainButton from '@components/common/button/MainButton';
 
 export const SelectExperienceModalButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,7 +44,7 @@ export const SelectExperienceModalButton = () => {
       <ExperienceInputButton experience={currentSelected[1] ?? null} />
       <ExperienceInputButton experience={currentSelected[2] ?? null} />
     </List>
-    <CommonModal isOpen={isOpen} onClose={onClose} w={'800px'}>
+    <CommonModal isOpen={isOpen} onClose={onClose} w={'980px'}>
       <CommonModal.Header>
         <Text textAlign={'center'}
               fontSize={'ml'}
@@ -57,7 +58,13 @@ export const SelectExperienceModalButton = () => {
         </Text>
       </CommonModal.Header>
       <CommonModal.Body>
-        <List h={'444px'} overflowY={'auto'} m={'0 56px'}>
+        <List h={'444px'}
+              display={'flex'}
+              flexDir={'column'}
+              alignItems={'center'}
+              overflowY={'auto'}
+              m={'0 56px'}
+              mt={'48px'}>
           {retrieveList.map((experience) =>
             <CheckExperienceItem key={experience._id}
                                  experience={experience} />)}
@@ -65,15 +72,12 @@ export const SelectExperienceModalButton = () => {
       </CommonModal.Body>
       <CommonModal.Footer>
         <Center w={'100%'} mb={'20px'} flexDirection={'column'}>
-          <Button colorScheme={'main'}
-                  p={'13px 51px'}
-                  boxSizing={'initial'}
-                  fontSize={'md'}
-                  fontWeight={'normal'}
-                  borderRadius={'40px'}
-                  onClick={onCloseModal}>
+          <MainButton w={'196px'}
+                      h={'56px'}
+                      rounded
+                      onClick={onCloseModal}>
             {coverLetter.selectExp.completeSelect}
-          </Button>
+          </MainButton>
           <ChakraLink as={ReactRouterLink as any}
                       textDecor={'underline'}
                       size={'sm'}

@@ -46,8 +46,11 @@ const CheckExperienceItem = ({ experience }: CheckExperienceItemProps) => {
           borderColor={'main.500'}
           bgColor={isChecked ? '#6C74CD22' : 'white'}
           onClick={onCheck}
+          w={'820px'}
           mt={'24px'}>
-      <Box w={'68px'} m={'auto 0'}>
+      <Box w={'68px'}
+           m={'auto 0'}
+           mr={'34px'}>
         <Img w={'38px'} src={isChecked ? CheckedIcon : UnCheckedIcon} />
       </Box>
       <Box fontSize={'xs'}>
@@ -56,10 +59,12 @@ const CheckExperienceItem = ({ experience }: CheckExperienceItemProps) => {
               fontSize={'sm'}>
           {experience.title}
         </Text>
-        <Text color={getFontColor()}>
+        <Text color={getFontColor()}
+              fontSize={'sx'}>
           {experience.experienceDetailList[0].content}
         </Text>
-        <Text color={getFontColor()}>
+        <Text color={getFontColor()}
+              fontSize={'sx'}>
           {experience.experienceDetailList[1].content}
         </Text>
       </Box>
