@@ -34,6 +34,7 @@ export interface AIGeneratorRequest {
 export interface SaveCoverLetterRequest {
   question: string;
   answer: string;
+  maxLen: number
 }
 
 export interface CoverLetterResponse {

@@ -119,7 +119,7 @@ const AddJobPostingModalButton = ({ callBack, position }: AddJobPostingModalProp
             <Button size={'md'}
                     colorScheme={'main'}
                     type={'submit'}
-                    p={'13px 75px'}
+                    p={'13px 75.5px'}
                     borderRadius={'20px'}>
               {common.save}
             </Button>

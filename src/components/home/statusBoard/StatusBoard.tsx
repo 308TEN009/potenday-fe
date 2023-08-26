@@ -2,7 +2,7 @@ import { Box, HStack, Image, Link as ChakraLink, Text, useMediaQuery } from '@ch
 import StatusBoardCard from '@components/home/statusBoard/StatusBoardCard';
 import { home } from '@/messages.json';
 import { Link as ReactRouterLink } from 'react-router-dom';
-import MoreIcon from '@assets/icons/more-horizontal-circle-01.svg';
+import RightArrowIcon from '@assets/icons/circle-arrow-right-01-sharp.svg';
 import type { StatusBoardCnt } from '@/model/home';
 import { useEffect, useState } from 'react';
 import HomeApi from '@/api/HomeApi';
@@ -26,7 +26,7 @@ export const StatusBoard = () => {
       <Text fontSize={'md'}>{home.statusBoard.title}</Text>
       <ChakraLink as={ReactRouterLink as any}
                   to={'/my-page'}>
-        <Image src={MoreIcon} />
+        <Image src={RightArrowIcon} />
       </ChakraLink>
     </HStack>
     <HStack justifyContent={'start'}

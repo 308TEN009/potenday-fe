@@ -109,6 +109,7 @@ const AddNewsModal = ({ isOpen, onClose, newsData, onSubmit }: AddNewsModalProps
         <Button colorScheme={'main'}
                 borderRadius={'50px'}
                 type={'submit'}
+                p={'13px 75.5px'}
                 m={'auto'}
                 mt={'84px'}
                 mb={'72px'}

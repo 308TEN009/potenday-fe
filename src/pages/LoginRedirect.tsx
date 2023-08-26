@@ -10,6 +10,7 @@ const LoginRedirect = () => {
     const accessToken = searchParams.get('accessToken');
     const refreshToken = searchParams.get('refreshToken');
 
+    console.log(accessToken);
     if (accessToken) localStorage.setItem('accessToken', accessToken);
     if (refreshToken) localStorage.setItem('refreshToken', refreshToken);
     if (!accessToken || !refreshToken) {

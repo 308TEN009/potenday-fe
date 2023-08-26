@@ -3,6 +3,8 @@ import {
   Button,
   Flex,
   Input,
+  InputGroup,
+  InputRightElement,
   Tab,
   TabList,
   TabPanel,
@@ -13,7 +15,6 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import AiAssistant from '@components/coverLetter/assistant/AiAssistant';
 import HomeApi from '@/api/HomeApi';
 import useErrorHandler from '@/hooks/useErrorHandler';
 import type { JobPost } from '@/model/home';
@@ -27,82 +28,84 @@ import AddIcon from '@assets/icons/plus-sign-circle-grey.svg';
 import { BASIC_FAIL } from '@/model/toast';
 import CoverLetterApi from '@/api/CoverLetterApi';
 import MainButton from '@components/common/button/MainButton';
+import AiAssistant from '@components/coverLetter/assistant/AiAssistant';
 
 const CoverLetter = () => {
-    const [jopPostOptions, setJobPostOptions] = useState<JobPost[]>([]);
-    const [jobPost, setJobPost] = useState<JobPost | null>(null);
-    const [expListStore, setExpListStore] = useRecoilState(selectedExpListStore);
-    const [jobPostStore, setJobPostStore] = useRecoilState(selectedJobPostStore);
-    const [questionList, setQuestionList] = useState<SaveCoverLetterRequest[]>([
-      {
-        question: '',
-        answer: '',
-      },
-    ]);
-    const toast = useToast();
-    const [tabIdx, setTabIdx] = useState(0);
-    const [loading, setLoading] = useState(false);
-    const [disabled, setDisabled] = useState(false);
+  const [jopPostOptions, setJobPostOptions] = useState<JobPost[]>([]);
+  const [jobPost, setJobPost] = useState<JobPost | null>(null);
+  const [expListStore, setExpListStore] = useRecoilState(selectedExpListStore);
+  const [jobPostStore, setJobPostStore] = useRecoilState(selectedJobPostStore);
+  const [questionList, setQuestionList] = useState<SaveCoverLetterRequest[]>([
+    {
+      question: '',
+      answer: '',
+      maxLen: 0,
+    },
+  ]);
+  const toast = useToast();
+  const [tabIdx, setTabIdx] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
-    useEffect(() => {
-      setJobPost(jobPostStore);
-      retrieveJobPostOptions();
-      return () => {
-        setExpListStore({
-          currentSelected: [],
-          originSelected: [],
-        });
-        setJobPostStore(null);
-      };
-    }, []);
-
-    useEffect(() => {
-      setDisabled((jobPostStore?.status ?? jobPost?.status) === 'complete');
-      retrieveAllCoverLetters();
+  useEffect(() => {
+    setJobPost(jobPostStore);
+    retrieveJobPostOptions();
+    return () => {
       setExpListStore({
         currentSelected: [],
         originSelected: [],
       });
-      setTabIdx(0);
-    }, [jobPost, jobPostStore]);
-
-    const addNewTab = () => {
-      if (questionList.length >= 5) {
-        return;
-      }
-      setTabIdx(questionList.length);
-      setQuestionList([...questionList, {
-        question: '',
-        answer: '',
-      }]);
+      setJobPostStore(null);
     };
+  }, []);
 
-    const retrieveJobPostOptions = () => {
-      setLoading(true);
-      HomeApi.retrieveJobPost()
-             .then(setJobPostOptions)
-             .catch(useErrorHandler)
-             .finally(() => setLoading(false));
-    };
+  useEffect(() => {
+    setDisabled((jobPostStore?.status ?? jobPost?.status) === 'complete');
+    retrieveAllCoverLetters();
+    setExpListStore({
+      currentSelected: [],
+      originSelected: [],
+    });
+    setTabIdx(0);
+  }, [jobPost, jobPostStore]);
 
-    const retrieveAllCoverLetters = () => {
-      const id = jobPostStore?._id ?? jobPost?._id;
-      if (!id) {
-        return;
-      }
-      setLoading(true);
-      CoverLetterApi.retrieveAllCoverLetters(id)
-                    .then(response => {
-                        if (response.length <= 0) {
-                          setQuestionList([{
-                            question: '',
-                            answer: '',
-                          }]);
-                          return;
-                        }
-                        setQuestionList(
-                          response.map(({ question, answer }) => ({ question, answer })).reverse(),
-                        );
+  const addNewTab = () => {
+    if (questionList.length >= 5) {
+      return;
+    }
+    setTabIdx(questionList.length);
+    setQuestionList([...questionList, {
+      question: '',
+      answer: '',
+    }]);
+  };
+
+  const retrieveJobPostOptions = () => {
+    setLoading(true);
+    HomeApi.retrieveJobPost()
+           .then(setJobPostOptions)
+           .catch(useErrorHandler)
+           .finally(() => setLoading(false));
+  };
+
+  const retrieveAllCoverLetters = () => {
+    const id = jobPostStore?._id ?? jobPost?._id;
+    if (!id) {
+      return;
+    }
+    setLoading(true);
+    CoverLetterApi.retrieveAllCoverLetters(id)
+                  .then(response => {
+                      if (response.length <= 0) {
+                        setQuestionList([{
+                          question: '',
+                          answer: '',
+                        }]);
+                        return;
+                      }
+                      setQuestionList(
+                        response.map(({ question, answer }) => ({ question, answer })).reverse(),
+                      );
                       },
                     )
                     .catch(useErrorHandler)
@@ -121,8 +124,10 @@ const CoverLetter = () => {
       const applicationJob = jobPostStore?.applicationJob ?? jobPost?.applicationJob ?? '';
       const jobDescription = jobPostStore?.jobDescription ?? jobPost?.jobDescription ?? '';
 
+      const question = questionList[tabIdx].question +
+        (maxLen ? `해당 답변을${maxLen}자 이내로 작성` : '');
       const request: AIGeneratorRequest = {
-        question: questionList[tabIdx].question,
+        question,
         assistantInput: [
           {
             type: 'emp' as AssistantType,
@@ -151,10 +156,15 @@ const CoverLetter = () => {
     };
 
     const updateList = (index: number, field: string, value: string) => {
+
+      if (field === 'maxLen' && questionList[index].maxLen > 700) {
+        value = 700;
+      }
       const changedList = questionList.map((listItem, idx) => (
         index === idx ? { ...listItem, [field]: value } : listItem
       ));
       setQuestionList(changedList);
+
     };
 
     const saveCoverLetter = (index: number, isFinal: boolean) => {
@@ -236,21 +246,40 @@ const CoverLetter = () => {
                         mb={'24px'}>
                     {coverLetter.question}
                   </Text>
-                  <Input value={question.question}
-                         isDisabled={disabled}
-                         onChange={e => updateList(index, 'question', e.target.value)}
-                         placeholder={coverLetter.questionPlaceholder}
-                         fontSize={'md'}
-                         border={'2px solid'}
-                         borderColor={'lightgrey2.500'}
-                         bgColor={'white'}
-                         focusBorderColor={'sub1.500'}
-                         borderRadius={'8px'}
-                         color={'darkgrey2.500'}
-                         mb={'56px'}
-                         h={'74px'}
-                         p={'22px 40px'}
-                         lineHeight={'sm'} />
+                  <InputGroup>
+                    <Input value={question.question}
+                           isDisabled={disabled}
+                           onChange={e => updateList(index, 'question', e.target.value)}
+                           placeholder={coverLetter.questionPlaceholder}
+                           fontSize={'md'}
+                           border={'2px solid'}
+                           borderColor={'lightgrey2.500'}
+                           bgColor={'white'}
+                           focusBorderColor={'sub1.500'}
+                           borderRadius={'8px'}
+                           color={'darkgrey2.500'}
+                           mb={'56px'}
+                           h={'74px'}
+                           p={'22px 40px'}
+                           lineHeight={'sm'} />
+                    <InputRightElement w={'145px'}
+                                       h={'74px'}
+                                       p={'22px 40px'}>
+                      <Input lineHeight={'sm'}
+                             outline={'none'}
+                             value={question.maxLen}
+                             onChange={e => updateList(index, 'maxLen', e.target.value)}
+                             w={'65px'}
+                             fontSize={'md'}
+                             focusBorderColor={'transparent'}
+                             placeholder={'000'}
+                             border={'none'}
+                             p={0}
+                             type={'number'} />
+                      자
+                    </InputRightElement>
+                  </InputGroup>
+
                   <Text fontSize={'md'}
                         mb={'24px'}>
                     {coverLetter.myAnswer}
